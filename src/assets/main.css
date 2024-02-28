@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Istok Web", initial;
+  }
+  * {
+    transition: 1s all;
+  }
+}
+.btn:is(input[type="checkbox"]:checked),
+.btn:is(input[type="radio"]:checked) {
+  background-color: #ff5252;
+  color: white;
+}
+.checkbox {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.checkbox:checked {
+  background-image: linear-gradient(-45deg, transparent 65%, #ff5252 65.99%),
+    linear-gradient(45deg, transparent 75%, #ff5252 75.99%),
+    linear-gradient(-45deg, #ff5252 40%, transparent 40.99%),
+    linear-gradient(
+      45deg,
+      #ff5252 30%,
+      #f8f8f8 30.99%,
+      #f8f8f8 40%,
+      transparent 40.99%
+    ),
+    linear-gradient(-45deg, #f8f8f8 50%, #ff5252 50.99%);
+  background-color: #ff5252;
+}
