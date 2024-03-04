@@ -1,22 +1,21 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
-import TypeItem from "./TypeItem";
-import { random } from "./tool";
-import ItemManagement from "./ItemsManagement";
-import roll1 from "/images/dice-1.png";
-import roll2 from "/images/dice-2.png";
-import roll3 from "/images/dice-3.png";
-import roll4 from "/images/dice-4.png";
-import roll5 from "/images/dice-5.png";
-import roll6 from "/images/dice-6.png";
-import Item from "./Item";
-import addItem from "/music/addItem.mp3";
-import backgroundMusic from "/music/backgroundMusic.mp3";
-import soundHold from "/music/holdsound.mp3";
-import soundWin from "/music/toothless.mp3";
-import soundbtn from "/music/soundBtn.mp3";
-import soundSwap from "/music/swapsound.mp3";
-import ItemTutorial from "./components/ItemTutorial.vue";
+import { reactive, ref, watch } from 'vue';
+import TypeItem from './TypeItem';
+import { random } from './tool';
+import ItemManagement from './ItemsManagement';
+import roll1 from '/images/dice-1.png';
+import roll2 from '/images/dice-2.png';
+import roll3 from '/images/dice-3.png';
+import roll4 from '/images/dice-4.png';
+import roll5 from '/images/dice-5.png';
+import roll6 from '/images/dice-6.png';
+import Item from './Item';
+import addItem from '/music/addItem.mp3';
+import backgroundMusic from '/music/backgroundMusic.mp3';
+import soundHold from '/music/holdsound.mp3';
+import soundWin from '/music/toothless.mp3';
+import soundbtn from '/music/soundBtn.mp3';
+import soundSwap from '/music/swapsound.mp3';
 
 let voidScore = 1;
 const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6];
@@ -48,14 +47,14 @@ const currentSetting = reactive({ ...defaultSetting });
 const player1 = reactive({
   point: 0,
   curPoint: 0,
-  items: new ItemManagement("p1", pollItem),
+  items: new ItemManagement('p1', pollItem),
   buff: [],
 });
 
 const player2 = reactive({
   point: 0,
   curPoint: 0,
-  items: new ItemManagement("p2", pollItem),
+  items: new ItemManagement('p2', pollItem),
   buff: [],
 });
 
@@ -90,7 +89,7 @@ const playMusicBg = () => {
 };
 
 const itemRollDice = new Item(
-  new TypeItem("rollDice", rollDiceAbility, 2, "-", false)
+  new TypeItem('rollDice', rollDiceAbility, 2, '-', false)
 );
 
 const chooseItems = (index) => {
@@ -180,32 +179,33 @@ const hold = () => {
   currentPlayer[0].curPoint = 0;
   switchPlayer();
 };
-const btnCloseSetting = () => {
+const btnCloseSetting = () => { 
   currentSetting.limitItem = defaultSetting.limitItem;
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
   currentSetting.settingPoint = defaultSetting.settingPoint;
   currentSetting.startingItem = defaultSetting.startingItem;
-  const arrNameItem = pollSelectedItems.map((item) => item.name);
+  const arrNameItem = pollSelectedItems.map(item => item.name);
   checkSelectedItems.forEach((isChecked, index) => {
-    if (isChecked) {
-      if (!arrNameItem.includes(pollItem[index].name)) {
-        checkSelectedItems[index] = !checkSelectedItems[index];
+      if (isChecked) {
+        if(!arrNameItem.includes(pollItem[index].name)){
+          checkSelectedItems[index] = !checkSelectedItems[index]
+        }
+      }else{
+        if(arrNameItem.includes(pollItem[index].name)){
+          checkSelectedItems[index] = !checkSelectedItems[index]
+        }
       }
-    } else {
-      if (arrNameItem.includes(pollItem[index].name)) {
-        checkSelectedItems[index] = !checkSelectedItems[index];
-      }
-    }
-  });
-};
+    });
+}
 const btnSaveSetting = () => {
+  
   const isInteger = (input, min, max) => {
-    if (input === "") return false;
-    const isValidInput = !isNaN(input) && Number.isInteger(Number(input));
+    if(input === "") return false;
+    const isValidInput = !isNaN(input) && Number.isInteger(Number(input)) 
     if (
       isValidInput &&
-      typeof min !== "undefined" &&
-      typeof max !== "undefined"
+      typeof min !== 'undefined' &&
+      typeof max !== 'undefined'
     ) {
       return input >= min && input <= max;
     }
@@ -294,35 +294,35 @@ const initItem = () => {
   };
 
   const G6 = new TypeItem(
-    "6",
+    '6',
     Guarantee6Ability,
     6,
-    "การันตีว่าลูกเต๋า 1 ลูกจะทอยได้ 6",
+    'การันตีว่าลูกเต๋า 1 ลูกจะทอยได้ 6',
     false
   );
   const N10C = new TypeItem(
-    "-10",
+    '-10',
     N10Ability,
     0,
-    "ลบ 10 “คะแนนของผู้เล่น” ฝ่ายตรงข้าม สามารถลดจนเหลือ 0",
+    'ลบ 10 “คะแนนของผู้เล่น” ฝ่ายตรงข้าม สามารถลดจนเหลือ 0',
     false,
     true
   );
   const addDice = new TypeItem(
-    "Dice+",
+    'Dice+',
     addDiceAbililty,
     1,
-    "เพิ่มลูกเต๋า 1 ลูกในทั้งตานั้น สามารถเพิ่มได้สูงสุด 5 ลูก",
+    'เพิ่มลูกเต๋า 1 ลูกในทั้งตานั้น สามารถเพิ่มได้สูงสุด 5 ลูก',
     false
   );
   const X2P50 = new TypeItem(
-    "X2>3",
+    'X2>3',
     X2P50Abililty,
     8,
-    "เเต้มที่ได้จากการทอยจะ คูณ2 เเต่ละหน้าของทุกลูกเต๋าต้องมากกว่า 3 ไม่งั้นจะสลับฝั่งผู้เล่นทันที"
+    'เเต้มที่ได้จากการทอยจะ คูณ2 เเต่ละหน้าของทุกลูกเต๋าต้องมากกว่า 3 ไม่งั้นจะสลับฝั่งผู้เล่นทันที'
   );
   const OAE = new TypeItem(
-    "O&E",
+    'O&E',
     OAEAbililty,
     9,
     'เมื่อผู้เล่นทอยได้ผลรวมเป็น "คู่" จะขโมย “คะแนนของผู้เล่น” ของฝ่ายตรงข้ามเเต่ถ้าผลรวมเป็น "คี่" จะเเบ่งครึ่งนึงของที่ทอยได้ไปเพิ่ม “คะแนนของผู้เล่น” ให้ฝ่ายตรงข้าม',
@@ -330,17 +330,17 @@ const initItem = () => {
     true
   );
   const popDice = new TypeItem(
-    "Dice-",
+    'Dice-',
     popDiceAbililty,
     1,
-    "ลดลูกเต๋า 1 ลูกในทั้งตานั้น สามารถลดได้จนเหลือ 1 ลูก",
+    'ลดลูกเต๋า 1 ลูกในทั้งตานั้น สามารถลดได้จนเหลือ 1 ลูก',
     false
   );
   const plus2Point = new TypeItem(
-    "+2",
+    '+2',
     plus2Abililty,
     7,
-    "ทุกการทอยจะเพิ่ม “คะแนนในตานั้น” 2 เเต้ม"
+    'ทุกการทอยจะเพิ่ม “คะแนนในตานั้น” 2 เเต้ม'
   );
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
   checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
@@ -647,7 +647,32 @@ init();
                     id="items-box"
                     class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
                   >
-                    <ItemTutorial />
+                    <div
+                      id="item-box"
+                      class="box-item scr-l:w-[560px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
+                      v-for="({
+                        name,
+                        discription,
+                        isPerTurn,
+                        isAttack,
+                      },index) in pollItem" :key="index"
+                    >
+                      <div
+                        class="w-[35px] rounded-[10px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
+                        :class="
+                          isPerTurn || name === 'Dice+' || name === 'Dice-'
+                            ? 'bg-isTurn text-White'
+                            : isAttack
+                            ? 'bg-Main-pink-300 text-White'
+                            : 'bg-isPerTurn text-White'
+                        "
+                      >
+                        {{ name }}
+                      </div>
+                      <p class="text-hss scr-l:text-hs-des w-[80%]">
+                        {{ discription }}
+                      </p>
+                    </div>
                   </div>
 
                   <form
@@ -805,7 +830,7 @@ init();
                       <button
                         class="btn text-White border-0 btn-close scr-l:w-[40%] scr-l:rounded-[20px] scr-l scr-l:h-[50px] bg-Main-pink-300 rounded-[10px] w-[100px] h-[25px] btn-xs scr-m:btn-md scr-l:btn-m hover:bg-Main-pink-100 hover:text-Black"
                         id="cancelButton"
-                        @click="[playSound(soundbtn), btnCloseSetting()]"
+                        @click="[playSound(soundbtn),btnCloseSetting()]"
                       >
                         Close
                       </button>
