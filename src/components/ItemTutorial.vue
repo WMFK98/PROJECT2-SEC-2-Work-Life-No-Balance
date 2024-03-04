@@ -1,24 +1,22 @@
 <script setup>
-import { defineProps } from "vue";
-defineProps({
-  pollItem: {
-    type: Array,
-    default: () => [
-      {
-        name: String,
-        description: String,
-        isPerTurn: Boolean,
-        isAttack: Boolean,
-      },
-    ],
-  },
+import { reactive, ref, watch } from "vue";
+
+const props = defineProps({
+  pollItem: [
+    {
+      name: String,
+      description: String,
+      isPerTurn: Boolean,
+      isAttack: Boolean,
+    },
+  ],
 });
 </script>
 <template>
   <div
     id="item-box"
     class="box-item scr-l:w-[560px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
-    v-for="({ name, discription, isPerTurn, isAttack }, index) in pollItem"
+    v-for="({ name, discription, isPerTurn, isAttack }, index) in props"
     :key="index"
   >
     <div
