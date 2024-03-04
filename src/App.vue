@@ -1,5 +1,4 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
 import TypeItem from "./TypeItem";
 import { random } from "./tool";
 import ItemManagement from "./ItemsManagement";
@@ -16,7 +15,8 @@ import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
 import soundbtn from "/music/soundBtn.mp3";
 import soundSwap from "/music/swapsound.mp3";
-import ItemTutorial from "./components/ItemTutorial.vue";
+import ItemTutorials from "./components/ItemTutorials.vue";
+import { ref, reactive, watch } from "vue";
 
 let voidScore = 1;
 const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6];
@@ -647,7 +647,7 @@ init();
                     id="items-box"
                     class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
                   >
-                    <ItemTutorial />
+                    <ItemTutorials :poll-item="pollItem" />
                   </div>
 
                   <form
@@ -1013,3 +1013,4 @@ init();
     </div>
   </div>
 </template>
+./components/ItemTutorialss.vue
