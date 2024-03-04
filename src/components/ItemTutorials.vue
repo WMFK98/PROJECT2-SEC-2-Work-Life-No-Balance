@@ -1,6 +1,18 @@
 <script setup>
 import { defineProps } from "vue";
-const props = defineProps(["pollItem"]);
+defineProps({
+  pollItem: {
+    type: Array,
+    default: () => [
+      {
+        name: String,
+        description: String,
+        isPerTurn: Boolean,
+        isAttack: Boolean,
+      },
+    ],
+  },
+});
 </script>
 <template>
   <div
