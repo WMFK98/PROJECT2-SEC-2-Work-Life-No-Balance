@@ -3,12 +3,12 @@ import { reactive, ref, watch } from "vue"
 import TypeItem from "./TypeItem"
 import { random } from "./tool"
 import ItemManagement from "./ItemsManagement"
-import roll1 from "/images/dice-1.png"
-import roll2 from "/images/dice-2.png"
-import roll3 from "/images/dice-3.png"
-import roll4 from "/images/dice-4.png"
-import roll5 from "/images/dice-5.png"
-import roll6 from "/images/dice-6.png"
+// import roll1 from "/images/dice-1.png"
+// import roll2 from "/images/dice-2.png"
+// import roll3 from "/images/dice-3.png"
+// import roll4 from "/images/dice-4.png"
+// import roll5 from "/images/dice-5.png"
+// import roll6 from "/images/dice-6.png"
 import Item from "./Item"
 import addItem from "/music/addItem.mp3"
 import backgroundMusic from "/music/backgroundMusic.mp3"
@@ -17,9 +17,18 @@ import soundWin from "/music/toothless.mp3"
 import soundbtn from "/music/soundBtn.mp3"
 import soundSwap from "/music/swapsound.mp3"
 
+// Leng's Component
 import DisplayDice from "./component/DisplayDice.vue"
 import HowtoPlay from "./component/HowtoPlay.vue"
 import Setting from "./component/Setting.vue"
+//Pic Item
+import Diceplus from "./assets/Icon_Dice_1/DicePlus.png"
+import DelDice from "./assets/Icon_Dice_1/DelDice.png"
+import DelTenSC from "./assets/Icon_Dice_1/DelTenSC.png"
+import OddAndEven from "./assets/Icon_Dice_1/ODDEVENT.png"
+import SixOneTime from "./assets/Icon_Dice_1/OneSixTM.png"
+import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png"
+import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png"
 
 let voidScore = 1
 // const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6]
@@ -301,7 +310,9 @@ const initItem = () => {
 		Guarantee6Ability,
 		6,
 		"การันตีว่าลูกเต๋า 1 ลูกจะทอยได้ 6",
-		false
+		false,
+		false,
+		SixOneTime
 	)
 	const N10C = new TypeItem(
 		"-10",
@@ -309,20 +320,26 @@ const initItem = () => {
 		0,
 		"ลบ 10 “คะแนนของผู้เล่น” ฝ่ายตรงข้าม สามารถลดจนเหลือ 0",
 		false,
-		true
+		true,
+		DelTenSC
 	)
 	const addDice = new TypeItem(
 		"Dice+",
 		addDiceAbililty,
 		1,
 		"เพิ่มลูกเต๋า 1 ลูกในทั้งตานั้น สามารถเพิ่มได้สูงสุด 5 ลูก",
-		false
+		false,
+		false,
+		Diceplus
 	)
 	const X2P50 = new TypeItem(
 		"X2>3",
 		X2P50Abililty,
 		8,
-		"เเต้มที่ได้จากการทอยจะ คูณ2 เเต่ละหน้าของทุกลูกเต๋าต้องมากกว่า 3 ไม่งั้นจะสลับฝั่งผู้เล่นทันที"
+		"เเต้มที่ได้จากการทอยจะ คูณ2 เเต่ละหน้าของทุกลูกเต๋าต้องมากกว่า 3 ไม่งั้นจะสลับฝั่งผู้เล่นทันที",
+		false,
+		true,
+		SqureTwo
 	)
 	const OAE = new TypeItem(
 		"O&E",
@@ -330,21 +347,28 @@ const initItem = () => {
 		9,
 		'เมื่อผู้เล่นทอยได้ผลรวมเป็น "คู่" จะขโมย “คะแนนของผู้เล่น” ของฝ่ายตรงข้ามเเต่ถ้าผลรวมเป็น "คี่" จะเเบ่งครึ่งนึงของที่ทอยได้ไปเพิ่ม “คะแนนของผู้เล่น” ให้ฝ่ายตรงข้าม',
 		false,
-		true
+		true,
+		OddAndEven
 	)
 	const popDice = new TypeItem(
 		"Dice-",
 		popDiceAbililty,
 		1,
 		"ลดลูกเต๋า 1 ลูกในทั้งตานั้น สามารถลดได้จนเหลือ 1 ลูก",
-		false
+		false,
+		false,
+		DelDice
 	)
 	const plus2Point = new TypeItem(
 		"+2",
 		plus2Abililty,
 		7,
-		"ทุกการทอยจะเพิ่ม “คะแนนในตานั้น” 2 เเต้ม"
+		"ทุกการทอยจะเพิ่ม “คะแนนในตานั้น” 2 เเต้ม",
+		false,
+		false,
+		PlusTwo
 	)
+	player1.items.addItem(addDice)
 	pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point)
 	checkSelectedItems = reactive(new Array(pollItem.length).fill(true))
 	pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point)
@@ -675,19 +699,6 @@ init()
 											</p>
 										</div>
 									</div>
-
-									<form
-										method="dialog"
-										class="justify-center flex w-full px-10"
-									>
-										<button
-											class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
-											id="cancelButton"
-											@click="playSound(soundbtn)"
-										>
-											Close
-										</button>
-									</form>
 								</div>
 							</dialog> -->
 						<HowtoPlay :playSound="playSound" :pollItem="pollItem" />
@@ -842,7 +853,7 @@ init()
 							</dialog>
 						</div> -->
 						<Setting
-							@soundChange="playSound(isPlaySoundSF)"
+							@soundChange="playSound()"
 							@click="console.log(isPlaySoundSF)"
 							:propObj="{
 								playSound: playSound,
@@ -938,7 +949,7 @@ init()
 								v-for="{
 									id,
 									isUsed,
-									itemInfo: { name, isPerTurn, isAttack },
+									itemInfo: { name, isPerTurn, isAttack, picture },
 								} in player1.items.getAllItem()"
 								:key="id"
 								class="swap swap-rotate item btn text-hss scr-l:text-hs-des scr-m:text-hs-tal btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
@@ -959,8 +970,8 @@ init()
 									type="checkbox"
 									:disabled="!(currentPlayer[0] === player1) || theWinner"
 								/>
-								<p class="swap-off">{{ name }}</p>
-								<p class="swap-on">{{ name }}</p>
+								<img class="swap-off" :src="picture" />
+								<img class="swap-on" :src="picture" />
 							</label>
 						</div>
 					</div>
@@ -1005,7 +1016,7 @@ init()
 								v-for="{
 									id,
 									isUsed,
-									itemInfo: { name, isPerTurn, isAttack },
+									itemInfo: { name, isPerTurn, isAttack, picture },
 								} in player2.items.getAllItem()"
 								:key="id"
 								class="swap swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
@@ -1026,8 +1037,8 @@ init()
 									type="checkbox"
 									:disabled="!(currentPlayer[0] === player2) || theWinner"
 								/>
-								<p class="swap-off">{{ name }}</p>
-								<p class="swap-on">{{ name }}</p>
+								<img class="swap-off" :src="picture" />
+								<img class="swap-on" :src="picture" />
 							</label>
 						</div>
 					</div>

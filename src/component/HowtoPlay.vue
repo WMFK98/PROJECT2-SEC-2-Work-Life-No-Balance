@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue"
 import soundbtn from "/music/soundBtn.mp3"
-import HowToUseItem from "./HowToUseItem.vue"
+import Closebtn from "./Closebtn.vue"
 const selectTutorial = ref(1)
 const props = defineProps({
 	playSound: Function,
@@ -273,21 +273,17 @@ const props = defineProps({
 						</p>
 					</div>
 				</div> -->
-				<HowToUseItem
-					:selectTutorial="selectTutorial"
-					:playSound="playSound"
-					:pollItem="pollItem"
-				/>
 
-				<form method="dialog" class="justify-center flex w-full px-10">
+				<!-- <form method="dialog" class="justify-center flex w-full px-10">
 					<button
 						class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
 						id="cancelButton"
 						@click="playSound(soundbtn)"
 					>
 						Close
-					</button>
-				</form>
+					</button> -->
+				<!-- </form> -->
+				<Closebtn :playSound="playSound" />
 			</div>
 		</dialog>
 	</div>

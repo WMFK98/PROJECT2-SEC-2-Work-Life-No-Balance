@@ -66,6 +66,7 @@ const emit = defineEmits(["soundChange"])
 						/>
 
 						<div class="swap-on">🔊</div>
+						{{ propObj.isPlaySoundSF }}
 						<div class="swap-off">🔇</div>
 					</div>
 				</label>
