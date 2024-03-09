@@ -16,6 +16,9 @@ import soundHold from '/music/holdsound.mp3';
 import soundWin from '/music/toothless.mp3';
 import soundbtn from '/music/soundBtn.mp3';
 import soundSwap from '/music/swapsound.mp3';
+import SwitchSide from './components/SwitchSide.vue';
+import SwitchSideLower from './components/SwitchSideLower.vue';
+import SwitchSideLowerRight from './components/SwitchSideLowerRight.vue';
 
 let voidScore = 1;
 const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6];
@@ -370,7 +373,14 @@ init();
       class="w-[640px] shadow-lg h-[340px] bg-btn-none-active rounded-[20px] flex flex-col overflow-hidden scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px]"
     >
       <div id="display" class="bg-White h-max flex justify-between">
-        <div
+        <!-- บน -->
+        
+        <SwitchSide 
+        :player = "player1"
+        :the-winner="theWinner"
+        :current-player="currentPlayer"
+         />
+        <!-- <div
           id="display-p1"
           class="w-[204.944px] scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
           :class="
@@ -395,7 +405,7 @@ init();
           >
             {{ player1.point }}
           </h1>
-        </div>
+        </div> -->
         <div
           id="display-dice"
           class="flex flex-col py-2 scr-l:pt-[19px] gap-2 scr-m:gap-[22px] items-center"
@@ -853,7 +863,12 @@ init();
             />
           </div>
         </div>
-        <div
+        <SwitchSide
+        :player = "player2"
+        :the-winner="theWinner"
+        :current-player="currentPlayer"
+         />
+        <!-- <div
           id="display-p2"
           class="w-[204.944px] scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
           :class="
@@ -878,10 +893,26 @@ init();
           >
             {{ player2.point }}
           </h1>
-        </div>
+        </div> -->
       </div>
       <div id="controller" class="flex flex-auto justify-center relative">
-        <div
+<!-- From here -->
+
+      <SwitchSideLower
+        :player = "player1"
+        :the-winner="theWinner"
+        :current-player="currentPlayer"
+        :isPlaySoundSF="isPlaySoundSF"
+
+         />
+         <SwitchSideLowerRight
+        :player = "player2"
+        :the-winner="theWinner"
+        :current-player="currentPlayer"
+        :isPlaySoundSF="isPlaySoundSF"
+        
+         />
+        <!-- <div
           id="controller-p1"
           class="w-1/2 flex flex-col px-3 py-5 scr-l:pb-[64px] scr-l:pr-[29px] scr-l:pl-[93px] gap-[35px] scr-m:gap-[70px] justify-end"
           :class="
@@ -901,6 +932,7 @@ init();
                 : 'bg-Main-pink-300 text-White'
             "
           >
+
             <p class="text-hss scr-m:text-hs-tal scr-l:text-hs-des">CURRENT</p>
             <p class="text-hs scr-l:text-hm-des scr-m:text-hm-tal">
               {{ player1.curPoint }}
@@ -944,8 +976,9 @@ init();
               </label>
             </div>
           </div>
-        </div>
-        <div
+        </div> -->
+        <!-- Start P2 -->
+        <!-- <div
           id="controller-p2"
           class="w-1/2 flex flex-col px-3 py-5 scr-l:pb-[64px] scr-l:pr-[93px] scr-l:pl-[29px] gap-[35px] scr-m:gap-[70px] justify-end"
           :class="
@@ -1011,7 +1044,10 @@ init();
               </label>
             </div>
           </div>
-        </div>
+        </div> -->
+        <!-- To here -->
+
+
         <div
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"
