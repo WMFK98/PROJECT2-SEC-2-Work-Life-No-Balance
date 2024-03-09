@@ -1,4 +1,7 @@
 <script setup>
+import soundHold from '/music/holdsound.mp3'
+import soundbtn from '/music/soundBtn.mp3'
+import { defineProps } from 'vue'
 const props = defineProps({
   buttonShow: {
     validator(value) {
