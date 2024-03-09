@@ -1014,11 +1014,11 @@ init()
             </div>
           </div>
         </div>
-        <!-- <div
+        <div
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"
         >
-          <button
+          <!-- <button
             :disabled="theWinner"
             @click=";[roll(), playMusicBg(), playSound(soundbtn)]"
             id="btn-roll"
@@ -1034,10 +1034,10 @@ init()
             class="btn w-[75px] scr-m:w-[113px] hover:bg-btn-hover scr-m:h-max bg-btn-active h-[60px] p-0 border-0 text-hss scr-m:text-hs-tal scr-l:text-hs-des text-Black flex flex-col scr-m:rounded-[30px] scr-l:w-[136px]"
           >
             <p>📥 Hold</p>
-          </button>
-        </div> -->
-        <ButtonComponent buttonShow="btn-roll"></ButtonComponent>
-        <ButtonComponent buttonShow="btn-hold"></ButtonComponent>
+          </button> -->
+          <ButtonComponent buttonShow="btn-roll"></ButtonComponent>
+          <ButtonComponent buttonShow="btn-hold"></ButtonComponent>
+        </div>
       </div>
     </div>
   </div>
