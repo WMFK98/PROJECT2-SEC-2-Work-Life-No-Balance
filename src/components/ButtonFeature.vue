@@ -2,21 +2,20 @@
 import soundHold from '/music/holdsound.mp3'
 import soundbtn from '/music/soundBtn.mp3'
 import { defineProps } from 'vue'
+
 const props = defineProps({
   buttonShow: {
     validator(value) {
       return ['btns', 'btn-roll', 'btn-hold'].includes(value)
     },
-    default: 'btns' // ตั้งค่า default เป็น 'btns'
+    default: 'btns'
   },
-  buttonAction: {
-    validator(value) {
-      return ['roll', 'reset', 'hold', 'playSound', 'playMusicBg'].includes(
-        value
-      )
-    },
-    default: 'roll'
-  }
+  theWinner: Boolean, // Assuming theWinner is a boolean prop
+  roll: Object,
+  reset: Object,
+  hold: Array,
+  playMusicBg: Boolean,
+  playSound: Boolean
 })
 </script>
 
