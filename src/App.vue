@@ -18,6 +18,8 @@ import soundbtn from '/music/soundBtn.mp3'
 import soundSwap from '/music/swapsound.mp3'
 
 import ButtonComponent from './components/ButtonFeature.vue'
+import { defineProps } from 'vue'
+const props = defineProps(['buttonShow'])
 
 let voidScore = 1
 const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6]
@@ -695,6 +697,7 @@ init()
             >
               🆕 NEW GAME
             </button> -->
+            <ButtonComponent :buttonShow="buttonShow"></ButtonComponent>
 
             <div>
               <button
@@ -1033,6 +1036,8 @@ init()
             <p>📥 Hold</p>
           </button>
         </div> -->
+        <ButtonComponent buttonShow="btn-roll"></ButtonComponent>
+        <ButtonComponent buttonShow="btn-hold"></ButtonComponent>
       </div>
     </div>
   </div>
