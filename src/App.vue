@@ -444,14 +444,7 @@ init();
             >
               🆕 NEW GAME
             </button>
-            <Setting
-              @soundChange="playSound()"
-              :propObj="{
-                playSound: playSound,
-                btnCloseSetting: btnCloseSetting,
-                saveSetting: saveSetting,
-              }"
-            >
+            <Setting>
               <template #inputSetting>
                 <InputSetting
                   title="Amount of point to win (50-500)"
@@ -502,7 +495,7 @@ init();
                 <ButtonSetting
                   title="close"
                   :action="btnCloseSetting"
-                  style-type="save"
+                  style-type="close"
                 />
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
