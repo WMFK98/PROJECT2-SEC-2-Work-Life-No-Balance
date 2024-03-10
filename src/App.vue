@@ -22,6 +22,11 @@ import DisplayDice from "./component/DisplayDice.vue";
 import HowtoPlay from "./component/HowtoPlay.vue";
 import Setting from "./component/Setting.vue";
 import InputSetting from "./component/InputSetting.vue";
+import ToggleSetting from "./component/ToggleSetting.vue";
+import CheckboxsSetting from "./component/CheckboxsSetting.vue";
+import ButtonSetting from "./component/ButtonSetting.vue";
+import PopupLog from "./component/PopupLog.vue";
+
 //Pic Item
 import Diceplus from "./assets/Icon_Dice_1/DicePlus.png";
 import DelDice from "./assets/Icon_Dice_1/DelDice.png";
@@ -94,6 +99,7 @@ const playSound = (song) => {
   const soundSelect = new Audio(song);
   soundSelect.play();
 };
+
 const playMusicBg = () => {
   if (!isPlayMusic.value) return currentMusicBG.value.pause();
   if (theWinner.value) {
@@ -212,7 +218,7 @@ const btnCloseSetting = () => {
     }
   });
 };
-const btnSaveSetting = () => {
+const saveSetting = () => {
   const isInteger = (input, min, max) => {
     if (input === "") return false;
     const isValidInput = !isNaN(input) && Number.isInteger(Number(input));
@@ -440,37 +446,59 @@ init();
             </button>
             <Setting
               @soundChange="playSound()"
-              @click="console.log(isPlaySoundSF)"
               :propObj="{
                 playSound: playSound,
                 btnCloseSetting: btnCloseSetting,
-                btnSaveSetting: btnSaveSetting,
-                isPlayMusic: isPlayMusic,
-                pollItem: pollItem,
-                chooseItems: chooseItems,
-                checkSelectedItems: checkSelectedItems,
-                isPlaySoundSF: isPlaySoundSF,
+                saveSetting: saveSetting,
               }"
             >
               <template #inputSetting>
                 <InputSetting
                   title="Amount of point to win (50-500)"
-                  :setting="currentSetting.settingPoint"
+                  v-model="currentSetting.settingPoint"
                 />
                 <InputSetting
                   title="Maximum amount of item (0-7)"
-                  :setting="currentSetting.limitItem"
+                  v-model="currentSetting.limitItem"
                 />
                 <InputSetting
                   title="Amount of add item per time (0-7)"
-                  :setting="currentSetting.addItemNumSetting"
+                  v-model="currentSetting.addItemNumSetting"
                 />
                 <InputSetting
                   title="Amount of item at start (0-7)"
-                  :setting="currentSetting.startingItem"
+                  v-model="currentSetting.startingItem"
                 />
               </template>
-              <template #soundSetting>j</template>
+              <template #toggleSetting>
+                <ToggleSetting
+                  title="Sound music"
+                  v-model="isPlayMusic"
+                  show-on="🔊"
+                  show-off="🔇"
+                />
+                <ToggleSetting
+                  title="Sound SFX"
+                  v-model="isPlaySoundSF"
+                  show-on="🔊"
+                  show-off="🔇"
+                />
+              </template>
+
+              <template #checkboxSetting>
+                <CheckboxsSetting
+                  title="Item Random:"
+                  :action="chooseItems"
+                  :values="pollItem"
+                  :checkboxs="checkSelectedItems"
+                />
+              </template>
+              <template #submit>
+                <ButtonSetting title="Save" :action="saveSetting" />
+                <ButtonSetting title="close" :action="btnCloseSetting" />
+                <PopupLog log="❌Something went wrong❌" type="errorModal" />
+                <PopupLog log="✅Success✅" type="successModal" />
+              </template>
             </Setting>
           </div>
 

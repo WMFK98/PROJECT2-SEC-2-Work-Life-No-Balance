@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   title: String,
-  setting: Object,
+  modelValue: String,
 });
 </script>
 
@@ -11,7 +11,8 @@ const props = defineProps({
     <input
       class="border w-[39px] scr-m:w-[59px] bg-White rounded-lg px-1 text-center"
       type="text"
-      :v-model="setting"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </p>
 </template>
