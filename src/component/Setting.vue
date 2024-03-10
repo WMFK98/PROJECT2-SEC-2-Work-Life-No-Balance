@@ -31,23 +31,7 @@ const props = defineProps({
         <div class="flex justify-center gap-5">
           <form method="dialog" class="justify-between flex w-full px-10">
             <slot name="submit">
-              <button
-                class="btn-save btn text-White border-0 btn-close scr-l:w-[40%] scr-l:rounded-[20px] rounded-[10px] w-[100px] h-[25px] font-sans btn-xs scr-m:btn-md scr-l:btn-m hover:bg-[#96ff66] bg-[#3e8a1b] hover:text-Black"
-                id="saveButton"
-                @click="[propObj.btnSaveSetting(), propObj.playSound(soundbtn)]"
-              >
-                Save
-              </button>
-              <div></div>
-              <button
-                class="btn text-White border-0 btn-close scr-l:w-[40%] scr-l:rounded-[20px] scr-l scr-l:h-[50px] bg-Main-pink-300 rounded-[10px] w-[100px] h-[25px] btn-xs scr-m:btn-md scr-l:btn-m hover:bg-Main-pink-100 hover:text-Black"
-                id="cancelButton"
-                @click="
-                  [propObj.playSound(soundbtn), propObj.btnCloseSetting()]
-                "
-              >
-                Close
-              </button>
+              <p>empty submit</p>
             </slot>
           </form>
         </div>
