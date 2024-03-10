@@ -23,6 +23,7 @@ const props = defineProps({
     id="saveButton"
     @click="[action(), playSound]"
   >
+    <!-- bug play sound -->
     {{ title }}
   </button>
 </template>

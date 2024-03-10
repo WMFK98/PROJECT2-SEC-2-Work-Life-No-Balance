@@ -95,7 +95,7 @@ const resetMusic = () => {
 };
 
 const playSound = (song) => {
-  if (isPlaySoundSF.value === false) return;
+  if (!isPlaySoundSF.value) return;
   const soundSelect = new Audio(song);
   soundSelect.play();
 };
@@ -444,6 +444,13 @@ init();
             >
               🆕 NEW GAME
             </button>
+            <button
+              class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
+              onclick="setting.showModal()"
+              @click="playSound(soundbtn)"
+            >
+              ⚙️
+            </button>
             <Setting>
               <template #inputSetting>
                 <InputSetting
@@ -491,11 +498,13 @@ init();
                   title="Save"
                   :action="saveSetting"
                   style-type="save"
+                  :play-sound="playSound(soundbtn)"
                 />
                 <ButtonSetting
                   title="close"
                   :action="btnCloseSetting"
                   style-type="close"
+                  :play-sound="playSound(soundbtn)"
                 />
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
