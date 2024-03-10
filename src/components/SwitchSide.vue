@@ -1,7 +1,8 @@
 <script setup>
 import { defineProps, } from "vue";
 
-const props = defineProps(["player", "theWinner", "currentPlayer","isPlaySoundSF"]);
+const props = defineProps(["player", "theWinner", "currentPlayer","isPlaySoundSF","p"]);
+
 
 </script>
 <template>
@@ -17,11 +18,12 @@ const props = defineProps(["player", "theWinner", "currentPlayer","isPlaySoundSF
               : 'bg-Main-pink-200'
             ]"
         >
+        
           <h2
             class="text-hm scr-m:text-hm-tal scr-l:text-hm-des"
             :class="theWinner === player ? 'text-Yellow' : 'text-Black'"
           >
-            PLAYER 1
+            PLAYER {{ p }}
           </h2>
           <h1
             class="text-hl scr-m:text-hl-tal scr-l:text-hl-des"
@@ -32,7 +34,8 @@ const props = defineProps(["player", "theWinner", "currentPlayer","isPlaySoundSF
             {{ player.point }}
           </h1>
         </div>
- 
+
+
 
   
 </template>
