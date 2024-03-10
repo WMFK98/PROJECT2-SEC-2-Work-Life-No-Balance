@@ -698,7 +698,7 @@ init()
             <ButtonComponent
               title=" 🆕 NEW GAME"
               :action="reset"
-              :play-sound="playSound(soundbtn)"
+              :playSound="playSound(soundbtn)"
             />
             <div>
               <button
@@ -1038,13 +1038,14 @@ init()
           </button> -->
           <ButtonComponent
             title="🎲 ROLL"
-            :play-sound="playSound(soundbtn)"
             :action="roll"
+            :playSound="playSound(soundbtn)"
+            :play-Background="playMusicBg(backgroundMusic)"
           />
           <ButtonComponent
             title="📥 Hold"
             :action="hold"
-            :play-sound="playSound(soundHold)"
+            :playSound="playSound(soundHold)"
           />
         </div>
       </div>
