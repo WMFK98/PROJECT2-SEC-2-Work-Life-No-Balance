@@ -38,6 +38,11 @@ let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
 
+// ลบได้มันโง่เกิน ใช้สำหรับแสดงค่า Player1 และ Player2
+let p1 = 1;
+let p2 = 2;
+// 
+
 let defaultSetting = {
   settingPoint: 100,
   limitItem: 7,
@@ -374,11 +379,13 @@ init();
     >
       <div id="display" class="bg-White h-max flex justify-between">
         <!-- บน -->
-        
+        <!-- p ไว้แสดงค่า Player1 และ Player2 -->
         <SwitchSide 
         :player = "player1"
         :the-winner="theWinner"
         :current-player="currentPlayer"
+        
+        :p="p1"
          />
         <!-- <div
           id="display-p1"
@@ -867,6 +874,7 @@ init();
         :player = "player2"
         :the-winner="theWinner"
         :current-player="currentPlayer"
+        :p="p2"
          />
         <!-- <div
           id="display-p2"
@@ -902,9 +910,9 @@ init();
         :player = "player1"
         :the-winner="theWinner"
         :current-player="currentPlayer"
-        :isPlaySoundSF="isPlaySoundSF"
-
-         />
+        :isPlaySoundSF="isPlaySoundSF" />
+        
+        
          <SwitchSideLowerRight
         :player = "player2"
         :the-winner="theWinner"
@@ -1069,6 +1077,7 @@ init();
           >
             <p>📥 Hold</p>
           </button>
+          
         </div>
       </div>
     </div>
