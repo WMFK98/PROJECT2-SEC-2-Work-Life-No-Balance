@@ -494,8 +494,16 @@ init();
                 />
               </template>
               <template #submit>
-                <ButtonSetting title="Save" :action="saveSetting" />
-                <ButtonSetting title="close" :action="btnCloseSetting" />
+                <ButtonSetting
+                  title="Save"
+                  :action="saveSetting"
+                  style-type="save"
+                />
+                <ButtonSetting
+                  title="close"
+                  :action="btnCloseSetting"
+                  style-type="save"
+                />
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
               </template>
