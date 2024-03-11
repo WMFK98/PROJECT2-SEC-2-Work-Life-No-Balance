@@ -15,7 +15,7 @@ const props = defineProps([
     :class="
       theWinner === player
         ? 'bg-Black'
-        : currentPlayer[0] === player
+        : currentPlayer === player
         ? 'bg-Main-pink-100'
         : 'bg-Main-pink-200'
     "

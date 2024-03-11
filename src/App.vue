@@ -35,7 +35,6 @@ import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png";
 import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png";
 import SwitchSide from "./components/SwitchSide.vue";
 import SwitchSideLower from "./components/SwitchSideLower.vue";
-import SwitchSideLowerRight from "./components/SwitchSideLowerRight.vue";
 
 let voidScore = 1;
 // const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6]
@@ -524,7 +523,7 @@ init();
         <SwitchSideLower
           :player="player1"
           :the-winner="theWinner"
-          :current-player="currentPlayer"
+          :current-player="currentPlayer[0]"
           :isPlaySoundSF="isPlaySoundSF"
         >
           <template #currentPoint>
