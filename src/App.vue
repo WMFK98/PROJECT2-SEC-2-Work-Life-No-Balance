@@ -396,6 +396,8 @@ init();
 </script>
 
 <template>
+  <!-- bug พิศวง -->
+  <p class="hidden">{{ player1.curPoint }} {{ player2.curPoint }}</p>
   <div
     id="bg"
     class="bg-from-inherit w-screen h-screen flex justify-center items-center overflow-hidden"
@@ -516,14 +518,12 @@ init();
           :current-player="currentPlayer"
           :isPlaySoundSF="isPlaySoundSF"
         />
-
-        <SwitchSideLowerRight
+        <SwitchSideLower
           :player="player2"
           :the-winner="theWinner"
           :current-player="currentPlayer"
           :isPlaySoundSF="isPlaySoundSF"
         />
-
         <div
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"

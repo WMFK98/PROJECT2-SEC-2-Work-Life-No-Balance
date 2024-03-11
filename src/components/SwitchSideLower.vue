@@ -20,7 +20,8 @@ const props = defineProps([
         : 'bg-Main-pink-200'
     "
   >
-    <div
+    <slot name="currentPoint"></slot>
+    <!-- <div
       id="cp-p1"
       class="ml-[47px] scr-l:ml-0 mr-auto w-[108px] h-[69px] rounded-[20px] flex flex-col justify-center items-center scr-m:h-[101.823px] scr-m:w-[162.763px] scr-l:w-[211px] scr-l:h-[132px]"
       :class="
@@ -33,10 +34,12 @@ const props = defineProps([
       <p class="text-hs scr-l:text-hm-des scr-m:text-hm-tal">
         {{ player.curPoint }}
       </p>
-    </div>
+    </div> -->
     <div class="flex flex-col gap-1">
-      <p class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des">ITEMS</p>
-      <div
+      <slot name="itemsBar"></slot>
+      <!-- <p class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des">ITEMS</p> -->
+
+      <!-- <div
         id="items-p1 p-[2px]"
         class="max-w-auto h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
       >
@@ -68,7 +71,7 @@ const props = defineProps([
           <img class="swap-off" :src="picture" />
           <img class="swap-on" :src="picture" />
         </label>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
