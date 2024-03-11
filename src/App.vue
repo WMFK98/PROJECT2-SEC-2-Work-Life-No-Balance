@@ -22,6 +22,8 @@ import CheckboxsSetting from "./components/CheckboxsSetting.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import PopupLog from "./components/PopupLog.vue";
 
+import CurrentPoint from "./components/CurrentPoint.vue";
+import ItemTutorials from "./components/ItemTutorials.vue";
 //Pic Item
 import Diceplus from "./assets/Icon_Dice_1/DicePlus.png";
 import DelDice from "./assets/Icon_Dice_1/DelDice.png";
