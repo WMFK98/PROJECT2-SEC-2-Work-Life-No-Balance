@@ -22,7 +22,7 @@ const props = defineProps([
   >
     <div
       id="cp-p1"
-      class="ml-auto mr-[47px] scr-l:mr-0 w-[108px] h-[69px] rounded-[20px] flex flex-col justify-center items-center scr-m:h-[101.823px] scr-m:w-[162.763px] scr-l:w-[211px] scr-l:h-[132px]"
+      class="ml-auto w-[108px] h-[69px] rounded-[20px] flex flex-col justify-center items-center scr-m:h-[101.823px] scr-m:w-[162.763px] scr-l:w-[211px] scr-l:h-[132px]"
       :class="
         theWinner === player
           ? ' bg-Yellow text-Black'

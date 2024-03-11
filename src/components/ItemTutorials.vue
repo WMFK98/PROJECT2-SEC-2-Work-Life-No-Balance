@@ -6,7 +6,9 @@ const props = defineProps(["pollItem"]);
   <div
     id="item-box"
     class="box-item scr-l:w-[560px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
-    v-for="({ name, discription, isPerTurn, isAttack }, index) in pollItem"
+    v-for="(
+      { name, picture, discription, isPerTurn, isAttack }, index
+    ) in pollItem"
     :key="index"
   >
     <div
@@ -19,10 +21,10 @@ const props = defineProps(["pollItem"]);
           : 'bg-isPerTurn text-White'
       "
     >
-      {{ name }}
+      <img :src="picture" alt="" />
     </div>
     <p class="text-hss scr-l:text-hs-des w-[80%]">
-      {{ discription }}
+      <strong>{{ name }}</strong> : {{ discription }}
     </p>
   </div>
 </template>

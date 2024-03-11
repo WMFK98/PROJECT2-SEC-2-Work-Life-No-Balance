@@ -205,7 +205,7 @@ const hold = () => {
   currentPlayer[0].curPoint = 0;
   switchPlayer();
 };
-const btnCloseSetting = () => {
+const closeSetting = () => {
   currentSetting.limitItem = defaultSetting.limitItem;
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
   currentSetting.settingPoint = defaultSetting.settingPoint;
@@ -256,13 +256,14 @@ const saveSetting = () => {
     !isInteger(currentSetting.addItemNumSetting, 0, 7)
   ) {
     errorModal.showModal();
-  } else {
-    successModal.showModal();
-    defaultSetting = { ...currentSetting };
-    player1.items.setLimitItem(defaultSetting.limitItem);
-    player2.items.setLimitItem(defaultSetting.limitItem);
-    addSelectedItem();
+    closeSetting();
+    return;
   }
+  successModal.showModal();
+  defaultSetting = { ...currentSetting };
+  player1.items.setLimitItem(defaultSetting.limitItem);
+  player2.items.setLimitItem(defaultSetting.limitItem);
+  addSelectedItem();
   reset();
 };
 
@@ -424,7 +425,12 @@ init();
           class="flex flex-col py-2 scr-l:pt-[19px] gap-2 scr-m:gap-[22px] items-center"
         >
           <div id="top-btn" class="flex gap-3 items-center">
-            <HowtoPlay :playSound="playSound" :pollItem="pollItem" />
+            <HowtoPlay :playSound="playSound">
+              <template #items-tutorial>
+                <ItemTutorials :poll-item="pollItem" />
+              </template>
+            </HowtoPlay>
+
             <button
               @click="[reset(), playSound(soundbtn)]"
               class="px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:h-[39px] scr-m:w-[150px] scr-m:rounded-[30px] scr-l:w-[200px] scr-l:h-[50px]"
@@ -489,7 +495,7 @@ init();
                 />
                 <ButtonSetting
                   title="close"
-                  :action="btnCloseSetting"
+                  :action="closeSetting"
                   style-type="close"
                   :play-sound="playSound"
                 />
@@ -519,13 +525,27 @@ init();
           :the-winner="theWinner"
           :current-player="currentPlayer"
           :isPlaySoundSF="isPlaySoundSF"
-        />
+        >
+          <template #currentPoint>
+            <CurrentPoint
+              :player="player1"
+              :the-winner="theWinner"
+              :is-left="true"
+            /> </template
+        ></SwitchSideLower>
         <SwitchSideLower
           :player="player2"
           :the-winner="theWinner"
           :current-player="currentPlayer"
           :isPlaySoundSF="isPlaySoundSF"
-        />
+        >
+          <template #currentPoint>
+            <CurrentPoint
+              :player="player2"
+              :the-winner="theWinner"
+              :is-left="false"
+            /> </template
+        ></SwitchSideLower>
         <div
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"

@@ -11,7 +11,7 @@ const props = defineProps([
 <template>
   <div
     id="controller-p1"
-    class="w-1/2 flex flex-col px-3 py-5 scr-l:pb-[64px] scr-l:pr-[29px] scr-l:pl-[93px] gap-[35px] scr-m:gap-[70px] justify-end"
+    class="w-1/2 flex flex-col px-3 py-5 scr-m:pb-[42px] scr-l:pb-[64px] items-center gap-[50px] scr-m:gap-[100px] justify-end"
     :class="
       theWinner === player
         ? 'bg-Black'
@@ -39,9 +39,9 @@ const props = defineProps([
       <slot name="itemsBar"></slot>
       <!-- <p class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des">ITEMS</p> -->
 
-      <!-- <div
+      <div
         id="items-p1 p-[2px]"
-        class="max-w-auto h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
+        class="scr-l:w-[480px] w-auto h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
       >
         <label
           v-for="{
@@ -71,7 +71,7 @@ const props = defineProps([
           <img class="swap-off" :src="picture" />
           <img class="swap-on" :src="picture" />
         </label>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>

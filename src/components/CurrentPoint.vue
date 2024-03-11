@@ -10,7 +10,9 @@ const props = defineProps(["player", "theWinner", "isLeft"]);
       theWinner === player
         ? ' bg-Yellow text-Black'
         : 'bg-Main-pink-300 text-White',
-      isLeft ? 'ml-[47px] mr-auto scr-l:ml-0' : 'ml-auto mr-[47px]  scr-l:mr-0',
+      isLeft
+        ? 'scr-m:mr-[170px] mr-[120px] scr-l:mr-[210px]'
+        : 'scr-m:ml-[170px] ml-[120px] scr-l:ml-[210px]',
     ]"
   >
     <p class="text-hss scr-m:text-hs-tal scr-l:text-hs-des">CURRENT</p>
