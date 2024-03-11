@@ -1,4 +1,5 @@
 <script setup>
+import soundbtn from "/music/soundBtn.mp3";
 const props = defineProps({
   title: String,
   playSound: Function,
@@ -21,7 +22,7 @@ const props = defineProps({
         : 'bg-Main-pink-300  hover:bg-Main-pink-100 hover:text-Black'
     "
     id="saveButton"
-    @click="[action(), playSound]"
+    @click="[action(), playSound(soundbtn)]"
   >
     {{ title }}
   </button>
