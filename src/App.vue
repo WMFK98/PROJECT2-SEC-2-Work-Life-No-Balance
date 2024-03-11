@@ -18,14 +18,14 @@ import soundbtn from "/music/soundBtn.mp3";
 import soundSwap from "/music/swapsound.mp3";
 
 // Leng's Component
-import DisplayDice from "./component/DisplayDice.vue";
-import HowtoPlay from "./component/HowtoPlay.vue";
-import Setting from "./component/Setting.vue";
-import InputSetting from "./component/InputSetting.vue";
-import ToggleSetting from "./component/ToggleSetting.vue";
-import CheckboxsSetting from "./component/CheckboxsSetting.vue";
-import ButtonSetting from "./component/ButtonSetting.vue";
-import PopupLog from "./component/PopupLog.vue";
+import DisplayDice from "./components/DisplayDice.vue";
+import HowtoPlay from "./components/HowtoPlay.vue";
+import Setting from "./components/Setting.vue";
+import InputSetting from "./components/InputSetting.vue";
+import ToggleSetting from "./components/ToggleSetting.vue";
+import CheckboxsSetting from "./components/CheckboxsSetting.vue";
+import ButtonSetting from "./components/ButtonSetting.vue";
+import PopupLog from "./components/PopupLog.vue";
 
 //Pic Item
 import Diceplus from "./assets/Icon_Dice_1/DicePlus.png";
@@ -496,9 +496,8 @@ init();
               <template #submit>
                 <ButtonSetting
                   title="Save"
-                  :action="saveSetting"
+                  :action="[saveSetting, playSound(soundbtn)]"
                   style-type="save"
-                  :play-sound="playSound(soundbtn)"
                 />
                 <ButtonSetting
                   title="close"
