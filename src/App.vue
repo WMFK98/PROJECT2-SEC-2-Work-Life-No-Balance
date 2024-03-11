@@ -3,12 +3,7 @@ import { reactive, ref, watch } from "vue";
 import TypeItem from "./TypeItem";
 import { random } from "./tool";
 import ItemManagement from "./ItemsManagement";
-// import roll1 from "/images/dice-1.png"
-// import roll2 from "/images/dice-2.png"
-// import roll3 from "/images/dice-3.png"
-// import roll4 from "/images/dice-4.png"
-// import roll5 from "/images/dice-5.png"
-// import roll6 from "/images/dice-6.png"
+
 import Item from "./Item";
 import addItem from "/music/addItem.mp3";
 import backgroundMusic from "/music/backgroundMusic.mp3";
@@ -35,6 +30,9 @@ import OddAndEven from "./assets/Icon_Dice_1/ODDEVENT.png";
 import SixOneTime from "./assets/Icon_Dice_1/OneSixTM.png";
 import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png";
 import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png";
+import SwitchSide from "./components/SwitchSide.vue";
+import SwitchSideLower from "./components/SwitchSideLower.vue";
+import SwitchSideLowerRight from "./components/SwitchSideLowerRight.vue";
 
 let voidScore = 1;
 // const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6]
@@ -54,6 +52,11 @@ let givePoint = 0;
 let dices = reactive([1, 1]);
 
 let phaseGame = 0;
+
+// ลบได้มันโง่เกิน ใช้สำหรับแสดงค่า Player1 และ Player2
+let p1 = 1;
+let p2 = 2;
+//
 
 let defaultSetting = {
   settingPoint: 100,
@@ -405,39 +408,19 @@ init();
       class="w-[640px] shadow-lg h-[340px] bg-btn-none-active rounded-[20px] flex flex-col overflow-hidden scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px]"
     >
       <div id="display" class="bg-White h-max flex justify-between">
-        <div
-          id="display-p1"
-          class="w-[204.944px] scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
-          :class="
-            theWinner === player1
-              ? 'bg-Black'
-              : currentPlayer[0] === player1
-              ? 'bg-Main-pink-100'
-              : 'bg-Main-pink-200'
-          "
-        >
-          <h2
-            class="text-hm scr-m:text-hm-tal scr-l:text-hm-des"
-            :class="theWinner === player1 ? 'text-Yellow' : 'text-Black'"
-          >
-            PLAYER 1
-          </h2>
-          <h1
-            class="text-hl scr-m:text-hl-tal scr-l:text-hl-des"
-            :class="
-              theWinner === player1 ? 'text-Yellow' : 'text-Main-pink-300'
-            "
-          >
-            {{ player1.point }}
-          </h1>
-        </div>
+        <SwitchSide
+          :player="player1"
+          :the-winner="theWinner"
+          :current-player="currentPlayer"
+          :p="p1"
+        />
+
         <div
           id="display-dice"
           class="flex flex-col py-2 scr-l:pt-[19px] gap-2 scr-m:gap-[22px] items-center"
         >
           <div id="top-btn" class="flex gap-3 items-center">
             <HowtoPlay :playSound="playSound" :pollItem="pollItem" />
-            <!-- </div> -->
             <button
               @click="[reset(), playSound(soundbtn)]"
               class="px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:h-[39px] scr-m:w-[150px] scr-m:rounded-[30px] scr-l:w-[200px] scr-l:h-[50px]"
@@ -496,14 +479,15 @@ init();
               <template #submit>
                 <ButtonSetting
                   title="Save"
-                  :action="[saveSetting, playSound(soundbtn)]"
+                  :action="saveSetting"
                   style-type="save"
+                  :play-sound="playSound"
                 />
                 <ButtonSetting
                   title="close"
                   :action="btnCloseSetting"
                   style-type="close"
-                  :play-sound="playSound(soundbtn)"
+                  :play-sound="playSound"
                 />
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
@@ -515,175 +499,31 @@ init();
             id="dices "
             class="flex z-0 gap-3 justify-center w-max mx-3 h-max pb-[2px] scr-l:pb-[10px] scr-m:gap-[32px]"
           >
-            <!-- <img
-              v-for="(dice, index) in dices"
-              :key="index"
-              class="max-h-[54px] scr-m:max-h-[81px] scr-l:max-h-[105px] min-h-0 scr-l:rounded-[30px] rounded-[20px] scr-m:rounded-[30px] shadow-lg"
-              :src="diceFace[dice - 1]"
-              :alt="'dice' + dice"
-            /> -->
             <DisplayDice :dices="dices" />
           </div>
         </div>
-        <div
-          id="display-p2"
-          class="w-[204.944px] scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
-          :class="
-            theWinner === player2
-              ? 'bg-Black'
-              : currentPlayer[0] === player2
-              ? 'bg-Main-pink-100'
-              : 'bg-Main-pink-200'
-          "
-        >
-          <h2
-            class="text-hm scr-m:text-hm-tal scr-l:text-hm-des"
-            :class="theWinner === player2 ? 'text-Yellow' : 'text-Black'"
-          >
-            PLAYER 2
-          </h2>
-          <h1
-            class="text-hl scr-m:text-hl-tal scr-l:text-hl-des"
-            :class="
-              theWinner === player2 ? 'text-Yellow' : 'text-Main-pink-300'
-            "
-          >
-            {{ player2.point }}
-          </h1>
-        </div>
+        <SwitchSide
+          :player="player2"
+          :the-winner="theWinner"
+          :current-player="currentPlayer"
+          :p="p2"
+        />
       </div>
       <div id="controller" class="flex flex-auto justify-center relative">
-        <div
-          id="controller-p1"
-          class="w-1/2 flex flex-col px-3 py-5 scr-l:pb-[64px] scr-l:pr-[29px] scr-l:pl-[93px] gap-[35px] scr-m:gap-[70px] justify-end"
-          :class="
-            theWinner === player1
-              ? 'bg-Black'
-              : currentPlayer[0] === player1
-              ? 'bg-Main-pink-100'
-              : 'bg-Main-pink-200'
-          "
-        >
-          <div
-            id="cp-p1"
-            class="ml-[47px] scr-l:ml-0 mr-auto w-[108px] h-[69px] rounded-[20px] flex flex-col justify-center items-center scr-m:h-[101.823px] scr-m:w-[162.763px] scr-l:w-[211px] scr-l:h-[132px]"
-            :class="
-              theWinner === player1
-                ? ' bg-Yellow text-Black'
-                : 'bg-Main-pink-300 text-White'
-            "
-          >
-            <p class="text-hss scr-m:text-hs-tal scr-l:text-hs-des">CURRENT</p>
-            <p class="text-hs scr-l:text-hm-des scr-m:text-hm-tal">
-              {{ player1.curPoint }}
-            </p>
-          </div>
-          <div class="flex flex-col gap-1">
-            <p class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des">
-              ITEMS
-            </p>
-            <div
-              id="items-p1 p-[2px]"
-              class="max-w-auto h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
-            >
-              <label
-                v-for="{
-                  id,
-                  isUsed,
-                  itemInfo: { name, isPerTurn, isAttack, picture },
-                } in player1.items.getAllItem()"
-                :key="id"
-                class="swap swap-rotate item btn text-hss scr-l:text-hs-des scr-m:text-hs-tal btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
-                :class="
-                  !(currentPlayer[0] === player1) || theWinner
-                    ? 'bg-btn-hover  text-White'
-                    : isUsed
-                    ? 'bg-Yellow-light  text-Black'
-                    : isPerTurn || name === 'Dice+' || name === 'Dice-'
-                    ? 'bg-isTurn text-White'
-                    : isAttack
-                    ? 'bg-Main-pink-300 text-White'
-                    : 'bg-isPerTurn text-White'
-                "
-              >
-                <input
-                  @click="player1.items.toggleUsedItem(id, isPlaySoundSF)"
-                  type="checkbox"
-                  :disabled="!(currentPlayer[0] === player1) || theWinner"
-                />
-                <img class="swap-off" :src="picture" />
-                <img class="swap-on" :src="picture" />
-              </label>
-            </div>
-          </div>
-        </div>
-        <div
-          id="controller-p2"
-          class="w-1/2 flex flex-col px-3 py-5 scr-l:pb-[64px] scr-l:pr-[93px] scr-l:pl-[29px] gap-[35px] scr-m:gap-[70px] justify-end"
-          :class="
-            theWinner === player2
-              ? 'bg-Black'
-              : currentPlayer[0] === player2
-              ? 'bg-Main-pink-100'
-              : 'bg-Main-pink-200'
-          "
-        >
-          <div
-            id="cp-p2"
-            class="ml-auto mr-[47px] scr-l:mr-0 w-[108px] h-[69px] rounded-[20px] flex flex-col justify-center items-center scr-m:h-[101.823px] scr-m:w-[162.763px] scr-l:w-[211px] scr-l:h-[132px]"
-            :class="
-              theWinner === player2
-                ? ' bg-Yellow text-Black'
-                : 'bg-Main-pink-300 text-White'
-            "
-          >
-            <p class="text-hss scr-m:text-hs-tal scr-l:text-hs-des">CURRENT</p>
-            <p class="text-hs scr-m:text-hm-tal scr-l:text-hm-des">
-              {{ player2.curPoint }}
-            </p>
-          </div>
+        <SwitchSideLower
+          :player="player1"
+          :the-winner="theWinner"
+          :current-player="currentPlayer"
+          :isPlaySoundSF="isPlaySoundSF"
+        />
 
-          <div class="flex flex-col gap-1">
-            <p
-              class="text-Black text-end px-1 scr-m:text-hs-tal scr-l:text-hs-des"
-            >
-              ITEMS
-            </p>
-            <div
-              id="items-p2 p-[2px]"
-              class="max-w-auto h-[45px] ; rounded-[10px] flex p-1 gap-1 flex-row-reverse bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
-            >
-              <label
-                v-for="{
-                  id,
-                  isUsed,
-                  itemInfo: { name, isPerTurn, isAttack, picture },
-                } in player2.items.getAllItem()"
-                :key="id"
-                class="swap swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
-                :class="
-                  !(currentPlayer[0] === player2) || theWinner
-                    ? 'bg-btn-hover  text-White'
-                    : isUsed
-                    ? 'bg-Yellow-light  text-Black'
-                    : isPerTurn || name === 'Dice+' || name === 'Dice-'
-                    ? 'bg-isTurn text-White'
-                    : isAttack
-                    ? 'bg-Main-pink-300 text-White'
-                    : 'bg-isPerTurn text-White'
-                "
-              >
-                <input
-                  @click="player2.items.toggleUsedItem(id, isPlaySoundSF)"
-                  type="checkbox"
-                  :disabled="!(currentPlayer[0] === player2) || theWinner"
-                />
-                <img class="swap-off" :src="picture" />
-                <img class="swap-on" :src="picture" />
-              </label>
-            </div>
-          </div>
-        </div>
+        <SwitchSideLowerRight
+          :player="player2"
+          :the-winner="theWinner"
+          :current-player="currentPlayer"
+          :isPlaySoundSF="isPlaySoundSF"
+        />
+
         <div
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"
