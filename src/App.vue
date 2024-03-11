@@ -21,6 +21,7 @@ import ToggleSetting from "./components/ToggleSetting.vue";
 import CheckboxsSetting from "./components/CheckboxsSetting.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import PopupLog from "./components/PopupLog.vue";
+import ListItem from "./components/ListItem.vue";
 
 import CurrentPoint from "./components/CurrentPoint.vue";
 import ItemTutorials from "./components/ItemTutorials.vue";
@@ -531,12 +532,21 @@ init();
               :player="player1"
               :the-winner="theWinner"
               :is-left="true"
-            /> </template
-        ></SwitchSideLower>
+            />
+          </template>
+          <template #items-bar>
+            <ListItem
+              :player="player1"
+              :current-player="currentPlayer[0]"
+              :the-winner="theWinner"
+              :is-play-sound-s-f="isPlaySoundSF"
+            ></ListItem
+          ></template>
+        </SwitchSideLower>
         <SwitchSideLower
           :player="player2"
           :the-winner="theWinner"
-          :current-player="currentPlayer"
+          :current-player="currentPlayer[0]"
           :isPlaySoundSF="isPlaySoundSF"
         >
           <template #currentPoint>
@@ -544,7 +554,15 @@ init();
               :player="player2"
               :the-winner="theWinner"
               :is-left="false"
-            /> </template
+            />
+          </template>
+          <template #items-bar>
+            <ListItem
+              :player="player2"
+              :current-player="currentPlayer[0]"
+              :the-winner="theWinner"
+              :is-play-sound-s-f="isPlaySoundSF"
+            ></ListItem></template
         ></SwitchSideLower>
         <div
           id="btns"

@@ -1,17 +1,25 @@
 <script setup>
 import ItemComponent from "./Item.vue";
-const props = defineProps({ player: Object , currentPlayer : Array , isPlaySoundSF:Boolean , theWinner : [Object , Array]});
+const props = defineProps({
+  player: Object,
+  currentPlayer: Array,
+  isPlaySoundSF: Boolean,
+  theWinner: [Object, Array],
+});
 </script>
 
 <template>
   <div class="flex flex-col gap-1">
-    <p class="text-Black  px-1 scr-m:text-hs-tal scr-l:text-hs-des" :class="player.items.owner == 'p2'?'text-end':''">
+    <p
+      class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des"
+      :class="player.items.owner == 'p2' ? 'text-end' : ''"
+    >
       ITEMS
     </p>
     <div
       id="items-p2 p-[2px]"
-      class="max-w-auto h-[45px] ; rounded-[10px] flex p-1 gap-1  bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
-      :class="player.items.owner == 'p2'?'flex-row-reverse':''"
+      class="scr-l:w-[480px] w-[300px] h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
+      :class="player.items.owner == 'p2' ? 'flex-row-reverse' : ''"
     >
       <ItemComponent :pollItem="player.items.getAllItem()">
         <template
@@ -19,7 +27,7 @@ const props = defineProps({ player: Object , currentPlayer : Array , isPlaySound
             item: {
               id,
               isUsed,
-              itemInfo: { name, isPerTurn, isAttack },
+              itemInfo: { picture, isPerTurn, isAttack },
             },
           }"
         >
@@ -42,8 +50,8 @@ const props = defineProps({ player: Object , currentPlayer : Array , isPlaySound
               type="checkbox"
               :disabled="!(currentPlayer[0] === player) || theWinner"
             />
-            <p class="swap-off">{{ name }}</p>
-            <p class="swap-on">{{ name }}</p>
+            <img class="swap-off" :src="picture" />
+            <img class="swap-on" :src="picture" />
           </label>
         </template>
       </ItemComponent>

@@ -21,7 +21,7 @@ const props = defineProps(["pollItem"]);
           : 'bg-isPerTurn text-White'
       "
     >
-      <img :src="picture" alt="" />
+      <img :src="picture" :alt="name" />
     </div>
     <p class="text-hss scr-l:text-hs-des w-[80%]">
       <strong>{{ name }}</strong> : {{ discription }}

@@ -37,7 +37,7 @@ const props = defineProps([
             :key="id"
             class="swap swap-rotate item btn text-hss scr-l:text-hs-des scr-m:text-hs-tal btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
             :class="
-              !(currentPlayer[0] === player) || theWinner
+              !(currentPlayer === player) || theWinner
                 ? 'bg-btn-hover  text-White'
                 : isUsed
                 ? 'bg-Yellow-light  text-Black'
@@ -51,7 +51,7 @@ const props = defineProps([
             <input
               @click="player.items.toggleUsedItem(id, isPlaySoundSF)"
               type="checkbox"
-              :disabled="!(currentPlayer[0] === player) || theWinner"
+              :disabled="!(currentPlayer === player) || theWinner"
             />
             <img class="swap-off" :src="picture" />
             <img class="swap-on" :src="picture" />
