@@ -6,7 +6,7 @@ const props = defineProps({
   style: String,
   action: Function,
   playSound: Function,
-  playMusicBg: Function,
+  playBackground: Function,
   theWinner: [Object, Array],
   buttonStyle: {
     type: String,
@@ -19,7 +19,7 @@ const props = defineProps({
 
 <template>
   <button
-    @click=";[action(), playSound(), playMusicBg()]"
+    @click=";[action(), playSound(), playBackground()]"
     :style="style"
     class="px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:h-[39px] scr-m:w-[150px] scr-m:rounded-[30px] scr-l:w-[200px] scr-l:h-[50px]"
     :class="
