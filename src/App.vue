@@ -52,13 +52,7 @@ let pollItem = [];
 let checkSelectedItems = [];
 let givePoint = 0;
 let dices = reactive([1, 1]);
-
 let phaseGame = 0;
-
-// ลบได้มันโง่เกิน ใช้สำหรับแสดงค่า Player1 และ Player2
-let p1 = 1;
-let p2 = 2;
-//
 
 let defaultSetting = {
   settingPoint: 100,
@@ -70,6 +64,7 @@ let defaultSetting = {
 const currentSetting = reactive({ ...defaultSetting });
 
 const player1 = reactive({
+  name: "p1",
   point: 0,
   curPoint: 0,
   items: new ItemManagement("p1", pollItem),
@@ -77,6 +72,7 @@ const player1 = reactive({
 });
 
 const player2 = reactive({
+  name: "p2",
   point: 0,
   curPoint: 0,
   items: new ItemManagement("p2", pollItem),
@@ -417,7 +413,6 @@ init();
           :player="player1"
           :the-winner="theWinner"
           :current-player="currentPlayer"
-          :p="p1"
         />
 
         <div
@@ -516,7 +511,6 @@ init();
           :player="player2"
           :the-winner="theWinner"
           :current-player="currentPlayer"
-          :p="p2"
         />
       </div>
       <div id="controller" class="flex flex-auto justify-center relative">
