@@ -1,15 +1,14 @@
-class SoundControl {
-  constructor() {
+ const SoundControl = function() {
     this.isOffMusic = false;
     this.isOffSFX = false;
-  }
+
   changeMusic(music) {
     if (this.music) this.music.remove();
     this.music = new Audio(music);
     this.music.loop = true;
   }
   playSoundSFX(sound) {
-    if (!this.sound || this.isOffSFX) return;
+    if (!sound || this.isOffSFX) return;
     new Audio(sound).play();
   }
   playSoundMusic() {
@@ -26,5 +25,6 @@ class SoundControl {
   toggleSoundSFX() {
     this.isOffSFX = !this.isOffSFX;
   }
+
+  return {}
 }
-export default new SoundControl();
