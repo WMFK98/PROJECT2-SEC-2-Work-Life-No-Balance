@@ -4,15 +4,21 @@ class SoundControl {
     this.isOffSFX = false;
   }
   changeMusic(music) {
+    if (this.music) this.music.remove();
     this.music = new Audio(music);
     this.music.loop = true;
   }
   playSoundSFX(sound) {
     if (!this.sound || this.isOffSFX) return;
-    new Audio(sound).soundSelect.play();
+    new Audio(sound).play();
   }
   playSoundMusic() {
     if (!this.music || this.isOffMusic) return;
+    this.music.play();
+  }
+  stopSoundMusic() {
+    if (!this.music || this.isOffMusic) return;
+    this.music.pause();
   }
   toggleSoundMusic() {
     this.isOffMusic = !this.isOffMusic;
