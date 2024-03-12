@@ -1,30 +1,37 @@
- const SoundControl = function() {
-    this.isOffMusic = false;
-    this.isOffSFX = false;
+const SoundControl = function () {
+  let isOffMusic = false;
+  let isOffSFX = false;
+  let music = null;
 
-  changeMusic(music) {
-    if (this.music) this.music.remove();
-    this.music = new Audio(music);
-    this.music.loop = true;
+  function changeMusic(newMusic) {
+    if (music) music.pause();
+    music = new Audio(newMusic);
+    music.loop = true;
   }
-  playSoundSFX(sound) {
-    if (!sound || this.isOffSFX) return;
+  function playSoundSFX(sound) {
+    if (!sound || isOffSFX) return;
     new Audio(sound).play();
   }
-  playSoundMusic() {
-    if (!this.music || this.isOffMusic) return;
-    this.music.play();
-  }
-  stopSoundMusic() {
-    if (!this.music || this.isOffMusic) return;
-    this.music.pause();
-  }
-  toggleSoundMusic() {
-    this.isOffMusic = !this.isOffMusic;
-  }
-  toggleSoundSFX() {
-    this.isOffSFX = !this.isOffSFX;
+  function playSoundMusic() {
+    if (!music || isOffMusic) return;
+    music.play();
   }
 
-  return {}
-}
+  function toggleSoundMusic() {
+    isOffMusic = !isOffMusic;
+    if (isOffMusic) return music.pause();
+    music.play();
+  }
+  function toggleSoundSFX() {
+    isOffSFX = !isOffSFX;
+  }
+
+  return {
+    changeMusic,
+    playSoundMusic,
+    playSoundSFX,
+    toggleSoundMusic,
+    toggleSoundSFX,
+  };
+};
+export default SoundControl();

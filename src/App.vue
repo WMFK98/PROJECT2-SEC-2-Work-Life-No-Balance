@@ -37,8 +37,14 @@ import SwitchSide from "./components/SwitchSide.vue";
 import SwitchSideLower from "./components/SwitchSideLower.vue";
 import SoundControl from "./SoundControl";
 
+const {
+  playSoundSFX,
+  changeMusic,
+  playSoundMusic,
+  toggleSoundMusic,
+  toggleSoundSFX,
+} = SoundControl;
 let voidScore = 1;
-// const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6]
 const musicBG = new Audio(backgroundMusic);
 const musicWin = new Audio(soundWin);
 musicBG.loop = true;
@@ -390,6 +396,7 @@ const initItem = () => {
 };
 
 const init = () => {
+  changeMusic(backgroundMusic);
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
   watch(() => isPlayMusic.value, playMusicBg);
@@ -465,12 +472,7 @@ init();
                 />
               </template>
               <template #toggleSetting>
-                <ToggleSetting
-                  title="Sound music"
-                  v-model="isPlayMusic"
-                  show-on="🔊"
-                  show-off="🔇"
-                />
+                <ToggleSetting title="Sound music" show-on="🔊" show-off="🔇" />
                 <ToggleSetting
                   title="Sound SFX"
                   v-model="isPlaySoundSF"
@@ -570,9 +572,7 @@ init();
         >
           <button
             :disabled="theWinner"
-            @click="
-              [roll(), playMusicBg(), SoundControl.playSoundSFX(soundbtn)]
-            "
+            @click="[roll(), playSoundMusic(), playSoundSFX(soundbtn)]"
             id="btn-roll"
             class="btn w-[75px] scr-m:w-[166px] hover:bg-btn-hover bg-btn-active h-[60px] scr-m:h-max p-0 border-0 text-hss scr-m:text-hs-tal scr-l:text-hs-des text-Black flex flex-col scr-m:flex-row items-center scr-m:rounded-[30px] scr-l:w-[200px]"
           >

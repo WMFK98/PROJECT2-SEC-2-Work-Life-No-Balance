@@ -2,7 +2,7 @@
 import { defineProps } from "vue";
 const props = defineProps({
   title: String,
-  modelValue: Boolean,
+  action: Function,
   showOn: String,
   showOff: String,
 });
@@ -12,12 +12,7 @@ const props = defineProps({
   <label class="flex gap-2 cursor-pointer">
     <p>{{ title }} :</p>
     <div class="swap swap-flip text-hss scr-m:text-hs-tal scr-l:text-hs-des">
-      <input
-        type="checkbox"
-        :checked="modelValue"
-        @change="$emit('update:modelValue', $event.target.checked)"
-      />
-
+      <input type="checkbox" @click="" />
       <div class="swap-on">{{ showOn }}</div>
       <div class="swap-off">{{ showOff }}</div>
     </div>
