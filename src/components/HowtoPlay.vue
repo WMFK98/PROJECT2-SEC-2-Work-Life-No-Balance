@@ -47,23 +47,6 @@ const props = defineProps({
               @click="selectTutorial = 2"
             />
           </div>
-          <!-- <div
-						v-show="selectTutorial === 2"
-						class="flex gap-3 text-hss scr-l:text-hs-des"
-					>
-						<div class="flex gap-2 src-l:gap-4">
-							<div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
-							<p>Item Time</p>
-						</div>
-						<div class="flex gap-2">
-							<div class="bg-[#FF3FA4] w-4 scr-l:w-8 rounded-[5px]"></div>
-							<p>Item Turn</p>
-						</div>
-						<div class="flex gap-2">
-							<div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
-							<p>Item Attack</p>
-						</div>
-					</div> -->
           <div
             v-show="selectTutorial === 1"
             class="flex gap-3 text-hss scr-l:text-hs-des scr-l:gap-6"
@@ -89,9 +72,9 @@ const props = defineProps({
 
         <ol
           class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
-          v-show="selectTutorial === 1"
+        v-show="selectTutorial === 1"
           type="1"
-        >
+      >
           <li><strong>กติกา:</strong></li>
           <li><strong>จำนวนผู้เล่น</strong>: 2 คน</li>
           <li><strong>รูปแบบ</strong>:ผลัดเทิร์น</li>

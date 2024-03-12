@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
-const props = defineProps(["pollItem"]);
+const props = defineProps({ pollItem: Array });
 </script>
 <template>
   <div
