@@ -384,11 +384,28 @@ const initItem = () => {
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 };
 
+const settingStorage = () => {
+  const storedSettingsString = localStorage.getItem('settings');
+  const storedSettings = storedSettingsString ? JSON.parse(storedSettingsString) : {};
+  window.addEventListener('load', function() {
+    if(storedSettingsString){
+      defaultSetting.value = reactive({ ...storedSettings });
+      reset()
+    } 
+  });
+  currentSetting.value = reactive({ ...storedSettings });
+  watch(currentSetting, (newVal) => {
+    localStorage.setItem('settings', JSON.stringify(newVal));
+  }, { deep: true }); 
+
+};
+
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
   watch(() => isPlayMusic.value, playMusicBg);
   initItem();
+  settingStorage();
 };
 
 init();
