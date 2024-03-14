@@ -1,37 +1,26 @@
-const SoundControl = function () {
-  let isOffMusic = false;
-  let isOffSFX = false;
-  let music = null;
+let isOffMusic = false;
+let isOffSFX = false;
+let currentPathMusic = "";
+let currentMusic = new Audio();
 
-  function changeMusic(newMusic) {
-    if (music) music.pause();
-    music = new Audio(newMusic);
-    music.loop = true;
+export function playSoundSFX(sound) {
+  if (!sound || isOffSFX) return;
+  new Audio(sound).play();
+}
+export function playSoundMusic(newPathMusic) {
+  if (newPathMusic !== currentPathMusic) {
+    currentPathMusic = newPathMusic;
+    currentMusic.pause();
+    currentMusic = new Audio(currentPathMusic);
   }
-  function playSoundSFX(sound) {
-    if (!sound || isOffSFX) return;
-    new Audio(sound).play();
-  }
-  function playSoundMusic() {
-    if (!music || isOffMusic) return;
-    music.play();
-  }
-
-  function toggleSoundMusic() {
-    isOffMusic = !isOffMusic;
-    if (isOffMusic) return music.pause();
-    music.play();
-  }
-  function toggleSoundSFX() {
-    isOffSFX = !isOffSFX;
-  }
-
-  return {
-    changeMusic,
-    playSoundMusic,
-    playSoundSFX,
-    toggleSoundMusic,
-    toggleSoundSFX,
-  };
-};
-export default SoundControl();
+  if (!isOffMusic) currentMusic.play();
+}
+export function toggleSoundMusic() {
+  if (!currentMusic) return;
+  isOffMusic = !isOffMusic;
+  if (isOffMusic) currentMusic.pause();
+  else currentMusic.play();
+}
+export function toggleSoundSFX() {
+  isOffSFX = !isOffSFX;
+}

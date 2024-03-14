@@ -1,12 +1,11 @@
 <script setup>
 import { defineProps } from "vue";
 
-const props = defineProps([
-  "player",
-  "theWinner",
-  "currentPlayer",
-  "isPlaySoundSF",
-]);
+const props = defineProps({
+  player: Object,
+  theWinner: Object,
+  currentPlayer: Object,
+});
 </script>
 <template>
   <div
@@ -24,39 +23,7 @@ const props = defineProps([
 
     <div class="flex flex-col gap-1">
       <slot name="items-bar">
-        <div
-          id="items-p1 p-[2px]"
-          class="scr-l:w-[480px] w-auto h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
-        >
-          <label
-            v-for="{
-              id,
-              isUsed,
-              itemInfo: { name, isPerTurn, isAttack, picture },
-            } in player.items.getAllItem()"
-            :key="id"
-            class="swap swap-rotate item btn text-hss scr-l:text-hs-des scr-m:text-hs-tal btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
-            :class="
-              !(currentPlayer === player) || theWinner
-                ? 'bg-btn-hover  text-White'
-                : isUsed
-                ? 'bg-Yellow-light  text-Black'
-                : isPerTurn || name === 'Dice+' || name === 'Dice-'
-                ? 'bg-isTurn text-White'
-                : isAttack
-                ? 'bg-Main-pink-300 text-White'
-                : 'bg-isPerTurn text-White'
-            "
-          >
-            <input
-              @click="player.items.toggleUsedItem(id, isPlaySoundSF)"
-              type="checkbox"
-              :disabled="!(currentPlayer === player) || theWinner"
-            />
-            <img class="swap-off" :src="picture" />
-            <img class="swap-on" :src="picture" />
-          </label>
-        </div>
+        <p>item is emply</p>
       </slot>
     </div>
   </div>

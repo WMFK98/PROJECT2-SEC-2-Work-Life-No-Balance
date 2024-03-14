@@ -1,10 +1,8 @@
 <script setup>
 import { ref } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
+import { playSoundSFX } from "./../SoundControl";
 const selectTutorial = ref(1);
-const props = defineProps({
-  playSound: Function,
-});
 </script>
 
 <template>
@@ -13,7 +11,7 @@ const props = defineProps({
       id="btn-tutorial"
       class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
       onclick="tutorial.showModal()"
-      @click="[playSound(soundbtn)]"
+      @click="playSoundSFX(soundbtn)"
     >
       📖
     </button>
@@ -72,9 +70,9 @@ const props = defineProps({
 
         <ol
           class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
-        v-show="selectTutorial === 1"
+          v-show="selectTutorial === 1"
           type="1"
-      >
+        >
           <li><strong>กติกา:</strong></li>
           <li><strong>จำนวนผู้เล่น</strong>: 2 คน</li>
           <li><strong>รูปแบบ</strong>:ผลัดเทิร์น</li>
@@ -236,7 +234,7 @@ const props = defineProps({
           <button
             class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
             id="cancelButton"
-            @click="playSound(soundbtn)"
+            @click="playSoundSFX(soundbtn)"
           >
             Close
           </button>
