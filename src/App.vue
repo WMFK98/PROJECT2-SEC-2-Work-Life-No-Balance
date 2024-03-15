@@ -60,11 +60,6 @@ let dices = reactive([1, 1]);
 
 let phaseGame = 0;
 
-// ลบได้มันโง่เกิน ใช้สำหรับแสดงค่า Player1 และ Player2
-let p1 = 1;
-let p2 = 2;
-//
-
 let defaultSetting = {
   settingPoint: 100,
   limitItem: 7,
@@ -389,7 +384,6 @@ const initItem = () => {
     false,
     PlusTwo
   );
-  player1.items.addItem(addDice);
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
   checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);

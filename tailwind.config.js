@@ -16,6 +16,7 @@ export default {
       "Yellow-light": "#FFE68E",
       White: "#F8F8F8",
       Black: "#434343",
+      bgCusItem: "rgba(255, 230, 142,0.7)",
     },
 
     fontSize: {
