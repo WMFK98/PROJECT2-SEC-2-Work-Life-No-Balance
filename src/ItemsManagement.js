@@ -1,6 +1,5 @@
-import Item from './Item';
-import { random } from './tool';
-import seItemsound from '/music/useItemsound.mp3';
+import Item from "./Item";
+import { random } from "./tool";
 export default class ItemsManagement {
   _items = [];
   constructor(owner, pollItem, limitItem = 7) {
@@ -14,11 +13,8 @@ export default class ItemsManagement {
   findIndexItem(id) {
     return this._items.findIndex((item) => item.id === id);
   }
-  toggleUsedItem(id, isPlaySound) {
+  toggleUsedItem(id) {
     this.findItem(id).toggleUsed();
-    if (!isPlaySound) return;
-    const sound = new Audio(seItemsound);
-    sound.play();
   }
   UnusedAllItem() {
     this._items.forEach((item) => (item.isUsed = false));

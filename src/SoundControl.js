@@ -1,6 +1,5 @@
 let isOffMusic = false;
 let isOffSFX = false;
-let currentPathMusic = "";
 let currentMusic = new Audio();
 
 export function playSoundSFX(sound) {
@@ -8,8 +7,7 @@ export function playSoundSFX(sound) {
   new Audio(sound).play();
 }
 export function playSoundMusic(newPathMusic) {
-  if (newPathMusic !== currentPathMusic) {
-    currentPathMusic = newPathMusic;
+  if (newPathMusic !== currentMusic.src) {
     currentMusic.pause();
     currentMusic = new Audio(currentPathMusic);
   }
