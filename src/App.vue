@@ -6,12 +6,12 @@ import ItemManagement from "./ItemsManagement";
 import initStructureItem from "./initStructureItem";
 
 import soundAddItem from "/music/addItem.mp3";
-import backgroundMusic from "/music/backgroundMusic.mp3";
+import soundbtn from "/music/soundBtn.mp3";
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
-import soundbtn from "/music/soundBtn.mp3";
-import soundSwap from "/music/swapsound.mp3";
 
+import soundSwap from "/music/swapsound.mp3";
+import ButtonGame from "./components/ButtonGame.vue";
 import Item from "./Item";
 import DisplayDice from "./components/DisplayDice.vue";
 import HowtoPlay from "./components/HowtoPlay.vue";
@@ -347,12 +347,12 @@ init();
               </template>
             </HowtoPlay>
 
-            <button
-              @click="[reset(), playSoundSFX(soundbtn)]"
-              class="px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:h-[39px] scr-m:w-[150px] scr-m:rounded-[30px] scr-l:w-[200px] scr-l:h-[50px]"
-            >
-              🆕 NEW GAME
-            </button>
+            <ButtonGame
+              title="🆕 NEW GAME"
+              buttonStyle="static"
+              :action="reset"
+              :theWinner="theWinner"
+            />
             <button
               class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
               onclick="setting.showModal()"
@@ -479,28 +479,23 @@ init();
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"
         >
-          <button
-            :disabled="theWinner"
-            @click="
-              [roll(), playSoundMusic(backgroundMusic), playSoundSFX(soundbtn)]
-            "
-            id="btn-roll"
-            class="btn w-[75px] scr-m:w-[166px] hover:bg-btn-hover bg-btn-active h-[60px] scr-m:h-max p-0 border-0 text-hss scr-m:text-hs-tal scr-l:text-hs-des text-Black flex flex-col scr-m:flex-row items-center scr-m:rounded-[30px] scr-l:w-[200px]"
-          >
-            <p>🎲 ROLL</p>
-            <p>DICE</p>
-          </button>
-          <button
-            :disabled="theWinner"
-            @click="[hold(), playSoundSFX(soundHold)]"
-            id="btn-hold"
-            class="btn w-[75px] scr-m:w-[113px] hover:bg-btn-hover scr-m:h-max bg-btn-active h-[60px] p-0 border-0 text-hss scr-m:text-hs-tal scr-l:text-hs-des text-Black flex flex-col scr-m:rounded-[30px] scr-l:w-[136px]"
-          >
-            <p>📥 Hold</p>
-          </button>
+          <ButtonGame
+            title="🎲 ROLL DICE"
+            buttonStyle="normal"
+            :action="roll"
+            :theWinner="theWinner"
+            :sound-s-f-x="soundbtn"
+          />
+          <ButtonGame
+            title="📥 Hold"
+            buttonStyle="short"
+            :action="hold"
+            :theWinner="theWinner"
+            :sound-s-f-x="soundHold"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
-./components/ItemInfo.vue
+./components/ItemInfo.vue ./components/ButtonGame.vue
