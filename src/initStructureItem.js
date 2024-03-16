@@ -69,7 +69,7 @@ const plus2Point = new TypeItem(
   false,
   PlusTwo
 );
-export default [X2P50, addDice, G6, N10C, OAE, popDice, plus2Point];
+export default { X2P50, addDice, G6, N10C, OAE, popDice, plus2Point };
 
 //   checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
 //   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);

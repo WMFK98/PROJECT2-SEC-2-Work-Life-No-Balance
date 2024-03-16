@@ -1,5 +1,5 @@
 <script setup>
-import initIStructureitem from "./initIStructureitem";
+import initStructureItem from "./initStructureItem";
 import Item from "./components/Item.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import BackIcon from "./assets/Icon/BackIcon.vue";
@@ -110,7 +110,7 @@ import BackIcon from "./assets/Icon/BackIcon.vue";
           <div
             class="item-bar w-max flex p-1 gap-5 bg-White text-hss scr-l:text-hs-des text-White h-max scr-l:h-[71px] rounded-[20px]"
           >
-            <Item :pollItem="initIStructureitem">
+            <Item :pollItem="initStructureItem">
               <template
                 #default="{ item: { name, picture, isPerTurn, isAttack } }"
               >
@@ -139,7 +139,7 @@ import BackIcon from "./assets/Icon/BackIcon.vue";
           <div
             class="item-bar w-max flex p-1 gap-5 bg-White text-hss scr-l:text-hs-des text-White h-max scr-l:h-[71px] rounded-[20px]"
           >
-            <Item :pollItem="initIStructureitem">
+            <Item :pollItem="initStructureItem">
               <template
                 #default="{ item: { name, picture, isPerTurn, isAttack } }"
               >
@@ -169,4 +169,3 @@ import BackIcon from "./assets/Icon/BackIcon.vue";
     </div>
   </div>
 </template>
-./initIStructureitem

@@ -1,15 +1,18 @@
 let isOffMusic = false;
 let isOffSFX = false;
 let currentMusic = new Audio();
+let currentPathMusic = "";
 
 export function playSoundSFX(sound) {
   if (!sound || isOffSFX) return;
   new Audio(sound).play();
 }
 export function playSoundMusic(newPathMusic) {
-  if (newPathMusic !== currentMusic.src) {
+  if (newPathMusic !== currentPathMusic) {
     currentMusic.pause();
-    currentMusic = new Audio(currentPathMusic);
+    currentMusic = new Audio(newPathMusic);
+    currentMusic.loop = true;
+    currentPathMusic = newPathMusic;
   }
   if (!isOffMusic) currentMusic.play();
 }
@@ -21,4 +24,8 @@ export function toggleSoundMusic() {
 }
 export function toggleSoundSFX() {
   isOffSFX = !isOffSFX;
+}
+export function stopMusic() {
+  currentMusic.pause();
+  currentMusic.currentTime = 0;
 }
