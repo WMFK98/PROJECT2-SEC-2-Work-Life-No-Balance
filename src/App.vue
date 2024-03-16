@@ -6,7 +6,7 @@ import ItemManagement from "./ItemsManagement";
 import initStructureItem from "./initStructureItem";
 
 import soundAddItem from "/music/addItem.mp3";
-import soundbtn from "/music/soundBtn.mp3";
+
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
 
@@ -325,7 +325,6 @@ init();
           :player="player1"
           :the-winner="theWinner"
           :current-player="currentPlayer"
-          :p="p1"
         />
 
         <div
@@ -430,7 +429,6 @@ init();
           :player="player2"
           :the-winner="theWinner"
           :current-player="currentPlayer"
-          :p="p2"
         />
       </div>
       <div id="controller" class="flex flex-auto justify-center relative">
@@ -438,7 +436,6 @@ init();
           :player="player1"
           :the-winner="theWinner"
           :current-player="currentPlayer[0]"
-          :isPlaySoundSF="isPlaySoundSF"
         >
           <template #currentPoint>
             <CurrentPoint
@@ -459,7 +456,6 @@ init();
           :player="player2"
           :the-winner="theWinner"
           :current-player="currentPlayer[0]"
-          :isPlaySoundSF="isPlaySoundSF"
         >
           <template #currentPoint>
             <CurrentPoint
@@ -484,7 +480,6 @@ init();
             buttonStyle="normal"
             :action="roll"
             :theWinner="theWinner"
-            :sound-s-f-x="soundbtn"
           />
           <ButtonGame
             title="📥 Hold"

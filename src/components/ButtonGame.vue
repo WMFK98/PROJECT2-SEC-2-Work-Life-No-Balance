@@ -2,11 +2,12 @@
 import { defineProps } from "vue";
 import { playSoundSFX, playSoundMusic } from "@/SoundControl";
 import backgroundMusic from "/music/backgroundMusic.mp3";
+import soundbtn from "/music/soundBtn.mp3";
 const props = defineProps({
   title: String,
   action: Function,
   theWinner: [Object, Array],
-  soundSFX: String,
+  soundSFX: { type: String, default: soundbtn },
   buttonStyle: {
     type: String,
     define(value) {
