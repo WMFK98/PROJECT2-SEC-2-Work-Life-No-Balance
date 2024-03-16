@@ -5,14 +5,14 @@ import { random } from "./tool";
 import ItemManagement from "./ItemsManagement";
 import initStructureItem from "./initStructureItem";
 
+import soundbtn from "/music/soundBtn.mp3";
 import soundAddItem from "/music/addItem.mp3";
-
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
-
 import soundSwap from "/music/swapsound.mp3";
-import ButtonGame from "./components/ButtonGame.vue";
 import Item from "./Item";
+
+import ButtonGame from "./components/ButtonGame.vue";
 import DisplayDice from "./components/DisplayDice.vue";
 import HowtoPlay from "./components/HowtoPlay.vue";
 import Setting from "./components/Setting.vue";

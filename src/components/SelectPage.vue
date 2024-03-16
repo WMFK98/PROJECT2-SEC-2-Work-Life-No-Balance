@@ -1,4 +1,6 @@
 <script setup>
+import { playSoundSFX } from "@/SoundControl";
+import soundbtn from "/music/soundBtn.mp3";
 defineProps({ modelValue: Number, namePages: Array });
 </script>
 
@@ -10,7 +12,12 @@ defineProps({ modelValue: Number, namePages: Array });
       name="options"
       :aria-label="namePages[0]"
       :value="1"
-      @click="$emit('update:modelValue', +$event.target.value)"
+      @click="
+        [
+          $emit('update:modelValue', +$event.target.value),
+          playSoundSFX(soundbtn),
+        ]
+      "
       :disabled="modelValue === 1"
     />
     <input
@@ -20,7 +27,12 @@ defineProps({ modelValue: Number, namePages: Array });
       :aria-label="namePages[1]"
       :value="2"
       :disabled="modelValue === 2"
-      @click="$emit('update:modelValue', +$event.target.value)"
+      @click="
+        [
+          $emit('update:modelValue', +$event.target.value),
+          playSoundSFX(soundbtn),
+        ]
+      "
     />
   </div>
 </template>

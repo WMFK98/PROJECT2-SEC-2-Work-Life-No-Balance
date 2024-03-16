@@ -6,6 +6,7 @@ import BackIcon from "./assets/Icon/BackIcon.vue";
 import ItemsInfo from "./components/ItemsInfo.vue";
 import HowtoPlay from "./components/HowtoPlay.vue";
 import SelectPage from "./components/SelectPage.vue";
+import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "@/SoundControl";
 import { ref } from "vue";
 
@@ -40,12 +41,14 @@ const selectPageItem = ref(1);
           <button
             class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
             onclick="categoryItem.showModal()"
+            @click="playSoundSFX(soundbtn)"
           >
             Category Items
           </button>
           <button
             class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
             onclick="wiki.showModal()"
+            @click="playSoundSFX(soundbtn)"
           >
             𝐢
           </button>
