@@ -239,7 +239,6 @@ const selectTutorial = ref(1);
             Close
           </button>
         </form>
-        <!-- <Closebtn :playSound="playSound" /> -->
       </div>
     </dialog>
   </div>

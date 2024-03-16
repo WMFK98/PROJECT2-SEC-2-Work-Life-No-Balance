@@ -38,8 +38,8 @@ const X2P50 = new TypeItem(
   null,
   8,
   "เเต้มที่ได้จากการทอยจะ คูณ2 เเต่ละหน้าของทุกลูกเต๋าต้องมากกว่า 3 ไม่งั้นจะสลับฝั่งผู้เล่นทันที",
-  false,
   true,
+  false,
   SqureTwo
 );
 const OAE = new TypeItem(
@@ -69,7 +69,7 @@ const plus2Point = new TypeItem(
   false,
   PlusTwo
 );
-export default { X2P50, addDice, G6, N10C, OAE, popDice, plus2Point };
+export default { X2P50, addDice, popDice, G6, plus2Point, OAE, N10C };
 
 //   checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
 //   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);

@@ -3,6 +3,7 @@ import initStructureItem from "./initStructureItem";
 import Item from "./components/Item.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import BackIcon from "./assets/Icon/BackIcon.vue";
+import ItemTutorials from "./components/ItemTutorials.vue";
 </script>
 
 <template>
@@ -34,7 +35,7 @@ import BackIcon from "./assets/Icon/BackIcon.vue";
             class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
             onclick="categoryItem.showModal()"
           >
-            Category Custom Items
+            Category Items
           </button>
           <button
             class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
@@ -42,17 +43,59 @@ import BackIcon from "./assets/Icon/BackIcon.vue";
           >
             𝐢
           </button>
+
           <dialog id="categoryItem" class="modal">
-            <div class="modal-box">
-              <h3 class="font-bold text-lg">Hello!</h3>
-              <p class="py-4">
-                Press ESC key or click the button below to close
-              </p>
-              <div class="modal-action">
-                <form method="dialog">
-                  <button class="btn">Close</button>
-                </form>
+            <div
+              class="rounded-[20px] scr-l:rounded-[40px] pb-2 pt-3 bg-Yellow-light text-Black gap-2 flex flex-col px-7 text-hss w-[600px] scr-l:w-[1200px] scr-l:text-hs-des scr-l:gap-4 scr-l:py-5"
+            >
+              <nav
+                id="navbar-tutorial"
+                class="flex pb-2 justify-between items-center"
+              >
+                <div className="join">
+                  <input
+                    className="join-item btn btn-sm scr-l:rounded-[20px]   scr-l:btn-lg scr-l:text-hs-des  btn-square w-[100px] scr-l:w-[200px] bg-Main-pink-100  text-Black border-0 hover:bg-Main-pink-200"
+                    type="radio"
+                    name="options"
+                    aria-label="Base Items"
+                    :value="1"
+                    v-model="selectTutorial"
+                    @click="selectTutorial = 1"
+                    :disabled="selectTutorial === 1"
+                  />
+                  <input
+                    className="join-item btn btn-sm scr-l:btn-lg scr-l:rounded-[20px]  hover:bg-Main-pink-200 scr-l:text-hs-des btn-square  border-0 scr-l:w-[200px] bg-Main-pink-100  text-Black  w-[100px]"
+                    type="radio"
+                    name="options"
+                    aria-label="Custom Items"
+                    :value="2"
+                    v-model="selectTutorial"
+                    :disabled="selectTutorial === 2"
+                    @click="selectTutorial = 2"
+                  />
+                </div>
+                <div
+                  id="items-box"
+                  class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
+                >
+                  <slot name="items-tutorial"></slot>
+                </div>
+              </nav>
+              <div
+                id="items-box"
+                class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
+              >
+                <ItemTutorials :poll-item="initStructureItem" />
               </div>
+              <form method="dialog" class="justify-center flex w-full px-10">
+                <button
+                  class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
+                  id="cancelButton"
+                  @click="playSoundSFX(soundbtn)"
+                >
+                  Close
+                </button>
+              </form>
             </div>
           </dialog>
           <dialog id="wiki" class="modal">

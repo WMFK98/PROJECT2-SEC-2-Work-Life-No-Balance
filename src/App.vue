@@ -25,6 +25,7 @@ import ListItem from "./components/ListItem.vue";
 import CurrentPoint from "./components/CurrentPoint.vue";
 import SwitchSide from "./components/SwitchSide.vue";
 import SwitchSideLower from "./components/SwitchSideLower.vue";
+import ItemTutorials from "./components/ItemTutorials.vue";
 import {
   playSoundSFX,
   playSoundMusic,
