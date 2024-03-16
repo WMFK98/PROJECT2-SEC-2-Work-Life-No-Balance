@@ -6,7 +6,7 @@ const props = defineProps({
   action: Function,
   styleType: {
     type: String,
-    define(value) {
+    varlidatior(value) {
       return ["save", "close"].includes(value);
     },
   },

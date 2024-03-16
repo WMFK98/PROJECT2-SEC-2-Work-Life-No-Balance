@@ -4,13 +4,14 @@ import TypeItem from "./TypeItem";
 import { random } from "./tool";
 import ItemManagement from "./ItemsManagement";
 import initStructureItem from "./initStructureItem";
-import addItem from "/music/addItem.mp3";
 
+import soundAddItem from "/music/addItem.mp3";
 import backgroundMusic from "/music/backgroundMusic.mp3";
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
 import soundbtn from "/music/soundBtn.mp3";
 import soundSwap from "/music/swapsound.mp3";
+
 import Item from "./Item";
 import DisplayDice from "./components/DisplayDice.vue";
 import HowtoPlay from "./components/HowtoPlay.vue";
@@ -115,7 +116,7 @@ const checkAddItem = () => {
   ) {
     currentPlayer[0].items.addRandomItem(defaultSetting.addItemNumSetting);
     if (currentPlayer[0].items.getAllItem().length < defaultSetting.limitItem)
-      playSoundSFX(addItem);
+      playSoundSFX(soundAddItem);
   }
 };
 
@@ -285,7 +286,7 @@ const initItem = () => {
   G6.addAbility(guarantee6Ability);
   N10C.addAbility(N10Ability);
   OAE.addAbility(OAEAbililty);
-  X2P50.addAbility(X2P50);
+  X2P50.addAbility(X2P50Abililty);
   addDice.addAbility(addDiceAbililty);
   plus2Point.addAbility(plus2Abililty);
   popDice.addAbility(popDiceAbililty);
