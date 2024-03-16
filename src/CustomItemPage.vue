@@ -4,6 +4,9 @@ import Item from "./components/Item.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import BackIcon from "./assets/Icon/BackIcon.vue";
 import ItemTutorials from "./components/ItemTutorials.vue";
+import { ref } from "vue";
+
+const selectPageItem = ref(1);
 </script>
 
 <template>
@@ -59,9 +62,9 @@ import ItemTutorials from "./components/ItemTutorials.vue";
                     name="options"
                     aria-label="Base Items"
                     :value="1"
-                    v-model="selectTutorial"
-                    @click="selectTutorial = 1"
-                    :disabled="selectTutorial === 1"
+                    v-model="selectPageItem"
+                    @click="selectPageItem = 1"
+                    :disabled="selectPageItem === 1"
                   />
                   <input
                     className="join-item btn btn-sm scr-l:btn-lg scr-l:rounded-[20px]  hover:bg-Main-pink-200 scr-l:text-hs-des btn-square  border-0 scr-l:w-[200px] bg-Main-pink-100  text-Black  w-[100px]"
@@ -69,23 +72,41 @@ import ItemTutorials from "./components/ItemTutorials.vue";
                     name="options"
                     aria-label="Custom Items"
                     :value="2"
-                    v-model="selectTutorial"
-                    :disabled="selectTutorial === 2"
-                    @click="selectTutorial = 2"
+                    v-model="selectPageItem"
+                    :disabled="selectPageItem === 2"
+                    @click="selectPageItem = 2"
                   />
                 </div>
-                <div
-                  id="items-box"
-                  class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
-                >
-                  <slot name="items-tutorial"></slot>
+                <div class="flex gap-3 text-hss scr-l:text-hs-des">
+                  <div class="flex gap-2 src-l:gap-4">
+                    <div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
+                    <p>Item Time</p>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="bg-[#FF3FA4] w-4 scr-l:w-8 rounded-[5px]"></div>
+                    <p>Item Turn</p>
+                  </div>
+                  <div class="flex gap-2">
+                    <div
+                      class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"
+                    ></div>
+                    <p>Item Attack</p>
+                  </div>
                 </div>
               </nav>
               <div
-                id="items-box"
+                id="items-base"
+                v-show="selectPageItem === 1"
                 class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
               >
                 <ItemTutorials :poll-item="initStructureItem" />
+              </div>
+              <div
+                id="items-custom"
+                v-show="selectPageItem === 2"
+                class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
+              >
+                <ItemTutorials :poll-item="[]" />
               </div>
               <form method="dialog" class="justify-center flex w-full px-10">
                 <button
