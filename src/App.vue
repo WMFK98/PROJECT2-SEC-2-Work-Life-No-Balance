@@ -25,7 +25,7 @@ import ListItem from "./components/ListItem.vue";
 import CurrentPoint from "./components/CurrentPoint.vue";
 import SwitchSide from "./components/SwitchSide.vue";
 import SwitchSideLower from "./components/SwitchSideLower.vue";
-import ItemTutorials from "./components/ItemTutorials.vue";
+import ItemsInfo from "./components/ItemsInfo.vue";
 import {
   playSoundSFX,
   playSoundMusic,
@@ -333,9 +333,17 @@ init();
           class="flex flex-col py-2 scr-l:pt-[19px] gap-2 scr-m:gap-[22px] items-center"
         >
           <div id="top-btn" class="flex gap-3 items-center">
-            <HowtoPlay>
+            <button
+              id="btn-tutorial"
+              class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
+              onclick="tutorial.showModal()"
+              @click="playSoundSFX(soundbtn)"
+            >
+              📖
+            </button>
+            <HowtoPlay id="tutorial">
               <template #items-tutorial>
-                <ItemTutorials :poll-item="pollItem" />
+                <ItemsInfo :poll-item="pollItem" />
               </template>
             </HowtoPlay>
 
@@ -495,3 +503,4 @@ init();
     </div>
   </div>
 </template>
+./components/ItemInfo.vue

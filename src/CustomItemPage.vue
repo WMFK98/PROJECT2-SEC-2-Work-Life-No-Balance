@@ -3,7 +3,10 @@ import initStructureItem from "./initStructureItem";
 import Item from "./components/Item.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import BackIcon from "./assets/Icon/BackIcon.vue";
-import ItemTutorials from "./components/ItemTutorials.vue";
+import ItemsInfo from "./components/ItemsInfo.vue";
+import HowtoPlay from "./components/HowtoPlay.vue";
+import SelectPage from "./components/SelectPage.vue";
+import { playSoundSFX } from "@/SoundControl";
 import { ref } from "vue";
 
 const selectPageItem = ref(1);
@@ -55,28 +58,10 @@ const selectPageItem = ref(1);
                 id="navbar-tutorial"
                 class="flex pb-2 justify-between items-center"
               >
-                <div className="join">
-                  <input
-                    className="join-item btn btn-sm scr-l:rounded-[20px]   scr-l:btn-lg scr-l:text-hs-des  btn-square w-[100px] scr-l:w-[200px] bg-Main-pink-100  text-Black border-0 hover:bg-Main-pink-200"
-                    type="radio"
-                    name="options"
-                    aria-label="Base Items"
-                    :value="1"
-                    v-model="selectPageItem"
-                    @click="selectPageItem = 1"
-                    :disabled="selectPageItem === 1"
-                  />
-                  <input
-                    className="join-item btn btn-sm scr-l:btn-lg scr-l:rounded-[20px]  hover:bg-Main-pink-200 scr-l:text-hs-des btn-square  border-0 scr-l:w-[200px] bg-Main-pink-100  text-Black  w-[100px]"
-                    type="radio"
-                    name="options"
-                    aria-label="Custom Items"
-                    :value="2"
-                    v-model="selectPageItem"
-                    :disabled="selectPageItem === 2"
-                    @click="selectPageItem = 2"
-                  />
-                </div>
+                <SelectPage
+                  v-model="selectPageItem"
+                  :name-pages="['Base Items', 'Custom Items']"
+                />
                 <div class="flex gap-3 text-hss scr-l:text-hs-des">
                   <div class="flex gap-2 src-l:gap-4">
                     <div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
@@ -99,14 +84,14 @@ const selectPageItem = ref(1);
                 v-show="selectPageItem === 1"
                 class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
               >
-                <ItemTutorials :poll-item="initStructureItem" />
+                <ItemsInfo :poll-item="initStructureItem" />
               </div>
               <div
                 id="items-custom"
                 v-show="selectPageItem === 2"
                 class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
               >
-                <ItemTutorials :poll-item="[]" />
+                <ItemsInfo :poll-item="[]" />
               </div>
               <form method="dialog" class="justify-center flex w-full px-10">
                 <button
@@ -119,19 +104,12 @@ const selectPageItem = ref(1);
               </form>
             </div>
           </dialog>
-          <dialog id="wiki" class="modal">
-            <div class="modal-box">
-              <h3 class="font-bold text-lg">Hello!</h3>
-              <p class="py-4">
-                Press ESC key or click the button below to close
-              </p>
-              <div class="modal-action">
-                <form method="dialog">
-                  <button class="btn">Close</button>
-                </form>
-              </div>
-            </div>
-          </dialog>
+          <HowtoPlay id="wiki">
+            <template #navbar>
+              <p>wiki</p>
+            </template>
+            <template #page>jjj</template>
+          </HowtoPlay>
         </div>
       </div>
       <div
@@ -257,3 +235,4 @@ const selectPageItem = ref(1);
     </div>
   </div>
 </template>
+./components/ItemsInfo.vue./components/ItemsInfo.vue
