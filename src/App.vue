@@ -54,14 +54,14 @@ let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
 
-let defaultSetting = localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings')) : {
-  settingPoint: 100,
-  limitItem: 7,
-  addItemNumSetting: 1,
-  startingItem: 0,
-
-};
-
+let defaultSetting = localStorage.getItem("settings")
+  ? JSON.parse(localStorage.getItem("settings"))
+  : {
+      settingPoint: 100,
+      limitItem: 7,
+      addItemNumSetting: 1,
+      startingItem: 0,
+    };
 
 const currentSetting = reactive({ ...defaultSetting });
 
@@ -223,16 +223,16 @@ const closeSetting = () => {
 };
 
 const addSelectedItem = function () {
-    pollSelectedItems.splice(0, pollSelectedItems.length);
-    checkSelectedItems.forEach((isChecked, index) => {
-      if (isChecked) {
-        pollSelectedItems.push(pollItem[index]);
-      }
-    });
-    [player1, player2].forEach((el) => {
-      el.items.changePollitem(pollSelectedItems);
-    });
-  };
+  pollSelectedItems.splice(0, pollSelectedItems.length);
+  checkSelectedItems.forEach((isChecked, index) => {
+    if (isChecked) {
+      pollSelectedItems.push(pollItem[index]);
+    }
+  });
+  [player1, player2].forEach((el) => {
+    el.items.changePollitem(pollSelectedItems);
+  });
+};
 
 const saveSetting = () => {
   const isInteger = (input, min, max) => {
@@ -383,30 +383,43 @@ const initItem = () => {
   );
   player1.items.addItem(addDice);
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-  checkSelectedItems = reactive(localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings')).checkSelectedItems : new Array(pollItem.length).fill(true));
+  checkSelectedItems = reactive(
+    localStorage.getItem("settings")
+      ? JSON.parse(localStorage.getItem("settings")).checkSelectedItems
+      : new Array(pollItem.length).fill(true)
+  );
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-}
+};
 
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
   watch(() => isPlayMusic.value, playMusicBg);
-  watch(currentSetting, (newVal) => {
-    localStorage.setItem('settings', JSON.stringify(newVal));
-  }, { deep: true }); 
+  watch(
+    currentSetting,
+    (newVal) => {
+      localStorage.setItem("settings", JSON.stringify(newVal));
+    },
+    { deep: true }
+  );
   initItem();
-  watch(checkSelectedItems,()=>{
-    const newVal = JSON.parse(localStorage.getItem('settings'))
-    newVal.checkSelectedItems = checkSelectedItems
-    localStorage.setItem('settings', JSON.stringify(newVal));
-  }, { deep: true })
-  addSelectedItem()
-  reset()
+  watch(
+    checkSelectedItems,
+    () => {
+      const newVal = JSON.parse(localStorage.getItem("settings"));
+      newVal.checkSelectedItems = checkSelectedItems;
+      localStorage.setItem("settings", JSON.stringify(newVal));
+    },
+    { deep: true }
+  );
+  addSelectedItem();
+  reset();
+  if (!localStorage.getItem("settings")) {
+    localStorage.setItem("settings", JSON.stringify(defaultSetting));
+  }
 };
 
 init();
-
-
 </script>
 
 <template>
