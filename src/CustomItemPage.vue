@@ -8,6 +8,7 @@ import HowtoPlay from "./components/HowtoPlay.vue";
 import SelectPage from "./components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "@/SoundControl";
+
 import { ref } from "vue";
 
 const selectPageItem = ref(1);
@@ -23,7 +24,7 @@ const selectPageItem = ref(1);
   >
     <div
       id="board"
-      class="w-[640px] shadow-lg h-[340px] bg-bgCusItem bg-btn-none-active rounded-[20px] flex flex-col overflow-hidden scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px] p-3 scr-m:p-6 overflow-y-scroll scr-l:p-10"
+      class="w-[640px] shadow-lg h-[340px] bg-bgCusItem bg-btn-none-active rounded-[20px] flex flex-col scr-m:overflow-hidden scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px] p-3 scr-m:p-6 overflow-y-scroll scr-l:p-10"
     >
       <div
         id="navbar"
@@ -32,10 +33,14 @@ const selectPageItem = ref(1);
         <div
           class="w-1/3 text-hs scr-m:text-hm-tal scr-l:text-hm-des font-bold flex"
         >
-          <div class="flex items-center gap-2">
-            <BackIcon class="h-[20px] w-[20px] scr-m:h-[30px] scr-m:w-[30px]" />
-            <p>Custom Items</p>
-          </div>
+          <button
+            class="group bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
+          >
+            <BackIcon
+              class="h-[20px] w-[20px] scr-m:h-[30px] scr-m:w-[30px] scr-l:h-[40px] scr-l:w-[40px]"
+            />
+            <p class="transition-none">Custom Items</p>
+          </button>
         </div>
         <div class="w-1/3 flex justify-end gap-2">
           <button
@@ -46,17 +51,15 @@ const selectPageItem = ref(1);
             Category Items
           </button>
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
+            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-Yellow-light flex justify-center items-center"
             onclick="wiki.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             𝐢
           </button>
 
-          <dialog id="categoryItem" class="modal">
-            <div
-              class="rounded-[20px] scr-l:rounded-[40px] pb-2 pt-3 bg-Yellow-light text-Black gap-2 flex flex-col px-7 text-hss w-[600px] scr-l:w-[1200px] scr-l:text-hs-des scr-l:gap-4 scr-l:py-5"
-            >
+          <HowtoPlay id="categoryItem">
+            <template #body>
               <nav
                 id="navbar-tutorial"
                 class="flex pb-2 justify-between items-center"
@@ -82,36 +85,20 @@ const selectPageItem = ref(1);
                   </div>
                 </div>
               </nav>
-              <div
-                id="items-base"
+
+              <ItemsInfo
                 v-show="selectPageItem === 1"
-                class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
-              >
-                <ItemsInfo :poll-item="initStructureItem" />
-              </div>
-              <div
-                id="items-custom"
-                v-show="selectPageItem === 2"
-                class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
-              >
-                <ItemsInfo :poll-item="[]" />
-              </div>
-              <form method="dialog" class="justify-center flex w-full px-10">
-                <button
-                  class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
-                  id="cancelButton"
-                  @click="playSoundSFX(soundbtn)"
-                >
-                  Close
-                </button>
-              </form>
-            </div>
-          </dialog>
+                :poll-item="initStructureItem"
+              />
+              <ItemsInfo v-show="selectPageItem === 2" :poll-item="[]" />
+            </template>
+          </HowtoPlay>
+
           <HowtoPlay id="wiki">
             <template #navbar>
               <p>wiki</p>
             </template>
-            <template #page>jjj</template>
+            <template #page>kuy</template>
           </HowtoPlay>
         </div>
       </div>
@@ -238,4 +225,3 @@ const selectPageItem = ref(1);
     </div>
   </div>
 </template>
-./components/ItemsInfo.vue./components/ItemsInfo.vue

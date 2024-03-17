@@ -340,11 +340,8 @@ init();
             >
               📖
             </button>
-            <HowtoPlay id="tutorial">
-              <template #items-tutorial>
-                <ItemsInfo :poll-item="pollItem" />
-              </template>
-            </HowtoPlay>
+            <HowtoPlay id="tutorial"/>
+  
 
             <ButtonGame
               title="🆕 NEW GAME"
@@ -493,4 +490,3 @@ init();
     </div>
   </div>
 </template>
-./components/ItemInfo.vue ./components/ButtonGame.vue

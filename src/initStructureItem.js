@@ -65,11 +65,8 @@ const plus2Point = new TypeItem(
   null,
   7,
   "ทุกการทอยจะเพิ่ม “คะแนนในตานั้น” 2 เเต้ม",
-  false,
+  true,
   false,
   PlusTwo
 );
-export default { X2P50, addDice, popDice, G6, plus2Point, OAE, N10C };
-
-//   checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
-//   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
+export default { X2P50, addDice, popDice, plus2Point, G6, OAE, N10C };

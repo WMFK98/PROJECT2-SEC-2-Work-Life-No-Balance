@@ -16,6 +16,7 @@
       stroke="#FF5252"
       stroke-width="19.5794"
       stroke-linejoin="round"
+      class="group-hover:fill-White group-hover:stroke-White"
     />
   </svg>
 </template>
