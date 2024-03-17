@@ -1,17 +1,18 @@
 <script setup>
-import initStructureItem from "./initStructureItem";
-import Item from "./components/Item.vue";
-import ButtonSetting from "./components/ButtonSetting.vue";
-import BackIcon from "./assets/Icon/BackIcon.vue";
-import ItemsInfo from "./components/ItemsInfo.vue";
-import HowtoPlay from "./components/HowtoPlay.vue";
-import SelectPage from "./components/SelectPage.vue";
-import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "@/SoundControl";
+import initStructureItem from './initStructureItem'
+import Item from './components/Item.vue'
+import ButtonSetting from './components/ButtonSetting.vue'
+import BackIcon from './assets/Icon/BackIcon.vue'
+import ItemsInfo from './components/ItemsInfo.vue'
+import HowtoPlay from './components/HowtoPlay.vue'
+import SelectPage from './components/SelectPage.vue'
+import soundbtn from '/music/soundBtn.mp3'
+import { playSoundSFX } from '@/SoundControl'
 
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const selectPageItem = ref(1);
+const selectPageItem = ref(1)
+const itemsName = ref('name')
 </script>
 
 <template>
@@ -116,7 +117,7 @@ const selectPageItem = ref(1);
               <div
                 class="h-[80%] w-[80%] bg-Main-pink-300 rounded-[20px] flex text-White scr-l:rounded-[40px] text-hs scr-m:text-hm-tal scr-l:text-hm-des text-center justify-center items-center"
               >
-                name
+                {{ itemsName }}
               </div>
             </div>
             <div
@@ -148,6 +149,7 @@ const selectPageItem = ref(1);
           <div class="flex justify-center">
             <input
               type="text"
+              v-model.trim="itemsName"
               placeholder="Name of Item"
               maxlength="4"
               class="input input-sm scr-m:input-md input-bordered text-hss scr-l:text-hs-des text-Black max-w-xs mt-3 w-full text-center bg-White"
