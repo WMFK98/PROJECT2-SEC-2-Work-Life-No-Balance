@@ -22,10 +22,12 @@ export function toggleSoundMusic() {
   if (isOffMusic) currentMusic.pause();
   else currentMusic.play();
   storeSoundSetting()
+  console.log(isOffSFX);
 }
 export function toggleSoundSFX() {
   isOffSFX = !isOffSFX;
   storeSoundSetting()
+  console.log(isOffSFX);
 }
 export function stopMusic() {
   currentMusic.pause();
@@ -38,6 +40,7 @@ export function loadSoundSetting(){
     isOffMusic  = newVal.musicSetting[0]
     isOffSFX =  newVal.musicSetting[1]
   }
+  console.log(isOffMusic,isOffSFX);
   return [isOffMusic,isOffSFX]
  
 }

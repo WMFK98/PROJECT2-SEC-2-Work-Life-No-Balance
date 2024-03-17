@@ -17,10 +17,10 @@ const props = defineProps({
     <div class="swap swap-flip text-hss scr-m:text-hs-tal scr-l:text-hs-des">
       <input
         type="checkbox"
-        :checked="openSound"
+        :checked="!openSound"
         @change="[action(), playSoundSFX(soundbtn)]"
       />
-      <div class="swap-on">{{ showOn }}</div>
+      <div class="swap-on" >{{ showOn }}</div>
       <div class="swap-off">{{ showOff }}</div>
     </div>
   </label>

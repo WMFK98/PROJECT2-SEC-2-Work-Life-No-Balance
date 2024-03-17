@@ -57,6 +57,7 @@ let defaultSetting = localStorage.getItem("settings")
       limitItem: 7,
       addItemNumSetting: 1,
       startingItem: 0,
+      musicSetting: [false,false],
     };
 
 const currentSetting = reactive({ ...defaultSetting });
@@ -306,6 +307,7 @@ const initItem = () => {
       ? JSON.parse(localStorage.getItem("settings")).checkSelectedItems
       : new Array(pollItem.length).fill(true)
   );
+  defaultSetting.checkSelectedItems = checkSelectedItems
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 };
 
@@ -331,6 +333,9 @@ const init = () => {
   );
   addSelectedItem();
   reset();
+  if (!localStorage.getItem("settings")) {
+    localStorage.setItem("settings", JSON.stringify(defaultSetting));
+  }
 };
 
 init();
