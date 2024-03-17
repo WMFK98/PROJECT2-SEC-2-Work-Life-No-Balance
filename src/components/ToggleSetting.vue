@@ -7,6 +7,7 @@ const props = defineProps({
   action: Function,
   showOn: String,
   showOff: String,
+  openSound : Boolean
 });
 </script>
 
@@ -16,7 +17,7 @@ const props = defineProps({
     <div class="swap swap-flip text-hss scr-m:text-hs-tal scr-l:text-hs-des">
       <input
         type="checkbox"
-        :checked="true"
+        :checked="openSound"
         @change="[action(), playSoundSFX(soundbtn)]"
       />
       <div class="swap-on">{{ showOn }}</div>
