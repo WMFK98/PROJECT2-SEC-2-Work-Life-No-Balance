@@ -70,11 +70,11 @@ const selectPageItem = ref(1);
                 />
                 <div class="flex gap-3 text-hss scr-l:text-hs-des">
                   <div class="flex gap-2 src-l:gap-4">
-                    <div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
+                    <div class="bg-isPerTurn w-4 scr-l:w-8 rounded-[5px]"></div>
                     <p>Item Time</p>
                   </div>
                   <div class="flex gap-2">
-                    <div class="bg-[#FF3FA4] w-4 scr-l:w-8 rounded-[5px]"></div>
+                    <div class="bg-isTurn w-4 scr-l:w-8 rounded-[5px]"></div>
                     <p>Item Turn</p>
                   </div>
                   <div class="flex gap-2">
@@ -98,7 +98,7 @@ const selectPageItem = ref(1);
             <template #navbar>
               <p>wiki</p>
             </template>
-            <template #page>kuy</template>
+            <template #page></template>
           </HowtoPlay>
         </div>
       </div>

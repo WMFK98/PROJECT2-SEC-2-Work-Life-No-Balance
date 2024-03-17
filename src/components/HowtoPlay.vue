@@ -49,17 +49,21 @@ defineProps({ id: String });
               v-show="selectTutorialPage === 2"
               class="flex gap-3 text-hss scr-l:text-hs-des"
             >
-              <div class="flex gap-2 src-l:gap-4">
-                <div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
-                <p>Item Time</p>
-              </div>
-              <div class="flex gap-2">
-                <div class="bg-[#FF3FA4] w-4 scr-l:w-8 rounded-[5px]"></div>
-                <p>Item Turn</p>
-              </div>
-              <div class="flex gap-2">
-                <div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
-                <p>Item Attack</p>
+              <div class="flex gap-3 text-hss scr-l:text-hs-des">
+                <div class="flex gap-2 src-l:gap-4">
+                  <div class="bg-isPerTurn w-4 scr-l:w-8 rounded-[5px]"></div>
+                  <p>Item Time</p>
+                </div>
+                <div class="flex gap-2">
+                  <div class="bg-isTurn w-4 scr-l:w-8 rounded-[5px]"></div>
+                  <p>Item Turn</p>
+                </div>
+                <div class="flex gap-2">
+                  <div
+                    class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"
+                  ></div>
+                  <p>Item Attack</p>
+                </div>
               </div>
             </div>
           </slot>
@@ -96,7 +100,6 @@ defineProps({ id: String });
               <strong>โมฆะ</strong>: เคลียร์คะแนนของผู้เล่นในเทิร์นยกเว้น
               <strong>คะแนนสะสม</strong> และสลับไปยังเทิร์นอีกฝ่ายทันที
             </li>
-
             <li><strong>การควบคุม:</strong></li>
             <li>
               Roll Dice 🎲 : ทอยเต๋าเพื่อรับคะแนนและคะแนนจะถูกเก็บใน
