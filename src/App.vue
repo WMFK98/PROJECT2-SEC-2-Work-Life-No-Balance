@@ -221,6 +221,19 @@ const closeSetting = () => {
     }
   });
 };
+
+const addSelectedItem = function () {
+    pollSelectedItems.splice(0, pollSelectedItems.length);
+    checkSelectedItems.forEach((isChecked, index) => {
+      if (isChecked) {
+        pollSelectedItems.push(pollItem[index]);
+      }
+    });
+    [player1, player2].forEach((el) => {
+      el.items.changePollitem(pollSelectedItems);
+    });
+  };
+
 const saveSetting = () => {
   const isInteger = (input, min, max) => {
     if (input === "") return false;
@@ -233,18 +246,6 @@ const saveSetting = () => {
       return input >= min && input <= max;
     }
     return isValidInput;
-  };
-
-  const addSelectedItem = function () {
-    pollSelectedItems.splice(0, pollSelectedItems.length);
-    checkSelectedItems.forEach((isChecked, index) => {
-      if (isChecked) {
-        pollSelectedItems.push(pollItem[index]);
-      }
-    });
-    [player1, player2].forEach((el) => {
-      el.items.changePollitem(pollSelectedItems);
-    });
   };
 
   if (
@@ -382,7 +383,7 @@ const initItem = () => {
   );
   player1.items.addItem(addDice);
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-  checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
+  checkSelectedItems = reactive(localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings')).checkSelectedItems : new Array(pollItem.length).fill(true));
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 }
 
@@ -394,13 +395,18 @@ const init = () => {
     localStorage.setItem('settings', JSON.stringify(newVal));
   }, { deep: true }); 
   initItem();
+  watch(checkSelectedItems,()=>{
+    const newVal = JSON.parse(localStorage.getItem('settings'))
+    newVal.checkSelectedItems = checkSelectedItems
+    localStorage.setItem('settings', JSON.stringify(newVal));
+  }, { deep: true })
+  addSelectedItem()
   reset()
-
 };
 
 init();
 
-console.log(defaultSetting);
+
 </script>
 
 <template>
