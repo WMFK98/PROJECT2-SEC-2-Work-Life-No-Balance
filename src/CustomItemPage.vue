@@ -14,7 +14,6 @@ import { ref } from 'vue'
 const selectPageItem = ref(1)
 const itemsName = ref('name')
 const props = defineProps({
-  changeColor: String,
   colorStyle: {
     type: String,
     define(value) {
@@ -141,8 +140,8 @@ const props = defineProps({
                   type="radio"
                   name="type-item"
                   class="radio radio-error radio-xs scr-m:radio-sm"
-                  changeColor="itemTime"
-                  v-model="itemTime"
+                  colorStyle="itemTime"
+                  v-bind="colorStyle"
                   :value="false"
                   checked
                 />
@@ -153,8 +152,8 @@ const props = defineProps({
                   type="radio"
                   name="type-item"
                   class="radio radio-xs radio-secondary scr-m:radio-sm"
-                  changeColor="itemTurn"
-                  v-model="itemTurn"
+                  colorStyle="itemTurn"
+                  v-bind="colorStyle"
                   :value="true"
                   checked
                 />
