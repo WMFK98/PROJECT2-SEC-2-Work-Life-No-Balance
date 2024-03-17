@@ -3,16 +3,16 @@ import { reactive, ref, watch } from "vue";
 import TypeItem from "./TypeItem";
 import { random } from "./tool";
 import ItemManagement from "./ItemsManagement";
+import initStructureItem from "./initStructureItem";
 
-import Item from "./Item";
-import addItem from "/music/addItem.mp3";
-import backgroundMusic from "/music/backgroundMusic.mp3";
+import soundbtn from "/music/soundBtn.mp3";
+import soundAddItem from "/music/addItem.mp3";
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
-import soundbtn from "/music/soundBtn.mp3";
 import soundSwap from "/music/swapsound.mp3";
+import Item from "./Item";
 
-// Leng's Component
+import ButtonGame from "./components/ButtonGame.vue";
 import DisplayDice from "./components/DisplayDice.vue";
 import HowtoPlay from "./components/HowtoPlay.vue";
 import Setting from "./components/Setting.vue";
@@ -22,31 +22,21 @@ import CheckboxsSetting from "./components/CheckboxsSetting.vue";
 import ButtonSetting from "./components/ButtonSetting.vue";
 import PopupLog from "./components/PopupLog.vue";
 import ListItem from "./components/ListItem.vue";
-
 import CurrentPoint from "./components/CurrentPoint.vue";
-import ItemTutorials from "./components/ItemTutorials.vue";
-//Pic Item
-import Diceplus from "./assets/Icon_Dice_1/DicePlus.png";
-import DelDice from "./assets/Icon_Dice_1/DelDice.png";
-import DelTenSC from "./assets/Icon_Dice_1/DelTenSC.png";
-import OddAndEven from "./assets/Icon_Dice_1/ODDEVENT.png";
-import SixOneTime from "./assets/Icon_Dice_1/OneSixTM.png";
-import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png";
-import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png";
 import SwitchSide from "./components/SwitchSide.vue";
 import SwitchSideLower from "./components/SwitchSideLower.vue";
+import ItemsInfo from "./components/ItemsInfo.vue";
+import {
+  playSoundSFX,
+  playSoundMusic,
+  toggleSoundMusic,
+  toggleSoundSFX,
+  stopMusic,
+} from "./SoundControl";
 
 let voidScore = 1;
-// const diceFace = [roll1, roll2, roll3, roll4, roll5, roll6]
-const musicBG = new Audio(backgroundMusic);
-const musicWin = new Audio(soundWin);
-musicBG.loop = true;
-musicWin.loop = true;
-const currentMusicBG = ref(musicBG);
 const theWinner = ref(null);
 const pollSelectedItems = [];
-const isPlaySoundSF = ref(true);
-const isPlayMusic = ref(true);
 
 let pollItem = [];
 let checkSelectedItems = reactive([]);
@@ -89,29 +79,6 @@ const rollDiceAbility = () => {
   givePoint = dices.reduce((total, dice) => total + dice);
 };
 
-const resetMusic = () => {
-  musicBG.currentTime = 0;
-  musicWin.currentTime = 0;
-  if (currentMusicBG.value !== musicWin) return;
-  currentMusicBG.value.pause();
-  currentMusicBG.value = musicBG;
-};
-
-const playSound = (song) => {
-  if (!isPlaySoundSF.value) return;
-  const soundSelect = new Audio(song);
-  soundSelect.play();
-};
-
-const playMusicBg = () => {
-  if (!isPlayMusic.value) return currentMusicBG.value.pause();
-  if (theWinner.value) {
-    currentMusicBG.value.pause();
-    currentMusicBG.value = musicWin;
-  }
-  currentMusicBG.value.play();
-};
-
 const itemRollDice = new Item(
   new TypeItem("rollDice", rollDiceAbility, 2, "-", false)
 );
@@ -122,7 +89,7 @@ const chooseItems = (index) => {
 
 const reset = () => {
   resetDice();
-  resetMusic();
+  stopMusic();
   phaseGame = 0;
   dices = dices.map(() => 1);
   theWinner.value = null;
@@ -139,7 +106,7 @@ const reset = () => {
 const checkWin = () => {
   if (enemyPlayer[0].point >= defaultSetting.settingPoint) {
     theWinner.value = enemyPlayer[0];
-    playMusicBg();
+    playSoundMusic(soundWin);
   }
 };
 const checkAddItem = () => {
@@ -151,7 +118,7 @@ const checkAddItem = () => {
   ) {
     currentPlayer[0].items.addRandomItem(defaultSetting.addItemNumSetting);
     if (currentPlayer[0].items.getAllItem().length < defaultSetting.limitItem)
-      playSound(addItem);
+      playSoundSFX(soundAddItem);
   }
 };
 
@@ -194,7 +161,7 @@ const roll = () => {
   activeItem();
   if (!isVoidScore()) return (currentPlayer[0].curPoint += givePoint);
   switchPlayer();
-  playSound(soundSwap);
+  playSoundSFX(soundSwap);
 };
 
 const hold = () => {
@@ -284,7 +251,7 @@ const initItem = () => {
     givePoint = givePoint * 2;
   };
 
-  const Guarantee6Ability = () => {
+  const guarantee6Ability = () => {
     let isReplace = false;
     if (phaseGame === 0) return;
     dices = dices.map((value) => {
@@ -317,71 +284,16 @@ const initItem = () => {
     if (phaseGame === 0) return;
     givePoint = givePoint + 2;
   };
+  const { G6, N10C, OAE, X2P50, addDice, plus2Point, popDice } =
+    initStructureItem;
+  G6.addAbility(guarantee6Ability);
+  N10C.addAbility(N10Ability);
+  OAE.addAbility(OAEAbililty);
+  X2P50.addAbility(X2P50Abililty);
+  addDice.addAbility(addDiceAbililty);
+  plus2Point.addAbility(plus2Abililty);
+  popDice.addAbility(popDiceAbililty);
 
-  const G6 = new TypeItem(
-    "6",
-    Guarantee6Ability,
-    6,
-    "การันตีว่าลูกเต๋า 1 ลูกจะทอยได้ 6",
-    false,
-    false,
-    SixOneTime
-  );
-  const N10C = new TypeItem(
-    "-10",
-    N10Ability,
-    0,
-    "ลบ 10 “คะแนนของผู้เล่น” ฝ่ายตรงข้าม สามารถลดจนเหลือ 0",
-    false,
-    true,
-    DelTenSC
-  );
-  const addDice = new TypeItem(
-    "Dice+",
-    addDiceAbililty,
-    1,
-    "เพิ่มลูกเต๋า 1 ลูกในทั้งตานั้น สามารถเพิ่มได้สูงสุด 5 ลูก",
-    false,
-    false,
-    Diceplus
-  );
-  const X2P50 = new TypeItem(
-    "X2>3",
-    X2P50Abililty,
-    8,
-    "เเต้มที่ได้จากการทอยจะ คูณ2 เเต่ละหน้าของทุกลูกเต๋าต้องมากกว่า 3 ไม่งั้นจะสลับฝั่งผู้เล่นทันที",
-    false,
-    true,
-    SqureTwo
-  );
-  const OAE = new TypeItem(
-    "O&E",
-    OAEAbililty,
-    9,
-    'เมื่อผู้เล่นทอยได้ผลรวมเป็น "คู่" จะขโมย “คะแนนของผู้เล่น” ของฝ่ายตรงข้ามเเต่ถ้าผลรวมเป็น "คี่" จะเเบ่งครึ่งนึงของที่ทอยได้ไปเพิ่ม “คะแนนของผู้เล่น” ให้ฝ่ายตรงข้าม',
-    false,
-    true,
-    OddAndEven
-  );
-  const popDice = new TypeItem(
-    "Dice-",
-    popDiceAbililty,
-    1,
-    "ลดลูกเต๋า 1 ลูกในทั้งตานั้น สามารถลดได้จนเหลือ 1 ลูก",
-    false,
-    false,
-    DelDice
-  );
-  const plus2Point = new TypeItem(
-    "+2",
-    plus2Abililty,
-    7,
-    "ทุกการทอยจะเพิ่ม “คะแนนในตานั้น” 2 เเต้ม",
-    false,
-    false,
-    PlusTwo
-  );
-  player1.items.addItem(addDice);
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
   checkSelectedItems = reactive(localStorage.getItem('settings') ? JSON.parse(localStorage.getItem('settings')).checkSelectedItems : new Array(pollItem.length).fill(true));
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
@@ -435,22 +347,30 @@ init();
           class="flex flex-col py-2 scr-l:pt-[19px] gap-2 scr-m:gap-[22px] items-center"
         >
           <div id="top-btn" class="flex gap-3 items-center">
-            <HowtoPlay :playSound="playSound">
+            <button
+              id="btn-tutorial"
+              class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
+              onclick="tutorial.showModal()"
+              @click="playSoundSFX(soundbtn)"
+            >
+              📖
+            </button>
+            <HowtoPlay id="tutorial">
               <template #items-tutorial>
-                <ItemTutorials :poll-item="pollItem" />
+                <ItemsInfo :poll-item="pollItem" />
               </template>
             </HowtoPlay>
 
-            <button
-              @click="[reset(), playSound(soundbtn)]"
-              class="px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:h-[39px] scr-m:w-[150px] scr-m:rounded-[30px] scr-l:w-[200px] scr-l:h-[50px]"
-            >
-              🆕 NEW GAME
-            </button>
+            <ButtonGame
+              title="🆕 NEW GAME"
+              buttonStyle="static"
+              :action="reset"
+              :theWinner="theWinner"
+            />
             <button
               class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
               onclick="setting.showModal()"
-              @click="playSound(soundbtn)"
+              @click="playSoundSFX(soundbtn)"
             >
               ⚙️
             </button>
@@ -476,13 +396,13 @@ init();
               <template #toggleSetting>
                 <ToggleSetting
                   title="Sound music"
-                  v-model="isPlayMusic"
                   show-on="🔊"
                   show-off="🔇"
+                  :action="toggleSoundMusic"
                 />
                 <ToggleSetting
                   title="Sound SFX"
-                  v-model="isPlaySoundSF"
+                  :action="toggleSoundSFX"
                   show-on="🔊"
                   show-off="🔇"
                 />
@@ -501,13 +421,11 @@ init();
                   title="Save"
                   :action="saveSetting"
                   style-type="save"
-                  :play-sound="playSound"
                 />
                 <ButtonSetting
                   title="close"
                   :action="closeSetting"
                   style-type="close"
-                  :play-sound="playSound"
                 />
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
@@ -533,7 +451,6 @@ init();
           :player="player1"
           :the-winner="theWinner"
           :current-player="currentPlayer[0]"
-          :isPlaySoundSF="isPlaySoundSF"
         >
           <template #currentPoint>
             <CurrentPoint
@@ -547,7 +464,6 @@ init();
               :player="player1"
               :current-player="currentPlayer[0]"
               :the-winner="theWinner"
-              :is-play-sound-s-f="isPlaySoundSF"
             ></ListItem
           ></template>
         </SwitchSideLower>
@@ -555,7 +471,6 @@ init();
           :player="player2"
           :the-winner="theWinner"
           :current-player="currentPlayer[0]"
-          :isPlaySoundSF="isPlaySoundSF"
         >
           <template #currentPoint>
             <CurrentPoint
@@ -569,32 +484,28 @@ init();
               :player="player2"
               :current-player="currentPlayer[0]"
               :the-winner="theWinner"
-              :is-play-sound-s-f="isPlaySoundSF"
             ></ListItem></template
         ></SwitchSideLower>
         <div
           id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"
         >
-          <button
-            :disabled="theWinner"
-            @click="[roll(), playMusicBg(), playSound(soundbtn)]"
-            id="btn-roll"
-            class="btn w-[75px] scr-m:w-[166px] hover:bg-btn-hover bg-btn-active h-[60px] scr-m:h-max p-0 border-0 text-hss scr-m:text-hs-tal scr-l:text-hs-des text-Black flex flex-col scr-m:flex-row items-center scr-m:rounded-[30px] scr-l:w-[200px]"
-          >
-            <p>🎲 ROLL</p>
-            <p>DICE</p>
-          </button>
-          <button
-            :disabled="theWinner"
-            @click="[hold(), playSound(soundHold)]"
-            id="btn-hold"
-            class="btn w-[75px] scr-m:w-[113px] hover:bg-btn-hover scr-m:h-max bg-btn-active h-[60px] p-0 border-0 text-hss scr-m:text-hs-tal scr-l:text-hs-des text-Black flex flex-col scr-m:rounded-[30px] scr-l:w-[136px]"
-          >
-            <p>📥 Hold</p>
-          </button>
+          <ButtonGame
+            title="🎲 ROLL DICE"
+            buttonStyle="normal"
+            :action="roll"
+            :theWinner="theWinner"
+          />
+          <ButtonGame
+            title="📥 Hold"
+            buttonStyle="short"
+            :action="hold"
+            :theWinner="theWinner"
+            :sound-s-f-x="soundHold"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
+./components/ItemInfo.vue ./components/ButtonGame.vue

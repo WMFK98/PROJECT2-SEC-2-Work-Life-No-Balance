@@ -1,16 +1,15 @@
 <script setup>
 import { defineProps } from "vue";
 
-const props = defineProps([
-  "player",
-  "theWinner",
-  "currentPlayer",
-  "isPlaySoundSF",
-]);
+const props = defineProps({
+  player: Object,
+  theWinner: Object,
+  currentPlayer: Object,
+});
 </script>
 <template>
   <div
-    :id="`display-${player.name}`"
+    id="display-p1"
     class="w-[204.944px] scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
     :class="[
       theWinner === player

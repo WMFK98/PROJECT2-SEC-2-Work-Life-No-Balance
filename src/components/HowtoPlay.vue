@@ -1,69 +1,23 @@
 <script setup>
 import { ref } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
+import { playSoundSFX } from "./../SoundControl";
+import SelectPage from "./SelectPage.vue";
 const selectTutorial = ref(1);
-const props = defineProps({
-  playSound: Function,
-});
+defineProps({ id: String });
 </script>
 
 <template>
-  <div>
-    <button
-      id="btn-tutorial"
-      class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
-      onclick="tutorial.showModal()"
-      @click="[playSound(soundbtn)]"
+  <dialog :id="id" class="modal">
+    <div
+      class="rounded-[20px] scr-l:rounded-[40px] pb-2 pt-3 bg-Yellow-light text-Black gap-2 flex flex-col px-7 text-hss w-[600px] scr-l:w-[1200px] scr-l:text-hs-des scr-l:gap-4 scr-l:py-5"
     >
-      📖
-    </button>
-    <dialog id="tutorial" class="modal">
-      <div
-        class="rounded-[20px] scr-l:rounded-[40px] pb-2 pt-3 bg-Yellow-light text-Black gap-2 flex flex-col px-7 text-hss w-[600px] scr-l:w-[1200px] scr-l:text-hs-des scr-l:gap-4 scr-l:py-5"
-      >
-        <nav
-          id="navbar-tutorial"
-          class="flex pb-2 justify-between items-center"
-        >
-          <div className="join">
-            <input
-              className="join-item btn btn-sm scr-l:rounded-[20px]   scr-l:btn-lg scr-l:text-hs-des  btn-square w-[100px] scr-l:w-[200px] bg-Main-pink-100  text-Black border-0 hover:bg-Main-pink-200"
-              type="radio"
-              name="options"
-              aria-label="How to play"
-              :value="1"
-              v-model="selectTutorial"
-              @click="selectTutorial = 1"
-              :disabled="selectTutorial === 1"
-            />
-            <input
-              className="join-item btn btn-sm scr-l:btn-lg scr-l:rounded-[20px]  hover:bg-Main-pink-200 scr-l:text-hs-des btn-square  border-0 scr-l:w-[200px] bg-Main-pink-100  text-Black  w-[100px]"
-              type="radio"
-              name="options"
-              aria-label="Item info"
-              :value="2"
-              v-model="selectTutorial"
-              :disabled="selectTutorial === 2"
-              @click="selectTutorial = 2"
-            />
-          </div>
-          <!-- <div
-						v-show="selectTutorial === 2"
-						class="flex gap-3 text-hss scr-l:text-hs-des"
-					>
-						<div class="flex gap-2 src-l:gap-4">
-							<div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
-							<p>Item Time</p>
-						</div>
-						<div class="flex gap-2">
-							<div class="bg-[#FF3FA4] w-4 scr-l:w-8 rounded-[5px]"></div>
-							<p>Item Turn</p>
-						</div>
-						<div class="flex gap-2">
-							<div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
-							<p>Item Attack</p>
-						</div>
-					</div> -->
+      <nav id="navbar-tutorial" class="flex pb-2 justify-between items-center">
+        <slot name="navbar">
+          <SelectPage
+            v-model="selectTutorial"
+            :name-pages="['How to play', 'Item info']"
+          />
           <div
             v-show="selectTutorial === 1"
             class="flex gap-3 text-hss scr-l:text-hs-des scr-l:gap-6"
@@ -85,13 +39,32 @@ const props = defineProps({
               <p>Item</p>
             </div>
           </div>
-        </nav>
+          <div
+            v-show="selectTutorial === 2"
+            class="flex gap-3 text-hss scr-l:text-hs-des"
+          >
+            <div class="flex gap-2 src-l:gap-4">
+              <div class="bg-[#FF9B82] w-4 scr-l:w-8 rounded-[5px]"></div>
+              <p>Item Time</p>
+            </div>
+            <div class="flex gap-2">
+              <div class="bg-[#FF3FA4] w-4 scr-l:w-8 rounded-[5px]"></div>
+              <p>Item Turn</p>
+            </div>
+            <div class="flex gap-2">
+              <div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
+              <p>Item Attack</p>
+            </div>
+          </div>
+        </slot>
+      </nav>
 
-        <ol
-          class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
-          v-show="selectTutorial === 1"
-          type="1"
-        >
+      <ol
+        class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
+        v-show="selectTutorial === 1"
+        type="1"
+      >
+        <slot name="page">
           <li><strong>กติกา:</strong></li>
           <li><strong>จำนวนผู้เล่น</strong>: 2 คน</li>
           <li><strong>รูปแบบ</strong>:ผลัดเทิร์น</li>
@@ -239,29 +212,27 @@ const props = defineProps({
 
             : เมื่อกดใช้จะมีผลกับฝ่ายตรงข้ามทันที
           </li>
-        </ol>
-
-        <div
-          v-show="selectTutorial === 2"
-          id="items-box"
-          class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
-        >
-          <slot name="items-tutorial"></slot>
-        </div>
-
-        <form method="dialog" class="justify-center flex w-full px-10">
-          <button
-            class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
-            id="cancelButton"
-            @click="playSound(soundbtn)"
-          >
-            Close
-          </button>
-        </form>
-        <!-- <Closebtn :playSound="playSound" /> -->
+        </slot>
+      </ol>
+      <div
+        v-show="selectTutorial === 2"
+        id="items-box"
+        class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start scr-l:justify-evenly overflow-scroll scr-l:h-max scr-l:overflow-hidden rounded-md h-[150px]"
+      >
+        <slot name="items-tutorial"></slot>
       </div>
-    </dialog>
-  </div>
+
+      <form method="dialog" class="justify-center flex w-full px-10">
+        <button
+          class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
+          id="cancelButton"
+          @click="playSoundSFX(soundbtn)"
+        >
+          Close
+        </button>
+      </form>
+    </div>
+  </dialog>
 </template>
 
 <style scoped></style>

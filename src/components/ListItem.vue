@@ -1,9 +1,11 @@
 <script setup>
-import ItemComponent from "./Item.vue";
+import Item from "./Item.vue";
+import soundbtn from "/music/soundBtn.mp3";
+import { playSoundSFX } from "./../SoundControl";
+
 const props = defineProps({
   player: Object,
   currentPlayer: Object,
-  isPlaySoundSF: Boolean,
   theWinner: Object,
 });
 </script>
@@ -21,7 +23,7 @@ const props = defineProps({
       class="scr-l:w-[480px] w-[300px] h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
       :class="player.items.owner == 'p2' ? 'flex-row-reverse' : ''"
     >
-      <ItemComponent :pollItem="player.items.getAllItem()">
+      <Item :pollItem="player.items.getAllItem()">
         <template
           #default="{
             item: {
@@ -46,7 +48,7 @@ const props = defineProps({
             "
           >
             <input
-              @click="player.items.toggleUsedItem(id, isPlaySoundSF)"
+              @click="[player.items.toggleUsedItem(id), playSoundSFX(soundbtn)]"
               type="checkbox"
               :disabled="!(currentPlayer === player) || theWinner"
             />
@@ -54,7 +56,7 @@ const props = defineProps({
             <img class="swap-on" :src="picture" />
           </label>
         </template>
-      </ItemComponent>
+      </Item>
     </div>
   </div>
 </template>

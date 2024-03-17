@@ -1,12 +1,12 @@
 <script setup>
 import soundbtn from "/music/soundBtn.mp3";
+import { playSoundSFX } from "./../SoundControl";
 const props = defineProps({
   title: String,
-  playSound: Function,
   action: Function,
   styleType: {
     type: String,
-    define(value) {
+    varlidatior(value) {
       return ["save", "close"].includes(value);
     },
   },
@@ -22,7 +22,7 @@ const props = defineProps({
         : 'bg-Main-pink-300  hover:bg-Main-pink-100 hover:text-Black'
     "
     id="saveButton"
-    @click="[action(), playSound(soundbtn)]"
+    @click="[action(), playSoundSFX(soundbtn)]"
   >
     {{ title }}
   </button>
