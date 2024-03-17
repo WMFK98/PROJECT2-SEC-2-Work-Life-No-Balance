@@ -13,6 +13,15 @@ import { ref } from 'vue'
 
 const selectPageItem = ref(1)
 const itemsName = ref('name')
+const props = defineProps({
+  changeColor: String,
+  colorStyle: {
+    type: String,
+    define(value) {
+      return ['itemTime', 'itemTurn'].includes(value)
+    }
+  }
+})
 </script>
 
 <template>
@@ -116,6 +125,9 @@ const itemsName = ref('name')
             >
               <div
                 class="h-[80%] w-[80%] bg-Main-pink-300 rounded-[20px] flex text-White scr-l:rounded-[40px] text-hs scr-m:text-hm-tal scr-l:text-hm-des text-center justify-center items-center"
+                :class="
+                  colorStyle === 'itemTurn' ? '  bg-[#ff7a59] ' : 'bg-[#FF3FA4]'
+                "
               >
                 {{ itemsName }}
               </div>
@@ -129,6 +141,8 @@ const itemsName = ref('name')
                   type="radio"
                   name="type-item"
                   class="radio radio-error radio-xs scr-m:radio-sm"
+                  changeColor="itemTime"
+                  v-model="itemTime"
                   :value="false"
                   checked
                 />
@@ -139,6 +153,8 @@ const itemsName = ref('name')
                   type="radio"
                   name="type-item"
                   class="radio radio-xs radio-secondary scr-m:radio-sm"
+                  changeColor="itemTurn"
+                  v-model="itemTurn"
                   :value="true"
                   checked
                 />
