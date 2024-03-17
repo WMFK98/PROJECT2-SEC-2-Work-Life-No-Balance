@@ -49,7 +49,7 @@ const isPlaySoundSF = ref(true);
 const isPlayMusic = ref(true);
 
 let pollItem = [];
-let checkSelectedItems = [];
+let checkSelectedItems = reactive([]);
 let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
@@ -59,9 +59,9 @@ let defaultSetting = localStorage.getItem('settings') ? JSON.parse(localStorage.
   limitItem: 7,
   addItemNumSetting: 1,
   startingItem: 0,
+
 };
 
-console.log(defaultSetting);
 
 const currentSetting = reactive({ ...defaultSetting });
 
@@ -384,7 +384,7 @@ const initItem = () => {
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
   checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-};
+}
 
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
@@ -395,9 +395,12 @@ const init = () => {
   }, { deep: true }); 
   initItem();
   reset()
+
 };
 
 init();
+
+console.log(defaultSetting);
 </script>
 
 <template>
