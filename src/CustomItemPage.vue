@@ -12,7 +12,7 @@ import { playSoundSFX } from '@/SoundControl'
 import { ref } from 'vue'
 
 const selectPageItem = ref(1)
-const itemsName = ref('name')
+const itemsName = ref('')
 const colorItems = ref(true)
 </script>
 
@@ -119,7 +119,8 @@ const colorItems = ref(true)
                 class="h-[80%] w-[80%] bg-Main-pink-300 rounded-[20px] flex text-White scr-l:rounded-[40px] text-hs scr-m:text-hm-tal scr-l:text-hm-des text-center justify-center items-center"
                 :class="colorItems ? 'bg-isTurn' : ' bg-isPerTurn'"
               >
-                {{ itemsName }}
+                <span v-if="!itemsName">name</span>
+                <span v-else>{{ itemsName }}</span>
               </div>
             </div>
             <div
