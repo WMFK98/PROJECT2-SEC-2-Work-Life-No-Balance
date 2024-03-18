@@ -6,7 +6,7 @@ import soundbtn from "/music/soundBtn.mp3";
 const props = defineProps({
   title: String,
   action: Function,
-  theWinner: [Object, Array],
+  theWinner: { type: Object, default: null },
   soundSFX: { type: String, default: soundbtn },
   buttonStyle: {
     type: String,
