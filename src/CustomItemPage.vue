@@ -12,6 +12,14 @@ import { playSoundSFX } from "@/SoundControl";
 import { ref } from "vue";
 
 const selectPageItem = ref(1);
+const selectedItem = ref();
+const doSom = () => {
+  console.log(selectedItem.value)
+}
+
+// const Som = () => {
+//   console.log('Notdo')
+// }
 </script>
 
 <template>
@@ -177,11 +185,27 @@ const selectPageItem = ref(1);
                         : isAttack
                         ? 'bg-Main-pink-300 text-White'
                         : 'bg-isPerTurn text-White'
-                    "
+                    
+                    " 
                   >
-                    <input type="checkbox" />
+                  <input
+                  @click="selectedItem = name"
+                  type="checkbox"
+                  
+                  />
+                  <!-- <div v-if="selectedItem == 'X2>3'" >
+                    
+                  </div> -->
+                  <!-- <div :class=" selectedItem === 'Dice+' ? 'bg-isPerTurn' : 'bg-Black' ">
+                  </div> -->
+                    <!-- <input type="checkbox" id="" /> -->
+                    
                     <img class="swap-off" :src="picture" />
                     <img class="swap-on" :src="picture" />
+                    
+                    
+                    
+                    
                   </label>
                 </template>
               </Item>
@@ -208,7 +232,11 @@ const selectPageItem = ref(1);
                         : 'bg-isPerTurn text-White'
                     "
                   >
-                    <input type="checkbox" />
+                  <input
+                  @click="doSom"
+                  type="checkbox"
+                  
+                  />
                     <img class="swap-off" :src="picture" />
                     <img class="swap-on" :src="picture" />
                   </label>
