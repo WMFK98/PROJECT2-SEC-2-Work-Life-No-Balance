@@ -22,12 +22,11 @@ export function toggleSoundMusic() {
   if (isOffMusic) currentMusic.pause();
   else currentMusic.play();
   storeSoundSetting()
-  console.log(isOffSFX);
 }
 export function toggleSoundSFX() {
   isOffSFX = !isOffSFX;
   storeSoundSetting()
-  console.log(isOffSFX);
+
 }
 export function stopMusic() {
   currentMusic.pause();
@@ -37,17 +36,15 @@ export function stopMusic() {
 export function loadSoundSetting(){
   if(localStorage.getItem("settings")){
     const newVal = JSON.parse(localStorage.getItem('settings'))
-    isOffMusic  = newVal.musicSetting[0]
-    isOffSFX =  newVal.musicSetting[1]
+    isOffMusic  = newVal.musicSetting.isOffMusic
+    isOffSFX =  newVal.musicSetting.isOffSFX
   }
-  console.log(isOffMusic,isOffSFX);
-  return [isOffMusic,isOffSFX]
- 
+  return { isOffMusic , isOffSFX}
 }
 
 export function storeSoundSetting(){
   const newVal = JSON.parse(localStorage.getItem('settings'))
-  newVal.musicSetting = [isOffMusic,isOffSFX]
+  newVal.musicSetting = {isOffMusic,isOffSFX}
   localStorage.setItem('settings', JSON.stringify(newVal));
 }
 

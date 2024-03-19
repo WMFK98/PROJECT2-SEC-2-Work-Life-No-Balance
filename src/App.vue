@@ -46,8 +46,8 @@ let dices = reactive([1, 1]);
 let phaseGame = 0;
 
 const musicSetting = reactive({
-  isOffMusic : loadSoundSetting()[1],
-  isOffSFX : loadSoundSetting()[0]
+  isOffMusic : loadSoundSetting().isOffMusic,
+  isOffSFX : loadSoundSetting().isOffSFX
 })
 
 let defaultSetting = localStorage.getItem("settings")
@@ -57,7 +57,7 @@ let defaultSetting = localStorage.getItem("settings")
       limitItem: 7,
       addItemNumSetting: 1,
       startingItem: 0,
-      musicSetting: [false,false],
+      musicSetting: {isOffMusic : false , isOffSFX : false},
     };
 
 const currentSetting = reactive({ ...defaultSetting });
@@ -311,31 +311,30 @@ const initItem = () => {
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 };
 
-const init = () => {
-  watch(() => [player1.point, player2.point], checkWin);
-  watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
-  watch(
-    currentSetting,
-    (newVal) => {
-      localStorage.setItem("settings", JSON.stringify(newVal));
-    },
-    { deep: true }
-  );
-  initItem();
-  watch(
-    () => [checkSelectedItems],
-    () => {
-      const newVal = JSON.parse(localStorage.getItem("settings"));
-      newVal.checkSelectedItems = checkSelectedItems;
-      localStorage.setItem("settings", JSON.stringify(newVal));
-    },
-    { deep: true }
-  );
-  addSelectedItem();
-  reset();
+const localSetting = () =>{
   if (!localStorage.getItem("settings")) {
     localStorage.setItem("settings", JSON.stringify(defaultSetting));
   }
+  watch(
+  [currentSetting, checkSelectedItems],
+  ([newSetting, newSelectedItems]) => {
+    const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+    const newVal = { ...storedSettings, ...newSetting, checkSelectedItems: newSelectedItems };
+    localStorage.setItem("settings", JSON.stringify(newVal));
+  },
+  { deep: true }
+  
+);
+  addSelectedItem();
+}
+
+const init = () => {
+  watch(() => [player1.point, player2.point], checkWin);
+  watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
+  initItem();
+  localSetting();
+  reset();
+  
 };
 
 init();
