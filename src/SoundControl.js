@@ -48,6 +48,3 @@ export function storeSoundSetting(){
   localStorage.setItem('settings', JSON.stringify(newVal));
 }
 
-export {
-  isOffMusic , isOffSFX
-}

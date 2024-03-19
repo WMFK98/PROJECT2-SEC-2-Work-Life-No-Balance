@@ -33,7 +33,6 @@ import {
   toggleSoundSFX,
   stopMusic,
   loadSoundSetting,
-
 } from "./SoundControl";
 
 let voidScore = 1;
@@ -177,6 +176,18 @@ const hold = () => {
   currentPlayer[0].curPoint = 0;
   switchPlayer();
 };
+
+const resetSetting = () => {
+  currentSetting.settingPoint = 100
+  currentSetting.limitItem = 7
+  currentSetting.addItemNumSetting= 1,
+  currentSetting.startingItem= 0,
+  musicSetting.isOffMusic = false ,
+  musicSetting.isOffSFX = false
+  checkSelectedItems = checkSelectedItems.fill(true)
+  defaultSetting = { ...currentSetting };
+  reset()
+}
 const closeSetting = () => {
   currentSetting.limitItem = defaultSetting.limitItem;
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
@@ -300,14 +311,7 @@ const initItem = () => {
   addDice.addAbility(addDiceAbililty);
   plus2Point.addAbility(plus2Abililty);
   popDice.addAbility(popDiceAbililty);
-
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-  checkSelectedItems = reactive(
-    localStorage.getItem("settings")
-      ? JSON.parse(localStorage.getItem("settings")).checkSelectedItems
-      : new Array(pollItem.length).fill(true)
-  );
-  defaultSetting.checkSelectedItems = checkSelectedItems
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 };
 
@@ -315,16 +319,27 @@ const localSetting = () =>{
   if (!localStorage.getItem("settings")) {
     localStorage.setItem("settings", JSON.stringify(defaultSetting));
   }
+
+  checkSelectedItems = reactive(
+    JSON.parse(localStorage.getItem("settings")).checkSelectedItems == undefined
+      ? new Array(pollItem.length).fill(true)
+      : JSON.parse(localStorage.getItem("settings")).checkSelectedItems
+  );
+
+  console.log(checkSelectedItems);
+  defaultSetting.checkSelectedItems = checkSelectedItems
+
   watch(
-  [currentSetting, checkSelectedItems],
-  ([newSetting, newSelectedItems]) => {
+  [currentSetting, checkSelectedItems , musicSetting],
+  ([newSetting, newSelectedItems, newMusicsetting]) => {
     const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
-    const newVal = { ...storedSettings, ...newSetting, checkSelectedItems: newSelectedItems };
+    const newVal = { ...storedSettings, ...newSetting, checkSelectedItems: newSelectedItems , musicSetting:newMusicsetting};
     localStorage.setItem("settings", JSON.stringify(newVal));
   },
   { deep: true }
   
 );
+ 
   addSelectedItem();
 }
 
@@ -334,7 +349,6 @@ const init = () => {
   initItem();
   localSetting();
   reset();
-  
 };
 
 init();
@@ -444,10 +458,16 @@ init();
                   style-type="save"
                 />
                 <ButtonSetting
+                  title="Default Setting"
+                  :action="resetSetting"
+                  style-type="default"
+                />
+                <ButtonSetting
                   title="close"
                   :action="closeSetting"
                   style-type="close"
                 />
+               
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
               </template>
@@ -529,4 +549,4 @@ init();
     </div>
   </div>
 </template>
-./components/ItemInfo.vue ./components/ButtonGame.vue
+
