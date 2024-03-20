@@ -48,3 +48,8 @@ export function storeSoundSetting(){
   localStorage.setItem('settings', JSON.stringify(newVal));
 }
 
+export function setDefault(){
+  isOffMusic =false 
+  isOffSFX = false
+  storeSoundSetting();
+}

@@ -18,7 +18,7 @@ const props = defineProps({
       <input
         type="checkbox"
         :checked="!openSound"
-        @change="[action(), playSoundSFX(soundbtn), openSound = !openSound]"
+        @change="[action(), playSoundSFX(soundbtn)]"
       />
       <div class="swap-on" >{{ showOn }}</div>
       <div class="swap-off">{{ showOff }}</div>

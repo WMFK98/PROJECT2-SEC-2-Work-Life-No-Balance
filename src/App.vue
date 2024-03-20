@@ -33,6 +33,7 @@ import {
   toggleSoundSFX,
   stopMusic,
   loadSoundSetting,
+  setDefault
 } from "./SoundControl";
 
 let voidScore = 1;
@@ -182,8 +183,9 @@ const resetSetting = () => {
   currentSetting.limitItem = 7
   currentSetting.addItemNumSetting= 1,
   currentSetting.startingItem= 0,
-  musicSetting.isOffMusic = false ,
-  musicSetting.isOffSFX = false
+  setDefault()
+  musicSetting.isOffMusic = loadSoundSetting().isOffMusic
+  musicSetting.isOffSFX = loadSoundSetting().isOffSFX
   checkSelectedItems = checkSelectedItems.fill(true)
   defaultSetting = { ...currentSetting };
   reset()
@@ -330,10 +332,10 @@ const localSetting = () =>{
   defaultSetting.checkSelectedItems = checkSelectedItems
 
   watch(
-  [currentSetting, checkSelectedItems , musicSetting],
-  ([newSetting, newSelectedItems, newMusicsetting]) => {
+  [currentSetting, checkSelectedItems ],
+  ([newSetting, newSelectedItems]) => {
     const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
-    const newVal = { ...storedSettings, ...newSetting, checkSelectedItems: newSelectedItems , musicSetting:newMusicsetting};
+    const newVal = { ...storedSettings, ...newSetting, checkSelectedItems: newSelectedItems};
     localStorage.setItem("settings", JSON.stringify(newVal));
   },
   { deep: true }
