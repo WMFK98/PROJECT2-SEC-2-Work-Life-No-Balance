@@ -24,6 +24,9 @@ import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
 onMounted(async () => {
   customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
+
+const selectedItem1 = ref("");
+const selectedItem2 = ref("");
 </script>
 
 <template>
@@ -188,14 +191,24 @@ onMounted(async () => {
                   <label
                     class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
                     :class="
-                      isPerTurn || name === 'Dice+' || name === 'Dice-'
+                      selectedItem1 === name
+                        ? 'bg-Yellow-light'
+                        : isPerTurn || name === 'Dice+' || name === 'Dice-'
                         ? 'bg-isTurn text-White'
                         : isAttack
                         ? 'bg-Main-pink-300 text-White'
                         : 'bg-isPerTurn text-White'
                     "
                   >
-                    <input type="checkbox" />
+                    <input
+                      @click="
+                        selectedItem1 === name
+                          ? (selectedItem1 = '')
+                          : (selectedItem1 = name)
+                      "
+                      type="checkbox"
+                    />
+
                     <img class="swap-off" :src="picture" />
                     <img class="swap-on" :src="picture" />
                   </label>
@@ -217,14 +230,23 @@ onMounted(async () => {
                   <label
                     class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
                     :class="
-                      isPerTurn || name === 'Dice+' || name === 'Dice-'
+                      selectedItem2 === name
+                        ? 'bg-Yellow-light'
+                        : isPerTurn || name === 'Dice+' || name === 'Dice-'
                         ? 'bg-isTurn text-White'
                         : isAttack
                         ? 'bg-Main-pink-300 text-White'
                         : 'bg-isPerTurn text-White'
                     "
                   >
-                    <input type="checkbox" />
+                    <input
+                      @click="
+                        selectedItem2 === name
+                          ? (selectedItem2 = '')
+                          : (selectedItem2 = name)
+                      "
+                      type="checkbox"
+                    />
                     <img class="swap-off" :src="picture" />
                     <img class="swap-on" :src="picture" />
                   </label>
@@ -235,7 +257,15 @@ onMounted(async () => {
         </div>
       </div>
       <div class="flex justify-center gap-5 mt-4">
+        <!-- <button
+          id="btn-save"
+          :disabled="selectedItem1 && selectedItem2"
+          @click="doSome"
+        >
+          Save
+        </button> -->
         <ButtonSetting styleType="save" title="Save" />
+
         <ButtonSetting styleType="cancle" title="Cancle" />
       </div>
     </div>
