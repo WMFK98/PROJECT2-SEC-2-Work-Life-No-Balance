@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "json-server --watch ./data/db.json --port 5001"
   },
   "dependencies": {
+    "json-server": "^1.0.0-alpha.23",
+    "tailwindcss-animated": "^1.0.1",
     "vue": "^3.3.11"
   },
   "devDependencies": {

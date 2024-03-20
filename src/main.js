@@ -1,6 +1,9 @@
-import './assets/main.css'
+import "./assets/main.css";
 
-import { createApp } from 'vue'
-import App from './App.vue'
-
-createApp(App).mount('#app')
+import { createApp } from "vue";
+import HomePage from "./views/HomePage.vue";
+import GamePage from "./views/GamePage.vue";
+import CustomItemPage from "./views/CustomItemPage.vue";
+createApp(CustomItemPage).mount("#app");
+// createApp(HomePage).mount("#app");
+// createApp(GamePage).mount("#app");
