@@ -9,9 +9,21 @@ import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../libs/SoundControl";
 
-import { ref } from "vue";
-
+import { onMounted, ref } from "vue";
 const selectPageItem = ref(1);
+const customItems = ref(new TypeItemsCusMangement());
+import {
+  addItem,
+  deleteItemById,
+  editItem,
+  getItemById,
+  getItems,
+} from "./../utils/fetchUtils";
+import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+
+onMounted(async () => {
+  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
+});
 </script>
 
 <template>
@@ -92,7 +104,7 @@ const selectPageItem = ref(1);
               />
               <ItemsInfo
                 v-show="selectPageItem === 2"
-                :poll-item="initStructureItem"
+                :poll-item="customItems.getAllTypeItems()"
                 :can-edit="true"
               />
             </template>

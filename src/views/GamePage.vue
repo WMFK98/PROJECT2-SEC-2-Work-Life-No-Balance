@@ -41,7 +41,6 @@ let pollItem = [];
 let checkSelectedItems = [];
 let givePoint = 0;
 let dices = reactive([1, 1]);
-
 let phaseGame = 0;
 
 let defaultSetting = {

@@ -13,7 +13,7 @@ const props = defineProps({
       id="item-box"
       class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
       v-for="(
-        { name, picture, discription, isPerTurn, isAttack }, index
+        { name, picture, discription, isPerTurn, isAttack, ability }, index
       ) in pollItem"
       :key="index"
     >
@@ -27,13 +27,13 @@ const props = defineProps({
             : 'bg-isPerTurn text-White'
         "
       >
-        <img v-show="picture" :src="picture" :alt="name" />
-        <p v-show="picture === null">{{ name }}</p>
+        <img v-if="picture" :src="picture" />
+        <p v-show="!picture">{{ name }}</p>
       </div>
       <p
         class="text-hss scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
       >
-        <strong>{{ name }}</strong> : {{ discription }}
+        <strong>{{ name }}</strong> : {{ discription ? discription : ability }}
       </p>
       <div
         v-if="canEdit"

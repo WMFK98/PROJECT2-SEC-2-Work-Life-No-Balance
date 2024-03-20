@@ -1,8 +1,8 @@
 import Item from "../StateItem";
 
-export default class TypeItemsMangement {
+export default class TypeItemsCusMangement {
   _typeItems = [];
-  constructor(typeItems) {
+  constructor(typeItems = []) {
     this._typeItems = typeItems;
   }
   searchTypeItemByName(searchName) {
@@ -21,6 +21,10 @@ export default class TypeItemsMangement {
     return this._typeItems;
   }
   addTypeItem(typeItem) {
-    this._typeItems.push(new Item(typeItem));
+    this._typeItems.push(typeItem);
+  }
+
+  addTypeItems(typeItems = []) {
+    typeItems.forEach((typeItem) => this._typeItems.push(typeItem));
   }
 }

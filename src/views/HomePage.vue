@@ -84,11 +84,11 @@ import SqureTwo from "./../assets/Icon_Dice_1/SqureTwo.png";
           button-style="normal"
           class="animate-fade-up animate-duration-[2000ms] opacity-0 animate-delay-500 animate-ease-out animate-normal"
         />
-        <ButtonGame
+        <!-- <ButtonGame
           title="Setting"
           button-style="short"
           class="animate-fade-up animate-duration-[2000ms] opacity-0 animate-delay-1000 animate-ease-out animate-normal"
-        />
+        /> -->
       </div>
     </div>
   </div>
