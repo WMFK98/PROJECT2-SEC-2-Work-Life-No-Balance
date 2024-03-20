@@ -1,6 +1,9 @@
 <script setup>
 import { defineProps } from "vue";
-const props = defineProps({ pollItem: [Array, Object] });
+const props = defineProps({
+  pollItem: [Array, Object],
+  canEdit: { type: Boolean, default: false },
+});
 </script>
 <template>
   <div
@@ -26,9 +29,21 @@ const props = defineProps({ pollItem: [Array, Object] });
       >
         <img :src="picture" :alt="name" />
       </div>
-      <p class="text-hss scr-l:text-hs-des w-[80%]">
+      <p class="text-hss scr-l:text-[18px] w-[75%]">
         <strong>{{ name }}</strong> : {{ discription }}
       </p>
+      <div class="self-end flex gap-1">
+        <button
+          class="btn btn-xs bg-[#96ff66] hover:bg-[#3e8a1b] text-Black border-0 hover:text-White"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-xs bg-Main-pink-300 hover:bg-Main-pink-200 text-Black hover:text-White border-0"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </template>

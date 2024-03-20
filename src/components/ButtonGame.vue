@@ -22,12 +22,12 @@ const props = defineProps({
     @click="
       [action(), playSoundSFX(props.soundSFX), playSoundMusic(backgroundMusic)]
     "
-    class="px-2 text-hss p-0 scr-m:h-max scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:rounded-[30px] scr-l:h-[50px]"
+    class="px-2 text-hss p-0 scr-m:h-[40px] scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs bg-btn-active border-0 scr-m:rounded-[30px] scr-l:h-[50px]"
     :class="
       buttonStyle === 'short'
         ? ' scr-m:w-[113px] scr-l:w-[136px] w-[75px] h-[60px]'
         : buttonStyle === 'normal'
-        ? ' scr-m:w-[166px] scr-m:flex-row items-center scr-l:w-[200px] w-[75px] h-[60px]'
+        ? ' scr-m:w-[166px]  scr-m:flex-row items-center scr-l:w-[200px] w-[75px] h-[60px]'
         : 'w-max h-max items-center scr-l:w-[200px] scr-m:w-[166px]'
     "
     :disabled="theWinner !== null"

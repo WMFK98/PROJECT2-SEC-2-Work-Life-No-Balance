@@ -225,4 +225,3 @@ const selectPageItem = ref(1);
     </div>
   </div>
 </template>
-@/libs/SoundControl ../initStructureItem
