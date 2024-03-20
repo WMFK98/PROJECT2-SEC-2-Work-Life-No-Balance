@@ -12,14 +12,11 @@ import { playSoundSFX } from "@/SoundControl";
 import { ref } from "vue";
 
 const selectPageItem = ref(1);
-const selectedItem = ref();
-const doSom = () => {
-  console.log(selectedItem.value)
-}
+const selectedItem1 = ref();
+const selectedItem2 = ref();
 
-// const Som = () => {
-//   console.log('Notdo')
-// }
+
+
 </script>
 
 <template>
@@ -180,7 +177,9 @@ const doSom = () => {
                   <label
                     class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
                     :class="
-                      isPerTurn || name === 'Dice+' || name === 'Dice-'
+                      selectedItem1 === name ? 'bg-Yellow-light' : 
+
+                      isPerTurn || name === 'Dice+' || name === 'Dice-' 
                         ? 'bg-isTurn text-White'
                         : isAttack
                         ? 'bg-Main-pink-300 text-White'
@@ -189,16 +188,10 @@ const doSom = () => {
                     " 
                   >
                   <input
-                  @click="selectedItem = name"
+                  @click="selectedItem1 === name ? selectedItem1 = '': selectedItem1 = name"
                   type="checkbox"
                   
-                  />
-                  <!-- <div v-if="selectedItem == 'X2>3'" >
-                    
-                  </div> -->
-                  <!-- <div :class=" selectedItem === 'Dice+' ? 'bg-isPerTurn' : 'bg-Black' ">
-                  </div> -->
-                    <!-- <input type="checkbox" id="" /> -->
+                 >
                     
                     <img class="swap-off" :src="picture" />
                     <img class="swap-on" :src="picture" />
@@ -225,6 +218,7 @@ const doSom = () => {
                   <label
                     class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
                     :class="
+                    selectedItem2 === name ? 'bg-Yellow-light' :
                       isPerTurn || name === 'Dice+' || name === 'Dice-'
                         ? 'bg-isTurn text-White'
                         : isAttack
@@ -233,7 +227,7 @@ const doSom = () => {
                     "
                   >
                   <input
-                  @click="doSom"
+                  @click="selectedItem2 === name ? selectedItem2 = '': selectedItem2 = name"
                   type="checkbox"
                   
                   />
