@@ -12,8 +12,12 @@ import { playSoundSFX } from "@/SoundControl";
 import { ref } from "vue";
 
 const selectPageItem = ref(1);
-const selectedItem1 = ref();
-const selectedItem2 = ref();
+const selectedItem1 = ref('');
+const selectedItem2 = ref('');
+
+const doSome = () => {
+  console.log('hello')
+}
 
 
 
@@ -241,7 +245,11 @@ const selectedItem2 = ref();
         </div>
       </div>
       <div class="flex justify-center gap-5 mt-4">
-        <ButtonSetting styleType="save" title="Save" />
+        <button id="btn-save" :disabled="selectedItem1 && selectedItem2 ===  ''" @click="doSome"> Save </button>
+        <!-- <ButtonSetting styleType="save" title="Save" >
+            
+          </ButtonSetting> -->
+        
         <ButtonSetting styleType="cancle" title="Cancle" />
       </div>
     </div>
