@@ -2,6 +2,7 @@
 import { defineProps } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../SoundControl";
+const emits = defineEmits(['update'])
 const props = defineProps({
   title: String,
   action: Function,
@@ -9,6 +10,16 @@ const props = defineProps({
   showOff: String,
   openSound : Boolean
 });
+
+const handleClick = () => {
+  props.action();
+  playSoundSFX(soundbtn);
+  emitUpdateEvent();
+};
+
+const emitUpdateEvent = () => {
+  emits('update' , {openSound : !props.openSound});
+}
 </script>
 
 <template>
@@ -18,7 +29,7 @@ const props = defineProps({
       <input
         type="checkbox"
         :checked="!openSound"
-        @change="[action(), playSoundSFX(soundbtn)]"
+        @change="handleClick"
       />
       <div class="swap-on" >{{ showOn }}</div>
       <div class="swap-off">{{ showOff }}</div>
