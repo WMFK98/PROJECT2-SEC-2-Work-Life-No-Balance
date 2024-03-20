@@ -27,6 +27,8 @@ onMounted(async () => {
 
 const selectedItem1 = ref("");
 const selectedItem2 = ref("");
+const itemsName = ref("");
+const isPerTime = ref(true);
 </script>
 
 <template>
@@ -134,8 +136,10 @@ const selectedItem2 = ref("");
             >
               <div
                 class="h-[80%] w-[80%] bg-Main-pink-300 rounded-[20px] flex text-White scr-l:rounded-[40px] text-hs scr-m:text-hm-tal scr-l:text-hm-des text-center justify-center items-center"
+                :class="isPerTime ? 'bg-isTurn' : ' bg-isPerTurn'"
               >
-                name
+                <span v-if="!itemsName">name</span>
+                <span v-else>{{ itemsName }}</span>
               </div>
             </div>
             <div
@@ -147,6 +151,7 @@ const selectedItem2 = ref("");
                   type="radio"
                   name="type-item"
                   class="radio radio-error radio-xs scr-m:radio-sm"
+                  v-model="isPerTime"
                   :value="false"
                   checked
                 />
@@ -157,6 +162,7 @@ const selectedItem2 = ref("");
                   type="radio"
                   name="type-item"
                   class="radio radio-xs radio-secondary scr-m:radio-sm"
+                  v-model="isPerTime"
                   :value="true"
                   checked
                 />
@@ -167,6 +173,7 @@ const selectedItem2 = ref("");
           <div class="flex justify-center">
             <input
               type="text"
+              v-model.trim="itemsName"
               placeholder="Name of Item"
               maxlength="4"
               class="input input-sm scr-m:input-md input-bordered text-hss scr-l:text-hs-des text-Black max-w-xs mt-3 w-full text-center bg-White"
