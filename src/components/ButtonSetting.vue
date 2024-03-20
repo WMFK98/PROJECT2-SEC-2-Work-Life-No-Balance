@@ -15,7 +15,7 @@ const props = defineProps({
 
 <template>
   <button
-    class="btn-save btn border-0 btn-close scr-l:w-[40%] scr-l:rounded-[20px] rounded-[10px] w-[100px] h-[25px] font-sans btn-xs scr-m:btn-md scr-l:btn-m"
+    class="btn-save btn border-0 btn-close scr-l:w-[40%] scr-m:btn-sm scr-l:btn-md scr-l:rounded-[20px] rounded-[10px] w-[100px] h-[25px] font-sans btn-xs scr-l:btn-m"
     :class="
       styleType === 'save'
         ? 'bg-[#76e343] hover:bg-[#3e8a1b] text-Black  hover:text-White'

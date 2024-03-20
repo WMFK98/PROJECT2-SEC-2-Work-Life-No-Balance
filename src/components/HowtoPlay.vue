@@ -5,6 +5,7 @@ import { playSoundSFX } from "./../libs/SoundControl";
 import SelectPage from "./SelectPage.vue";
 import ItemsInfo from "./ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
+import ButtonClosePopup from "./ButtonClosePopup.vue";
 const selectTutorialPage = ref(1);
 defineProps({ id: String });
 </script>
@@ -229,15 +230,9 @@ defineProps({ id: String });
           :poll-item="initStructureItem"
         />
       </slot>
-      <form method="dialog" class="justify-center flex w-full scr-l:px-10">
-        <button
-          class="btn-close hover:bg-Main-pink-200 w-full scr-m:btn-sm scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
-          id="cancelButton"
-          @click="playSoundSFX(soundbtn)"
-        >
-          Close
-        </button>
-      </form>
+      <slot name="btn">
+        <ButtonClosePopup />
+      </slot>
     </div>
   </dialog>
 </template>

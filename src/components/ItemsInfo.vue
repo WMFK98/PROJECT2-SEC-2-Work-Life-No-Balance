@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 <template>
   <div
-    class="flex gap-2 h-[150px] flex-col scr-m:flex-row scr-m:flex-wrap scr-m:h-[282px] justify-start scr-l:justify-evenly overflow-y-scroll scr-l:overflow-hidden scr-l:h-max rounded-md"
+    class="flex gap-2 h-[150px] flex-col scr-m:flex-row scr-m:flex-wrap scr-m:h-[282px] justify-start overflow-y-scroll scr-l:overflow-hidden scr-l:h-max rounded-md"
   >
     <div
       id="item-box"
