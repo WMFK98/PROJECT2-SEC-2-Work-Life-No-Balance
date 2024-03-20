@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "json-server": "^1.0.0-alpha.23",
     "tailwindcss-animated": "^1.0.1",
     "vue": "^3.3.11"
   },

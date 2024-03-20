@@ -1,6 +1,6 @@
 <script setup>
 import soundbtn from "/music/soundBtn.mp3";
-import { toggleSoundSFX } from "./SoundControl";
+import { toggleSoundSFX } from "./../libs/SoundControl";
 </script>
 
 <template>

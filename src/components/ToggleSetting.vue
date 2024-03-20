@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../SoundControl";
+import { playSoundSFX } from "./../libs/SoundControl";
 const props = defineProps({
   title: String,
   action: Function,
@@ -26,3 +26,4 @@ const props = defineProps({
 </template>
 
 <style scoped></style>
+../libs/SoundControl

@@ -1,16 +1,16 @@
 <script setup>
-import ButtonGame from "./components/ButtonGame.vue";
+import ButtonGame from "./../components/ButtonGame.vue";
 import logoGame from "/images/logo-game.png";
 import amongDice1 from "/images/among-dice-1.png";
 import amongDice2 from "/images/among-dice-2.png";
 
-import Diceplus from "./assets/Icon_Dice_1/DicePlus.png";
-import DelDice from "./assets/Icon_Dice_1/DelDice.png";
-import DelTenSC from "./assets/Icon_Dice_1/DelTenSC.png";
-import OddAndEven from "./assets/Icon_Dice_1/ODDEVENT.png";
-import SixOneTime from "./assets/Icon_Dice_1/OneSixTM.png";
-import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png";
-import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png";
+import Diceplus from "./../assets/Icon_Dice_1/DicePlus.png";
+import DelDice from "./../assets/Icon_Dice_1/DelDice.png";
+import DelTenSC from "./../assets/Icon_Dice_1/DelTenSC.png";
+import OddAndEven from "./../assets/Icon_Dice_1/ODDEVENT.png";
+import SixOneTime from "./../assets/Icon_Dice_1/OneSixTM.png";
+import PlusTwo from "./../assets/Icon_Dice_1/PlusTwo.png";
+import SqureTwo from "./../assets/Icon_Dice_1/SqureTwo.png";
 </script>
 <template>
   <div

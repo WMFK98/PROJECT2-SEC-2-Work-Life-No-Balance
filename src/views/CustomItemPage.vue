@@ -1,13 +1,13 @@
 <script setup>
-import initStructureItem from "./initStructureItem";
-import Item from "./components/Item.vue";
-import ButtonSetting from "./components/ButtonSetting.vue";
-import BackIcon from "./assets/Icon/BackIcon.vue";
-import ItemsInfo from "./components/ItemsInfo.vue";
-import HowtoPlay from "./components/HowtoPlay.vue";
-import SelectPage from "./components/SelectPage.vue";
+import initStructureItem from "./../initStructureItem";
+import Item from "./../components/Item.vue";
+import ButtonSetting from "./../components/ButtonSetting.vue";
+import BackIcon from "./../assets/Icon/BackIcon.vue";
+import ItemsInfo from "./../components/ItemsInfo.vue";
+import HowtoPlay from "./../components/HowtoPlay.vue";
+import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "@/SoundControl";
+import { playSoundSFX } from "./../libs/SoundControl";
 
 import { ref } from "vue";
 
@@ -225,3 +225,4 @@ const selectPageItem = ref(1);
     </div>
   </div>
 </template>
+@/libs/SoundControl ../initStructureItem

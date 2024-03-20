@@ -1,7 +1,7 @@
 <script setup>
 import Item from "./Item.vue";
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../SoundControl";
+import { playSoundSFX } from "./../libs/SoundControl";
 
 const props = defineProps({
   player: Object,
@@ -62,3 +62,4 @@ const props = defineProps({
 </template>
 
 <style scoped></style>
+../libs/SoundControl

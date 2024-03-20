@@ -1,0 +1,16 @@
+{
+  "customTypeItem": [
+    {
+      "id": "100",
+      "name": "6X",
+      "ability": ["G6", "X2>3"],
+      "isTurn": false
+    },
+    {
+      "id": "101",
+      "name": "66",
+      "ability": ["G6", "G6"],
+      "isTurn": false
+    }
+  ]
+}

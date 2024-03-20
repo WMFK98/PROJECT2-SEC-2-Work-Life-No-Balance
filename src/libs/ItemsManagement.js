@@ -1,5 +1,5 @@
-import Item from "./Item";
-import { random } from "./tool";
+import Item from "../StateItem";
+import { random } from "../utils/tool";
 export default class ItemsManagement {
   _items = [];
   constructor(owner, pollItem, limitItem = 7) {
@@ -37,13 +37,9 @@ export default class ItemsManagement {
       this._items.push(new Item(typeItem));
   }
   addRandomItem(amout = 1) {
-    if (this.pollItem.length < 1) {
-      return;
-    }
-    for (let i = 0; i < amout; i++) {
-      const item = this.pollItem[random(0, this.pollItem.length - 1)];
-      this.addItem(item);
-    }
+    if (this.pollItem.length < 1) return;
+    for (let i = 0; i < amout; i++)
+      this.addItem(this.pollItem[random(0, this.pollItem.length - 1)]);
   }
   getAllItemUsed() {
     return this._items.filter(({ isUsed }) => isUsed);

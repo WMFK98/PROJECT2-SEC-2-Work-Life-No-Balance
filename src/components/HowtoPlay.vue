@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../SoundControl";
+import { playSoundSFX } from "./../libs/SoundControl";
 import SelectPage from "./SelectPage.vue";
 import ItemsInfo from "./ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
@@ -243,3 +243,4 @@ defineProps({ id: String });
 </template>
 
 <style scoped></style>
+../libs/SoundControl
