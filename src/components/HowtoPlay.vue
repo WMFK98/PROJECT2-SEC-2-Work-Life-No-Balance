@@ -12,7 +12,7 @@ defineProps({ id: String });
 <template>
   <dialog :id="id" class="modal">
     <div
-      class="rounded-[20px] scr-l:rounded-[40px] pb-2 pt-3 bg-Yellow-light text-Black gap-2 flex flex-col px-7 text-hss w-[600px] scr-l:w-[1200px] scr-l:text-hs-des scr-l:gap-4 scr-l:py-5"
+      class="rounded-[20px] scr-l:rounded-[40px] pb-2 pt-3 bg-Yellow-light text-Black gap-2 flex flex-col px-7 text-hss w-[600px] scr-m:w-[900px] scr-l:w-[1200px] scr-l:text-hs-des scr-l:gap-4 scr-l:py-5"
     >
       <slot name="body">
         <nav
@@ -70,7 +70,7 @@ defineProps({ id: String });
         </nav>
 
         <ol
-          class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
+          class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] scr-m:h-[300px] scr-m:text-hs-tal flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
           v-show="selectTutorialPage === 1"
           type="1"
         >
@@ -229,9 +229,9 @@ defineProps({ id: String });
           :poll-item="initStructureItem"
         />
       </slot>
-      <form method="dialog" class="justify-center flex w-full px-10">
+      <form method="dialog" class="justify-center flex w-full scr-l:px-10">
         <button
-          class="btn-close hover:bg-Main-pink-200 scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss w-full scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
+          class="btn-close hover:bg-Main-pink-200 w-full scr-m:btn-sm scr-l:btn-md btn-xs scr-l:w-[200px] bg-Main-pink-300 text-hss scr-l:text-hs-des bold text-White rounded-[10px] h-[25px] flex justify-center items-center scr-l:rounded-[20px]"
           id="cancelButton"
           @click="playSoundSFX(soundbtn)"
         >

@@ -90,7 +90,11 @@ const selectPageItem = ref(1);
                 v-show="selectPageItem === 1"
                 :poll-item="initStructureItem"
               />
-              <ItemsInfo v-show="selectPageItem === 2" :poll-item="[]" />
+              <ItemsInfo
+                v-show="selectPageItem === 2"
+                :poll-item="initStructureItem"
+                :can-edit="true"
+              />
             </template>
           </HowtoPlay>
 
