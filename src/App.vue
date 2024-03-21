@@ -430,6 +430,11 @@ init();
             </button>
             <Setting>
               <template #inputSetting>
+                <ButtonSetting
+                  title="Default Setting"
+                  :action="resetSetting"
+                  style-type="default"
+                />
                 <InputSetting
                   title="Amount of point to win (50-500)"
                   v-model="currentSetting.settingPoint"
@@ -480,11 +485,7 @@ init();
                   :action="saveSetting"
                   style-type="save"
                 />
-                <ButtonSetting
-                  title="Default Setting"
-                  :action="resetSetting"
-                  style-type="default"
-                />
+
                 <ButtonSetting
                   title="Close"
                   :action="closeSetting"
