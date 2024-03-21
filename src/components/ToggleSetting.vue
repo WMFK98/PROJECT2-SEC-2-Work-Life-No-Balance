@@ -2,12 +2,25 @@
 import { defineProps } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../libs/SoundControl";
+
+const emits = defineEmits(['update'])
 const props = defineProps({
   title: String,
   action: Function,
   showOn: String,
   showOff: String,
+  openSound : Boolean
 });
+
+const handleClick = () => {
+  props.action();
+  playSoundSFX(soundbtn);
+  emitUpdateEvent();
+};
+
+const emitUpdateEvent = () => {
+  emits('update' , {openSound : !props.openSound});
+}
 </script>
 
 <template>
@@ -16,10 +29,10 @@ const props = defineProps({
     <div class="swap swap-flip text-hss scr-m:text-hs-tal scr-l:text-hs-des">
       <input
         type="checkbox"
-        :checked="true"
-        @change="[action(), playSoundSFX(soundbtn)]"
+        :checked="!openSound"
+        @change="handleClick"
       />
-      <div class="swap-on">{{ showOn }}</div>
+      <div class="swap-on" >{{ showOn }}</div>
       <div class="swap-off">{{ showOff }}</div>
     </div>
   </label>

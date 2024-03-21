@@ -6,7 +6,7 @@ import { playSoundSFX } from "./../libs/SoundControl";
 const props = defineProps({
   player: Object,
   currentPlayer: Object,
-  theWinner: [Object, Array],
+  theWinner: Object,
 });
 </script>
 

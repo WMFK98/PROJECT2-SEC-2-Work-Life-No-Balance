@@ -15,11 +15,13 @@ const props = defineProps({
 
 <template>
   <button
-    class="btn-save btn border-0 btn-close scr-l:w-[40%] scr-l:rounded-[20px] rounded-[10px] w-[100px] h-[25px] font-sans btn-xs scr-m:btn-md scr-l:btn-m"
+    class="btn-save btn border-0 btn-close scr-l:w-[25%] scr-l:rounded-[20px] rounded-[10px] w-[70px] h-[25px] font-sans btn-xs scr-m:btn-md scr-l:btn-m"
     :class="
       styleType === 'save'
-        ? 'bg-[#76e343] hover:bg-[#3e8a1b] text-Black  hover:text-White'
-        : 'bg-Main-pink-300 hover:bg-Main-pink-200 text-White hover:text-Black '
+        ? 'hover:bg-[#96ff66]  bg-[#3e8a1b] text-White hover:text-Black'
+        : styleType === 'close'
+        ? 'bg-Main-pink-300  hover:bg-Main-pink-100 text-White hover:text-Black'
+        : 'hover:bg-Main-blue-100  bg-Yellow text-Black hover:text-Black'
     "
     id="saveButton"
     @click="[action(), playSoundSFX(soundbtn)]"

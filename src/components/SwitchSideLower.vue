@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 <template>
   <div
-    id="controller-p1"
+    :id="`controller-${player.name}`"
     class="w-1/2 flex flex-col px-3 py-5 scr-m:pb-[42px] scr-l:pb-[64px] items-center gap-[50px] scr-m:gap-[100px] justify-end"
     :class="
       theWinner === player
