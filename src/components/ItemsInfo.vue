@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 <template>
   <div
-    class="flex gap-2 h-[150px] flex-col scr-m:flex-row scr-m:flex-wrap scr-m:h-[282px] justify-start overflow-y-scroll scr-l:overflow-hidden scr-l:h-max rounded-md"
+    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start scr-l:overflow-hidden rounded-md h-max scr-m:h-max scr-l:h-max"
   >
     <div
       id="item-box"
@@ -31,7 +31,7 @@ const props = defineProps({
         <p v-show="!picture">{{ name }}</p>
       </div>
       <p
-        class="text-hss scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
+        class="text-hss scr-m:text-hs-tal text-Black scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
       >
         <strong>{{ name }}</strong> : {{ discription ? discription : ability }}
       </p>

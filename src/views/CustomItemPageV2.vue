@@ -65,14 +65,14 @@ const isPerTime = ref(true);
         </div>
         <div class="w-1/3 flex justify-end gap-2">
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
+            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] scr-l:btn-lg scr-l:px-[50px] scr-l:text-hs-des rounded-full shadow-sm bg-White flex justify-center items-center"
             onclick="categoryItem.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             ✚ Create Item
           </button>
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-Yellow-light flex justify-center items-center"
+            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-l:px-[32px] scr-m:w-[50px] scr-l:btn-lg text-Black h-[26px] rounded-full scr-l:text-hs-des shadow-sm bg-Yellow-light flex justify-center items-center"
             onclick="wiki.showModal()"
             @click="playSoundSFX(soundbtn)"
           >

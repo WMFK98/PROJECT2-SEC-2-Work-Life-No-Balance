@@ -8,7 +8,7 @@ defineProps({ modelValue: Number, group: String, namePages: Array });
   <div className="join">
     <input
       v-for="(page, index) in namePages"
-      className="join-item btn btn-sm scr-l:rounded-[20px] scr-m:btn-md  scr-m:w-[100px] scr-m:rounded-[15px]   scr-l:btn-lg scr-l:text-hs-des  btn-square w-[100px] scr-l:w-[200px] bg-Main-pink-100  text-Black border-0 hover:bg-Main-pink-200"
+      className="join-item btn btn-sm scr-l:rounded-[20px]   scr-m:btn-md  scr-m:w-[130px] scr-m:rounded-[15px]   scr-l:btn-lg scr-l:text-hs-des  btn-square w-[100px] scr-l:w-[200px] bg-Main-pink-100  text-Black border-0 hover:bg-Main-pink-200"
       type="radio"
       :name="group"
       :aria-label="page"

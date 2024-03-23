@@ -102,8 +102,7 @@ const isPerTime = ref(true);
                   </div>
                 </div>
               </nav>
-
-              <ItemsInfo
+              <ItemsInfo 
                 v-show="selectPageItem === 1"
                 :poll-item="initStructureItem"
               />
@@ -264,15 +263,7 @@ const isPerTime = ref(true);
         </div>
       </div>
       <div class="flex justify-center gap-5 mt-4">
-        <!-- <button
-          id="btn-save"
-          :disabled="selectedItem1 && selectedItem2"
-          @click="doSome"
-        >
-          Save
-        </button> -->
         <ButtonSetting styleType="save" title="Save" />
-
         <ButtonSetting styleType="cancle" title="Cancle" />
       </div>
     </div>
