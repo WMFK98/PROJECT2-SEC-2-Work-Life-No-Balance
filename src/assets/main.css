@@ -32,3 +32,8 @@
     linear-gradient(-45deg, #f8f8f8 50%, #ff5252 50.99%);
   background-color: #ff5252;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-3dlight-color: #ff5252;
+}

@@ -7,15 +7,15 @@ const props = defineProps({
 </script>
 <template>
   <div
-    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start scr-l:overflow-hidden rounded-md h-max scr-m:h-max scr-l:h-max"
+    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
   >
     <div
       id="item-box"
       class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
       v-for="(
-        { name, picture, discription, isPerTurn, isAttack, ability }, index
+        { id, name, picture, discription, isPerTurn, isAttack, ability }, index
       ) in pollItem"
-      :key="index"
+      :key="id"
     >
       <div
         class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"

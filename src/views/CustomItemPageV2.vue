@@ -42,7 +42,7 @@ const isPerTime = ref(true);
   >
     <div
       id="board"
-      class="w-[640px] shadow-lg h-[340px] bg-bgCusItem gap-3 bg-btn-none-active rounded-[20px] flex flex-col scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px] p-3 scr-m:p-6 scr-m:overflow-hidden overflow-y-scroll scr-l:p-10"
+      class="w-[640px] shadow-lg h-[340px] bg-bgCusItem gap-3 bg-btn-none-active rounded-[20px] flex flex-col scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px] p-3 scr-m:p-6 scr-l:overflow-hidden overflow-y-scroll scr-l:p-10"
     >
       <div
         id="navbar"
@@ -88,11 +88,11 @@ const isPerTime = ref(true);
                 <div
                   class="w-1/3 text-hs scr-m:text-hm-tal scr-l:text-hm-des font-bold flex"
                 >
-                  <button
-                    class="group bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
+                  <h2
+                    class="bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
                   >
-                    <p class="transition-none">Custom Item</p>
-                  </button>
+                    Custom Item
+                  </h2>
                 </div>
               </div>
               <div
@@ -262,6 +262,7 @@ const isPerTime = ref(true);
                   title="Save"
                 />
                 <ButtonClosePopup
+                  text="Cancel"
                   class="w-[49%] scr-l:w-[49%]"
                 ></ButtonClosePopup></div
             ></template>
