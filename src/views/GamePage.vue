@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, onMounted } from "vue";
 import TypeItem from "./../TypeItem";
 import { random } from "./../utils/tool";
 import ItemManagement from "./../libs/ItemsManagement";
@@ -31,24 +31,49 @@ import {
   toggleSoundMusic,
   toggleSoundSFX,
   stopMusic,
+  setSoundDefault,
+  setSound,
 } from "./../libs/SoundControl";
 
 let voidScore = 1;
 const theWinner = ref(null);
 const pollSelectedItems = [];
-
 let pollItem = [];
-let checkSelectedItems = [];
+let checkSelectedItems = reactive([]);
 let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
 
-let defaultSetting = {
-  settingPoint: 100,
-  limitItem: 7,
-  addItemNumSetting: 1,
-  startingItem: 0,
+const musicSetting = reactive({});
+
+onMounted(() => {
+  if (!localStorage.getItem("settings")) {
+    musicSetting.isOffMusic = false;
+    musicSetting.isOffSFX = false;
+  }
+  const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
+  musicSetting.isOffMusic = myMusic.isOffMusic;
+  musicSetting.isOffSFX = myMusic.isOffSFX;
+  setSound(myMusic);
+});
+
+const updateMusicSetting = (e, name) => {
+  if (name == "isOffMusic") {
+    musicSetting.isOffMusic = e.openSound;
+  } else {
+    musicSetting.isOffSFX = e.openSound;
+  }
 };
+
+let defaultSetting = localStorage.getItem("settings")
+  ? JSON.parse(localStorage.getItem("settings"))
+  : {
+      settingPoint: 100,
+      limitItem: 7,
+      addItemNumSetting: 1,
+      startingItem: 0,
+      musicSetting: { isOffMusic: false, isOffSFX: false },
+    };
 
 const currentSetting = reactive({ ...defaultSetting });
 
@@ -167,6 +192,19 @@ const hold = () => {
   currentPlayer[0].curPoint = 0;
   switchPlayer();
 };
+
+const resetSetting = () => {
+  currentSetting.settingPoint = 100;
+  currentSetting.limitItem = 7;
+  currentSetting.addItemNumSetting = 1;
+  currentSetting.startingItem = 0;
+  setSoundDefault();
+  musicSetting.isOffMusic = false;
+  musicSetting.isOffSFX = false;
+  checkSelectedItems = checkSelectedItems.fill(true);
+  defaultSetting = { ...currentSetting };
+  reset();
+};
 const closeSetting = () => {
   currentSetting.limitItem = defaultSetting.limitItem;
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
@@ -185,6 +223,19 @@ const closeSetting = () => {
     }
   });
 };
+
+const addSelectedItem = function () {
+  pollSelectedItems.splice(0, pollSelectedItems.length);
+  checkSelectedItems.forEach((isChecked, index) => {
+    if (isChecked) {
+      pollSelectedItems.push(pollItem[index]);
+    }
+  });
+  [player1, player2].forEach((el) => {
+    el.items.changePollitem(pollSelectedItems);
+  });
+};
+
 const saveSetting = () => {
   const isInteger = (input, min, max) => {
     if (input === "") return false;
@@ -197,18 +248,6 @@ const saveSetting = () => {
       return input >= min && input <= max;
     }
     return isValidInput;
-  };
-
-  const addSelectedItem = function () {
-    pollSelectedItems.splice(0, pollSelectedItems.length);
-    checkSelectedItems.forEach((isChecked, index) => {
-      if (isChecked) {
-        pollSelectedItems.push(pollItem[index]);
-      }
-    });
-    [player1, player2].forEach((el) => {
-      el.items.changePollitem(pollSelectedItems);
-    });
   };
 
   if (
@@ -289,16 +328,47 @@ const initItem = () => {
   addDice.addAbility(addDiceAbililty);
   plus2Point.addAbility(plus2Abililty);
   popDice.addAbility(popDiceAbililty);
-
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-  checkSelectedItems = reactive(new Array(pollItem.length).fill(true));
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
+};
+
+const localSetting = () => {
+  if (!localStorage.getItem("settings")) {
+    localStorage.setItem("settings", JSON.stringify(defaultSetting));
+  }
+
+  checkSelectedItems = reactive(
+    JSON.parse(localStorage.getItem("settings")).checkSelectedItems == undefined
+      ? new Array(pollItem.length).fill(true)
+      : JSON.parse(localStorage.getItem("settings")).checkSelectedItems
+  );
+
+  defaultSetting.checkSelectedItems = checkSelectedItems;
+
+  watch(
+    [currentSetting, checkSelectedItems, musicSetting],
+    ([newSetting, newSelectedItems, newMusicSetting]) => {
+      const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+      const newVal = {
+        ...storedSettings,
+        ...newSetting,
+        checkSelectedItems: newSelectedItems,
+        musicSetting: { ...newMusicSetting },
+      };
+      localStorage.setItem("settings", JSON.stringify(newVal));
+      setSound(newMusicSetting);
+    },
+    { deep: true }
+  );
+  addSelectedItem();
 };
 
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
   initItem();
+  localSetting();
+  reset();
 };
 
 init();
@@ -338,7 +408,11 @@ init();
             >
               📖
             </button>
-            <HowtoPlay id="tutorial" />
+            <HowtoPlay id="tutorial">
+              <template #items-tutorial>
+                <ItemsInfo :poll-item="pollItem" />
+              </template>
+            </HowtoPlay>
 
             <ButtonGame
               title="🆕 NEW GAME"
@@ -355,6 +429,11 @@ init();
             </button>
             <Setting>
               <template #inputSetting>
+                <ButtonSetting
+                  title="Default Setting"
+                  :action="resetSetting"
+                  style-type="default"
+                />
                 <InputSetting
                   title="Amount of point to win (50-500)"
                   v-model="currentSetting.settingPoint"
@@ -378,12 +457,16 @@ init();
                   show-on="🔊"
                   show-off="🔇"
                   :action="toggleSoundMusic"
+                  :openSound="musicSetting.isOffMusic"
+                  @update="updateMusicSetting($event, 'isOffMusic')"
                 />
                 <ToggleSetting
                   title="Sound SFX"
                   :action="toggleSoundSFX"
                   show-on="🔊"
                   show-off="🔇"
+                  :openSound="musicSetting.isOffSFX"
+                  @update="updateMusicSetting($event, 'isOffSFX')"
                 />
               </template>
 
@@ -401,11 +484,13 @@ init();
                   :action="saveSetting"
                   style-type="save"
                 />
+
                 <ButtonSetting
-                  title="close"
+                  title="Close"
                   :action="closeSetting"
                   style-type="close"
                 />
+
                 <PopupLog log="❌Something went wrong❌" type="errorModal" />
                 <PopupLog log="✅Success✅" type="successModal" />
               </template>

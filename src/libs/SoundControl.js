@@ -22,6 +22,7 @@ export function toggleSoundMusic() {
   if (isOffMusic) currentMusic.pause();
   else currentMusic.play();
 }
+
 export function toggleSoundSFX() {
   isOffSFX = !isOffSFX;
 }
@@ -29,3 +30,14 @@ export function stopMusic() {
   currentMusic.pause();
   currentMusic.currentTime = 0;
 }
+
+export function setSoundDefault(){
+  isOffMusic = false 
+  isOffSFX = false
+}
+
+export function setSound(obj){
+  isOffMusic = obj.isOffMusic
+  isOffSFX = obj.isOffSFX
+}
+

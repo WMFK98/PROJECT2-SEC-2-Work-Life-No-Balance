@@ -18,7 +18,7 @@
           <p>empty checkboxSetting</p>
         </slot>
         <div class="flex justify-center gap-5">
-          <form method="dialog" class="justify-between flex w-full px-10">
+          <form method="dialog" class="justify-between flex gap-3 w-full px-10">
             <slot name="submit">
               <p>empty submit</p>
             </slot>
