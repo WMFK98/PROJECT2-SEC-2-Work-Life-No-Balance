@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< Updated upstream
 import { reactive, ref, watch } from "vue";
 import TypeItem from "./TypeItem";
 import { random } from "./tool";
@@ -490,3 +491,15 @@ init();
     </div>
   </div>
 </template>
+=======
+import { RouterView } from "vue-router"
+</script>
+
+<template>
+	<div>
+		<router-view />
+	</div>
+</template>
+
+<style scoped></style>
+>>>>>>> Stashed changes

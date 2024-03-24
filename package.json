@@ -9,7 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< Updated upstream
     "vue": "^3.3.11"
+=======
+    "json-server": "^1.0.0-alpha.23",
+    "tailwindcss-animated": "^1.0.1",
+    "vue": "^3.3.11",
+    "vue-router": "^4.3.0"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
