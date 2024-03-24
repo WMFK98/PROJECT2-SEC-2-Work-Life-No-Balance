@@ -28,7 +28,7 @@ const props = defineProps({
         "
       >
         <img v-if="picture" :src="picture" />
-        <p v-show="!picture">{{ name }}</p>
+        <p v-else v-show="!picture">{{ name }}</p>
       </div>
       <p
         class="text-hss scr-m:text-hs-tal text-Black scr-l:text-[18px] w-[75%] scr-l:w-[65%]"

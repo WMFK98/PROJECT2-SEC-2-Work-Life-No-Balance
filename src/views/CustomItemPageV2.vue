@@ -73,7 +73,7 @@ const isPerTime = ref(true);
           </button>
           <button
             class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-l:px-[32px] scr-m:w-[50px] scr-l:btn-lg text-Black h-[26px] rounded-full scr-l:text-hs-des shadow-sm bg-Yellow-light flex justify-center items-center"
-            onclick="wiki.showModal()"
+            onclick="manual.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             𝐢
@@ -253,9 +253,6 @@ const isPerTime = ref(true);
                   </div>
                 </div>
               </div>
-              <!-- <div class="flex justify-center gap-5 mt-4">
-          
-              </div> -->
             </template>
             <template #btn>
               <div class="flex w-full gap-2 justify-between">
@@ -269,9 +266,9 @@ const isPerTime = ref(true);
                 ></ButtonClosePopup></div
             ></template>
           </HowtoPlay>
-          <HowtoPlay id="wiki">
+          <HowtoPlay id="manual">
             <template #navbar>
-              <p>wiki</p>
+              <p class="font-bold text-hm pl-1">📒 Manual</p>
             </template>
           </HowtoPlay>
         </div>
