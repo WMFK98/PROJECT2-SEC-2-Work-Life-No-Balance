@@ -8,7 +8,7 @@ defineEmits(["deleteItems", "showEdit"]);
 </script>
 <template>
   <div
-    class="flex gap-2 h-[150px] flex-col scr-m:flex-row scr-m:flex-wrap scr-m:h-[282px] justify-start overflow-y-scroll scr-l:overflow-hidden scr-l:h-max rounded-md"
+    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
   >
     <div
       id="item-box"
@@ -28,17 +28,17 @@ defineEmits(["deleteItems", "showEdit"]);
         class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
         :class="
           isPerTurn || name === 'Dice+' || name === 'Dice-'
-            ? 'bg-isTurn text-White'
+            ? 'bg-item-turn text-White'
             : isAttack
             ? 'bg-Main-pink-300 text-White'
-            : 'bg-isPerTurn text-White'
+            : 'bg-item-time text-White'
         "
       >
         <img v-if="picture" :src="picture" />
         <p v-show="!picture">{{ name }}</p>
       </div>
       <p
-        class="text-hss scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
+        class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
       >
         <strong>{{ name }}</strong> : {{ discription ? discription : ability }}
       </p>
@@ -47,7 +47,7 @@ defineEmits(["deleteItems", "showEdit"]);
         class="flex ml-auto gap-1 scr-m:flex-col h-full justify-center items-center scr-m:items-stretch"
       >
         <button
-          class="btn btn-xs bg-[#96ff66] hover:bg-[#3e8a1b] text-Black border-0 hover:text-White"
+          class="btn btn-xs bg-btn-edit hover:bg-btn-edit-hover text-White border-0 hover:text-Black"
         >
           Edit
         </button>

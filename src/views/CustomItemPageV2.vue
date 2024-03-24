@@ -102,7 +102,7 @@ const removeItems = async (removeId) => {
                   class="w-1/3 text-hs scr-m:text-hm-tal scr-l:text-hm-des font-bold flex"
                 >
                   <button
-                    class="group bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
+                    class="group bg-opacity-0 bg- text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
                   >
                     <p class="transition-none">Custom Item</p>
                   </button>

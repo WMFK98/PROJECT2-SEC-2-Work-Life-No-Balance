@@ -41,10 +41,10 @@ const props = defineProps({
                 : isUsed
                 ? 'bg-Yellow-light  text-Black'
                 : isPerTurn || name === 'Dice+' || name === 'Dice-'
-                ? 'bg-isTurn text-White'
+                ? 'bg-item-turn text-White'
                 : isAttack
                 ? 'bg-Main-pink-300 text-White'
-                : 'bg-isPerTurn text-White'
+                : 'bg-item-time text-White'
             "
           >
             <input
