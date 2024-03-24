@@ -3,6 +3,7 @@ import ButtonGame from "./../components/ButtonGame.vue";
 import logoGame from "/images/logo-game.png";
 import amongDice1 from "/images/among-dice-1.png";
 import amongDice2 from "/images/among-dice-2.png";
+import HowtoPlay from "@/components/HowtoPlay.vue";
 
 import Diceplus from "./../assets/Icon_Dice_1/DicePlus.png";
 import DelDice from "./../assets/Icon_Dice_1/DelDice.png";
@@ -23,12 +24,12 @@ import SqureTwo from "./../assets/Icon_Dice_1/SqureTwo.png";
     <img
       :src="amongDice2"
       alt="amongDice2"
-      class="absolute bottom-[-45%] scale-[120%] opacity-55"
+      class="absolute h-[100%] scale-125 bottom-[-45%] opacity-55"
     />
     <img
       :src="amongDice1"
       alt="amongDice1"
-      class="absolute bottom-[-50%] scale-[100%] animate-fade-up animate-duration-[5000ms] animate-ease-out"
+      class="absolute h-[100%] scale-125 bottom-[-50%] animate-fade-up animate-duration-[5000ms] animate-ease-out"
     />
     <img
       :src="SqureTwo"
@@ -80,8 +81,15 @@ import SqureTwo from "./../assets/Icon_Dice_1/SqureTwo.png";
           class="animate-fade-up animate-duration-[2000ms] opacity-0 animate-ease-out animate-normal"
         />
         <ButtonGame
-          title="Custom Item"
+          title="How to Play"
           button-style="normal"
+          class="animate-fade-up animate-duration-[2000ms] opacity-0 animate-delay-500 animate-ease-out animate-normal"
+          onclick="HowToPlay.showModal()"
+        />
+        <HowtoPlay id="HowToPlay" />
+        <ButtonGame
+          title="Custom Item"
+          button-style="short"
           class="animate-fade-up animate-duration-[2000ms] opacity-0 animate-delay-500 animate-ease-out animate-normal"
         />
       </div>

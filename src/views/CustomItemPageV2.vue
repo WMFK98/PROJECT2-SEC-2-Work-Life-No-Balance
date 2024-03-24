@@ -9,8 +9,8 @@ import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
-
 import { onMounted, ref } from "vue";
+
 const selectPageItem = ref(1);
 const customItems = ref(new TypeItemsCusMangement());
 import {
