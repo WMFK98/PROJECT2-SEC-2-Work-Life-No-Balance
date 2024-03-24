@@ -4,18 +4,20 @@ const props = defineProps({
   pollItem: [Array, Object],
   canEdit: { type: Boolean, default: false },
 });
+defineEmits(['deleteItems'])
+
 </script>
 <template>
   <div
-    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
+    class="flex gap-2 h-[150px] flex-col scr-m:flex-row scr-m:flex-wrap scr-m:h-[282px] justify-start overflow-y-scroll scr-l:overflow-hidden scr-l:h-max rounded-md"
   >
     <div
       id="item-box"
       class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
       v-for="(
-        { id, name, picture, discription, isPerTurn, isAttack, ability }, index
+        { id,name, picture, discription, isPerTurn, isAttack, ability }, index
       ) in pollItem"
-      :key="id"
+      :key="index"
     >
       <div
         class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
@@ -28,10 +30,10 @@ const props = defineProps({
         "
       >
         <img v-if="picture" :src="picture" />
-        <p v-else v-show="!picture">{{ name }}</p>
+        <p v-show="!picture">{{ name }}</p>
       </div>
       <p
-        class="text-hss scr-m:text-hs-tal text-Black scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
+        class="text-hss scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
       >
         <strong>{{ name }}</strong> : {{ discription ? discription : ability }}
       </p>
@@ -45,6 +47,7 @@ const props = defineProps({
           Edit
         </button>
         <button
+        @click="$emit('deleteItems', id)"
           class="btn btn-xs bg-Main-pink-300 hover:bg-Main-pink-200 text-White hover:text-Black border-0"
         >
           Delete
@@ -53,3 +56,4 @@ const props = defineProps({
     </div>
   </div>
 </template>
+
