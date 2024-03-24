@@ -10,9 +10,11 @@
         <slot name="inputSetting">
           <p>empty inputSetting</p>
         </slot>
-        <slot name="toggleSetting">
-          <p>empty soundSetting</p>
-        </slot>
+        <div class="flex flex-col scr-m:flex-row gap-2 justify-between">
+          <slot name="toggleSetting">
+            <p>empty soundSetting</p>
+          </slot>
+        </div>
 
         <slot name="checkboxSetting">
           <p>empty checkboxSetting</p>

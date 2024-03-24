@@ -7,7 +7,7 @@ const props = defineProps({
 
 <template>
   <dialog :id="type" class="modal">
-    <div class="modal-box bg-[#FFE68E]">
+    <div class="modal-box bg-Yellow-light">
       <h3 class="font-bold text-lg text-center">{{ log }}</h3>
       <p class="py-4 text-center font-bold">Invalid Value! Please try again.</p>
     </div>

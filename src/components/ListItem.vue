@@ -34,7 +34,7 @@ const props = defineProps({
           }"
         >
           <label
-            class="swap swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
+            class="swap hover:bg-Black swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
             :class="
               !(currentPlayer === player) || theWinner
                 ? 'bg-btn-hover  text-White'
@@ -46,11 +46,11 @@ const props = defineProps({
                 ? 'bg-Main-pink-300 text-White'
                 : 'bg-item-time text-White'
             "
+            :disabled="!(currentPlayer === player) || theWinner"
           >
             <input
               @click="[player.items.toggleUsedItem(id), playSoundSFX(soundbtn)]"
               type="checkbox"
-              :disabled="!(currentPlayer === player) || theWinner"
             />
             <img class="swap-off" :src="picture" />
             <img class="swap-on" :src="picture" />

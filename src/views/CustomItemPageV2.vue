@@ -31,18 +31,13 @@ const selectedItem2 = ref("");
 const itemsName = ref("");
 const isPerTime = ref(true);
 const removeItems = async (removeId) => {
-  
   const statusCode = await deleteItemById(
     import.meta.env.VITE_BASE_URL,
     removeId
-  )
-  console.log(statusCode)
-  if (statusCode === 200)
-   
-    customItems.value.removePollItem(removeId)
-}
-
-
+  );
+  console.log(statusCode);
+  if (statusCode === 200) customItems.value.removePollItem(removeId);
+};
 </script>
 
 <template>
@@ -78,14 +73,14 @@ const removeItems = async (removeId) => {
         </div>
         <div class="w-1/3 flex justify-end gap-2">
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
+            class="btn btn-xs bg-btn-save hover:bg-btn-save-hover hover:text-Black text-White text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max h-[26px] rounded-full shadow-sm flex justify-center items-center"
             onclick="categoryItem.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             ✚ Create Item
           </button>
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-Yellow-light flex justify-center items-center"
+            class="btn btn-xs hover:bg-Yellow text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-Yellow-light flex justify-center items-center"
             onclick="wiki.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
@@ -101,11 +96,11 @@ const removeItems = async (removeId) => {
                 <div
                   class="w-1/3 text-hs scr-m:text-hm-tal scr-l:text-hm-des font-bold flex"
                 >
-                  <button
-                    class="group bg-opacity-0 bg- text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
+                  <p
+                    class="bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
                   >
-                    <p class="transition-none">Custom Item</p>
-                  </button>
+                    Custom Item
+                  </p>
                 </div>
               </div>
               <div
@@ -198,10 +193,10 @@ const removeItems = async (removeId) => {
                                 : isPerTurn ||
                                   name === 'Dice+' ||
                                   name === 'Dice-'
-                                ? 'bg-isTurn text-White'
+                                ? 'bg-item-turn text-White'
                                 : isAttack
                                 ? 'bg-Main-pink-300 text-White'
-                                : 'bg-isPerTurn text-White'
+                                : 'bg-item-time text-White'
                             "
                           >
                             <input
@@ -217,10 +212,8 @@ const removeItems = async (removeId) => {
                             <img class="swap-on" :src="picture" />
                           </label>
                         </template>
-                        
                       </Item>
                     </div>
-                    
                   </div>
                   <div id="select-Items-2">
                     <p
@@ -245,10 +238,10 @@ const removeItems = async (removeId) => {
                                 : isPerTurn ||
                                   name === 'Dice+' ||
                                   name === 'Dice-'
-                                ? 'bg-isTurn text-White'
+                                ? 'bg-item-turn text-White'
                                 : isAttack
                                 ? 'bg-Main-pink-300 text-White'
-                                : 'bg-isPerTurn text-White'
+                                : 'bg-item-time text-White'
                             "
                           >
                             <input

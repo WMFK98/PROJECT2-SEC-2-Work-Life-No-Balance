@@ -429,11 +429,14 @@ init();
             </button>
             <Setting>
               <template #inputSetting>
-                <ButtonSetting
-                  title="Default Setting"
-                  :action="resetSetting"
-                  style-type="default"
-                />
+                <div class="w-full flex items-center justify-between">
+                  Set :
+                  <ButtonSetting
+                    title="Default Setting"
+                    :action="resetSetting"
+                    style-type="default"
+                  />
+                </div>
                 <InputSetting
                   title="Amount of point to win (50-500)"
                   v-model="currentSetting.settingPoint"

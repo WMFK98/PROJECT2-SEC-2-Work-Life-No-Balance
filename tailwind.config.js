@@ -9,7 +9,6 @@ export default {
       "Main-pink-300": "#FF5252",
       "btn-active": "rgba(255, 255, 255, 0.70)",
       "btn-hover": "rgba(0, 0, 0, 0.25)",
-      "theme-winner": "#FFF72D",
       "item-time": "#ff7a59",
       "item-turn": "#FF3FA4",
       "Yellow-light": "#FFE68E",
