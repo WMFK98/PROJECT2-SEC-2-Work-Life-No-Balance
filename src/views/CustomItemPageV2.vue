@@ -30,6 +30,19 @@ const selectedItem1 = ref("");
 const selectedItem2 = ref("");
 const itemsName = ref("");
 const isPerTime = ref(true);
+const removeItems = async (removeId) => {
+  
+  const statusCode = await deleteItemById(
+    import.meta.env.VITE_BASE_URL,
+    removeId
+  )
+  console.log(statusCode)
+  if (statusCode === 200)
+   
+    customItems.value.removePollItem(removeId)
+}
+
+
 </script>
 
 <template>
@@ -42,7 +55,7 @@ const isPerTime = ref(true);
   >
     <div
       id="board"
-      class="w-[640px] shadow-lg h-[340px] bg-bgCusItem gap-3 bg-btn-none-active rounded-[20px] flex flex-col scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px] p-3 scr-m:p-6 scr-l:overflow-hidden overflow-y-scroll scr-l:p-10"
+      class="w-[640px] shadow-lg h-[340px] bg-bgCusItem gap-3 bg-btn-none-active rounded-[20px] flex flex-col scr-m:w-[961.15px] scr-m:h-[550px] scr-l:w-[1246px] scr-l:h-[713px] p-3 scr-m:p-6 scr-m:overflow-hidden overflow-y-scroll scr-l:p-10"
     >
       <div
         id="navbar"
@@ -65,15 +78,15 @@ const isPerTime = ref(true);
         </div>
         <div class="w-1/3 flex justify-end gap-2">
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] scr-l:btn-lg scr-l:px-[50px] scr-l:text-hs-des rounded-full shadow-sm bg-White flex justify-center items-center"
+            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max text-Black h-[26px] rounded-full shadow-sm bg-White flex justify-center items-center"
             onclick="categoryItem.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             ✚ Create Item
           </button>
           <button
-            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-l:px-[32px] scr-m:w-[50px] scr-l:btn-lg text-Black h-[26px] rounded-full scr-l:text-hs-des shadow-sm bg-Yellow-light flex justify-center items-center"
-            onclick="manual.showModal()"
+            class="btn btn-xs text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-[25px] scr-m:w-[50px] text-Black h-[26px] rounded-full shadow-sm bg-Yellow-light flex justify-center items-center"
+            onclick="wiki.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             𝐢
@@ -88,11 +101,11 @@ const isPerTime = ref(true);
                 <div
                   class="w-1/3 text-hs scr-m:text-hm-tal scr-l:text-hm-des font-bold flex"
                 >
-                  <h2
-                    class="bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
+                  <button
+                    class="group bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
                   >
-                    Custom Item
-                  </h2>
+                    <p class="transition-none">Custom Item</p>
+                  </button>
                 </div>
               </div>
               <div
@@ -204,8 +217,10 @@ const isPerTime = ref(true);
                             <img class="swap-on" :src="picture" />
                           </label>
                         </template>
+                        
                       </Item>
                     </div>
+                    
                   </div>
                   <div id="select-Items-2">
                     <p
@@ -253,6 +268,9 @@ const isPerTime = ref(true);
                   </div>
                 </div>
               </div>
+              <!-- <div class="flex justify-center gap-5 mt-4">
+          
+              </div> -->
             </template>
             <template #btn>
               <div class="flex w-full gap-2 justify-between">
@@ -262,14 +280,13 @@ const isPerTime = ref(true);
                   title="Save"
                 />
                 <ButtonClosePopup
-                  text="Cancel"
                   class="w-[49%] scr-l:w-[49%]"
                 ></ButtonClosePopup></div
             ></template>
           </HowtoPlay>
-          <HowtoPlay id="manual">
+          <HowtoPlay id="wiki">
             <template #navbar>
-              <p class="font-bold text-hm pl-1">📒 Manual</p>
+              <p>wiki</p>
             </template>
           </HowtoPlay>
         </div>
@@ -284,6 +301,7 @@ const isPerTime = ref(true);
         v-show="selectPageItem === 2"
         :poll-item="customItems.getAllTypeItems()"
         :can-edit="true"
+        @deleteItems="removeItems"
       />
     </div>
   </div>

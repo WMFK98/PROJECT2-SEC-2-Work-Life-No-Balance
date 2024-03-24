@@ -4,12 +4,11 @@ const props = defineProps({
   pollItem: [Array, Object],
   canEdit: { type: Boolean, default: false },
 });
-
-defineEmits(["showEdit"]);
+defineEmits(["deleteItems", "showEdit"]);
 </script>
 <template>
   <div
-    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
+    class="flex gap-2 h-[150px] flex-col scr-m:flex-row scr-m:flex-wrap scr-m:h-[282px] justify-start overflow-y-scroll scr-l:overflow-hidden scr-l:h-max rounded-md"
   >
     <div
       id="item-box"
@@ -36,10 +35,10 @@ defineEmits(["showEdit"]);
         "
       >
         <img v-if="picture" :src="picture" />
-        <p v-else v-show="!picture">{{ name }}</p>
+        <p v-show="!picture">{{ name }}</p>
       </div>
       <p
-        class="text-hss scr-m:text-hs-tal text-Black scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
+        class="text-hss scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
       >
         <strong>{{ name }}</strong> : {{ discription ? discription : ability }}
       </p>
@@ -53,6 +52,7 @@ defineEmits(["showEdit"]);
           Edit
         </button>
         <button
+          @click="$emit('deleteItems', id)"
           class="btn btn-xs bg-Main-pink-300 hover:bg-Main-pink-200 text-White hover:text-Black border-0"
         >
           Delete

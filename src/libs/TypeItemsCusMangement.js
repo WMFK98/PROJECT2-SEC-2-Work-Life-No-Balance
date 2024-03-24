@@ -11,11 +11,11 @@ export default class TypeItemsCusMangement {
   findTypeItem(id) {
     return this._typeItems.find((item) => item.id === id);
   }
-  findIndexfindTypeItem(id) {
+  findIndexTypeItem(id) {
     return this._typeItems.findIndex((item) => item.id === id);
   }
   removePollItem(id) {
-    this._typeItems.splice(this.findIndexItem(id), 1);
+    this._typeItems.splice(this.findIndexTypeItem(id), 1);
   }
   getAllTypeItems() {
     return this._typeItems;
