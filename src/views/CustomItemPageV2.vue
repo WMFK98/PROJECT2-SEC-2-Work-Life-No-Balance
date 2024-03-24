@@ -31,20 +31,20 @@ const selectedItem2 = ref('')
 const itemsName = ref('')
 const isPerTime = ref(true)
 const itemStorage = ref({ id: undefined, name: '', ability: '', isTurn: '' })
-const saveItems = async (newCustomItems) => {
-  if (newCustomItems && newCustomItems.id === undefined) {
-    const addedItem = await addItem(import.meta.env.VITE_BASE_URL, {
-      name: newCustomItems.itemsName,
-      ability: [newCustomItems.selectedItem1, newCustomItems.selectedItem2],
-      isTurn: newCustomItems.isPerTime
-    })
+const saveItems = async () => {
+  const addedItem = await addItem(import.meta.env.VITE_BASE_URL, {
+    name: itemsName.value,
+    ability: [selectedItem1.value, selectedItem2.value],
+    isTurn: isPerTime.value
+  })
 
-    customItems.value.addTypeItem(
-      addedItem.id,
-      addedItem.name,
-      addedItem.ability,
-      addedItem.isTurn
-    )
+  if (addedItem !== undefined) {
+    customItems.value.addTypeItem({
+      id: addedItem.id,
+      name: addedItem.name,
+      ability: addedItem.ability,
+      isTurn: addedItem.isTurn
+    })
   }
   itemStorage.value = { id: undefined, name: '', ability: '', isTurn: '' }
 }
@@ -279,7 +279,6 @@ const saveItems = async (newCustomItems) => {
                   styleType="save"
                   title="Save"
                   :action="saveItems"
-                  @click="saveItems"
                 />
                 <ButtonClosePopup
                   text="Cancel"
