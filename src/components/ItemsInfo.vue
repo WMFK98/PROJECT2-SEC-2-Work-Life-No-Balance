@@ -4,6 +4,8 @@ const props = defineProps({
   pollItem: [Array, Object],
   canEdit: { type: Boolean, default: false },
 });
+
+defineEmits(["showEdit"]);
 </script>
 <template>
   <div
@@ -12,9 +14,15 @@ const props = defineProps({
     <div
       id="item-box"
       class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
-      v-for="(
-        { id, name, picture, discription, isPerTurn, isAttack, ability }, index
-      ) in pollItem"
+      v-for="{
+        id,
+        name,
+        picture,
+        discription,
+        isPerTurn,
+        isAttack,
+        ability,
+      } in pollItem"
       :key="id"
     >
       <div
