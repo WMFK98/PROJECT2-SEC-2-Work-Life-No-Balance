@@ -1,35 +1,53 @@
 <script setup>
-import initStructureItem from "./../initStructureItem";
-import Item from "./../components/Item.vue";
-import ButtonSetting from "./../components/ButtonSetting.vue";
-import BackIcon from "./../assets/Icon/BackIcon.vue";
-import ItemsInfo from "./../components/ItemsInfo.vue";
-import HowtoPlay from "./../components/HowtoPlay.vue";
-import SelectPage from "./../components/SelectPage.vue";
-import soundbtn from "/music/soundBtn.mp3";
-import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
-import { playSoundSFX } from "./../libs/SoundControl";
+import initStructureItem from './../initStructureItem'
+import Item from './../components/Item.vue'
+import ButtonSetting from './../components/ButtonSetting.vue'
+import BackIcon from './../assets/Icon/BackIcon.vue'
+import ItemsInfo from './../components/ItemsInfo.vue'
+import HowtoPlay from './../components/HowtoPlay.vue'
+import SelectPage from './../components/SelectPage.vue'
+import soundbtn from '/music/soundBtn.mp3'
+import ButtonClosePopup from '@/components/ButtonClosePopup.vue'
+import { playSoundSFX } from './../libs/SoundControl'
 
-import { onMounted, ref } from "vue";
-const selectPageItem = ref(1);
-const customItems = ref(new TypeItemsCusMangement());
+import { onMounted, ref } from 'vue'
+const selectPageItem = ref(1)
+const customItems = ref(new TypeItemsCusMangement())
 import {
   addItem,
   deleteItemById,
   editItem,
   getItemById,
-  getItems,
-} from "./../utils/fetchUtils";
-import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+  getItems
+} from './../utils/fetchUtils'
+import TypeItemsCusMangement from '@/libs/TypeItemsCusMangement'
 
 onMounted(async () => {
-  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
-});
+  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL))
+})
 
-const selectedItem1 = ref("");
-const selectedItem2 = ref("");
-const itemsName = ref("");
-const isPerTime = ref(true);
+const selectedItem1 = ref('')
+const selectedItem2 = ref('')
+const itemsName = ref('')
+const isPerTime = ref(true)
+const itemStorage = ref({ id: undefined, name: '', ability: '', isTurn: '' })
+const saveItems = async (newCustomItems) => {
+  if (newCustomItems && newCustomItems.id === undefined) {
+    const addedItem = await addItem(import.meta.env.VITE_BASE_URL, {
+      name: newCustomItems.itemsName,
+      ability: [newCustomItems.selectedItem1, newCustomItems.selectedItem2],
+      isTurn: newCustomItems.isPerTime
+    })
+
+    customItems.value.addTypeItem(
+      addedItem.id,
+      addedItem.name,
+      addedItem.ability,
+      addedItem.isTurn
+    )
+  }
+  itemStorage.value = { id: undefined, name: '', ability: '', isTurn: '' }
+}
 </script>
 
 <template>
@@ -174,7 +192,7 @@ const isPerTime = ref(true);
                       <Item :pollItem="initStructureItem">
                         <template
                           #default="{
-                            item: { name, picture, isPerTurn, isAttack },
+                            item: { name, picture, isPerTurn, isAttack }
                           }"
                         >
                           <label
@@ -219,7 +237,7 @@ const isPerTime = ref(true);
                       <Item :pollItem="initStructureItem">
                         <template
                           #default="{
-                            item: { name, picture, isPerTurn, isAttack },
+                            item: { name, picture, isPerTurn, isAttack }
                           }"
                         >
                           <label
@@ -260,6 +278,8 @@ const isPerTime = ref(true);
                   class="w-[49%] scr-l:w-[49%]"
                   styleType="save"
                   title="Save"
+                  :action="saveItems"
+                  @click="saveItems"
                 />
                 <ButtonClosePopup
                   text="Cancel"

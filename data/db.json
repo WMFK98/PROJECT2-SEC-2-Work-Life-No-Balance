@@ -3,83 +3,131 @@
     {
       "id": "100",
       "name": "GG",
-      "ability": ["G6", "X2>3"],
+      "ability": [
+        "G6",
+        "X2>3"
+      ],
       "isTurn": false
     },
     {
       "id": "101",
       "name": "KAK",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "102",
       "name": "KAI",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "103",
       "name": "EZ",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "100",
       "name": "GG",
-      "ability": ["G6", "X2>3"],
+      "ability": [
+        "G6",
+        "X2>3"
+      ],
       "isTurn": false
     },
     {
       "id": "101",
       "name": "KAK",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "102",
       "name": "KAI",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "103",
       "name": "EZ",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "100",
       "name": "GG",
-      "ability": ["G6", "X2>3"],
+      "ability": [
+        "G6",
+        "X2>3"
+      ],
       "isTurn": false
     },
     {
       "id": "101",
       "name": "KAK",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "102",
       "name": "KAI",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
     },
     {
       "id": "103",
       "name": "EZ",
-
-      "ability": ["G6", "G6"],
+      "ability": [
+        "G6",
+        "G6"
+      ],
       "isTurn": false
+    },
+    {
+      "id": "d234",
+      "ability": [
+        null,
+        null
+      ]
+    },
+    {
+      "id": "d475",
+      "ability": [
+        null,
+        null
+      ]
+    },
+    {
+      "id": "3d79",
+      "ability": [
+        null,
+        null
+      ]
     }
   ]
 }
