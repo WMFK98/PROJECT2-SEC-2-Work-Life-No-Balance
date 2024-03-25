@@ -48,8 +48,25 @@ const removeItem = async (removeId) => {
     import.meta.env.VITE_BASE_URL,
     removeId
   );
-  console.log(statusCode);
   if (statusCode === 200) customItems.value.removePollItem(removeId);
+};
+
+const saveItems = async () => {
+  const addedItem = await addItem(import.meta.env.VITE_BASE_URL, {
+    name: itemsName.value,
+    ability: [selectedItem1.value, selectedItem2.value],
+    isTurn: isPerTime.value,
+  });
+
+  if (addedItem !== undefined) {
+    customItems.value.addTypeItem({
+      id: addedItem.id,
+      name: addedItem.name,
+      ability: addedItem.ability,
+      isTurn: addedItem.isTurn,
+    });
+  }
+  itemStorage.value = { id: undefined, name: "", ability: "", isTurn: "" };
 };
 </script>
 
@@ -279,6 +296,7 @@ const removeItem = async (removeId) => {
                   class="w-[49%] scr-l:w-[49%]"
                   styleType="save"
                   title="Save"
+                  :action="saveItems"
                 />
                 <ButtonClosePopup
                   @click="resetForm"
