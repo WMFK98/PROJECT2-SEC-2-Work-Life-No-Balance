@@ -12,6 +12,7 @@ export function playSoundMusic(newPathMusic) {
     currentMusic.pause();
     currentMusic = new Audio(newPathMusic);
     currentMusic.loop = true;
+    currentMusic.volume = 0.3;
     currentPathMusic = newPathMusic;
   }
   if (!isOffMusic) currentMusic.play();
@@ -31,13 +32,12 @@ export function stopMusic() {
   currentMusic.currentTime = 0;
 }
 
-export function setSoundDefault(){
-  isOffMusic = false 
-  isOffSFX = false
+export function setSoundDefault() {
+  isOffMusic = false;
+  isOffSFX = false;
 }
 
-export function setSound(obj){
-  isOffMusic = obj.isOffMusic
-  isOffSFX = obj.isOffSFX
+export function setSound(obj) {
+  isOffMusic = obj.isOffMusic;
+  isOffSFX = obj.isOffSFX;
 }
-
