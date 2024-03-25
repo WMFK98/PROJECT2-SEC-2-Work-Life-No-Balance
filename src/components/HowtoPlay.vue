@@ -225,8 +225,10 @@ defineProps({ id: String });
             </li>
           </slot>
         </ol>
+
         <ItemsInfo
           v-show="selectTutorialPage === 2"
+          class="h-[120px] scr-m:h-[290px]"
           :poll-item="initStructureItem"
         />
       </slot>
