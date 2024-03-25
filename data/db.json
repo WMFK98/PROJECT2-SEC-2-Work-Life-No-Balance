@@ -10,22 +10,13 @@
       "isPerTurn": false
     },
     {
-      "id": "b6bd",
-      "ability": [
-        "X2>3",
-        "X2>3"
-      ],
-      "name": "3",
-      "isPerTurn": false
-    },
-    {
-      "id": "6bdc",
       "ability": [
         "+2",
         "X2>3"
       ],
-      "name": "33",
-      "isPerTurn": true
+      "name": "R",
+      "isPerTurn": true,
+      "id": "6bdc"
     }
   ]
 }

@@ -5,7 +5,7 @@ import { playSoundSFX } from "./../libs/SoundControl";
 import SelectPage from "./SelectPage.vue";
 import ItemsInfo from "./ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
-import ButtonClosePopup from "./ButtonClosePopup.vue";
+import ButtonSetting from "./ButtonSetting.vue";
 const selectTutorialPage = ref(1);
 defineProps({ id: String });
 </script>
@@ -231,7 +231,14 @@ defineProps({ id: String });
         />
       </slot>
       <slot name="btn">
-        <ButtonClosePopup />
+        <form method="dialog" class="flex justify-center">
+          <ButtonSetting
+            class="w-full"
+            styleType="close"
+            title="close"
+            :action="resetForm"
+          />
+        </form>
       </slot>
     </div>
   </dialog>

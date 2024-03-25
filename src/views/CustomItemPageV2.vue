@@ -125,22 +125,24 @@ const saveItem = async () => {
             :name-pages="['Custom Items', 'Base Items']"
           />
         </div>
-        <div class="w-1/3 flex justify-end gap-2">
+        <div class="w-auto flex justify-end gap-2">
           <div
             v-show="selectPageItem === 2"
-            class="flex gap-3 text-hss scr-l:text-hs-des items-center"
+            class="flex gap-3 text-hss scr-l:text-hs-des"
           >
-            <div class="flex gap-2 src-l:gap-4">
-              <div class="bg-item-time w-4 scr-l:w-8 rounded-[5px]"></div>
-              <p>Item Time</p>
-            </div>
-            <div class="flex gap-2">
-              <div class="bg-item-turn w-4 scr-l:w-8 rounded-[5px]"></div>
-              <p>Item Turn</p>
-            </div>
-            <div class="flex gap-2">
-              <div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
-              <p>Item Attack</p>
+            <div class="flex gap-3 text-hss scr-l:text-hs-des">
+              <div class="flex gap-2 src-l:gap-4">
+                <div class="bg-item-time w-4 scr-l:w-8 rounded-[5px]"></div>
+                <p>Item Time</p>
+              </div>
+              <div class="flex gap-2">
+                <div class="bg-item-turn w-4 scr-l:w-8 rounded-[5px]"></div>
+                <p>Item Turn</p>
+              </div>
+              <div class="flex gap-2">
+                <div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
+                <p>Item Attack</p>
+              </div>
             </div>
           </div>
           <button
@@ -163,32 +165,39 @@ const saveItem = async () => {
             <template #body>
               <h1 class="text-hm-des">Are you sure to remove this item?</h1>
               <div
-                id="item-box"
-                class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
+                class="flex bg-White w-full scr-l:rounded-[20px] rounded-[10px]"
               >
                 <div
-                  class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
-                  :class="
-                    customItemForm.isPerTurn
-                      ? 'bg-item-turn text-White'
-                      : 'bg-item-time text-White'
-                  "
+                  id="item-box"
+                  class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
                 >
-                  <p>
-                    {{ customItemForm.name }}
+                  <div
+                    class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
+                    :class="
+                      customItemForm.isPerTurn
+                        ? 'bg-item-turn text-White'
+                        : 'bg-item-time text-White'
+                    "
+                  >
+                    <p>
+                      {{ customItemForm.name }}
+                    </p>
+                  </div>
+                  <p
+                    class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
+                  >
+                    <strong>{{ customItemForm.name }}</strong> :
+                    {{ customItemForm.ability }}
                   </p>
                 </div>
-                <p
-                  class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
-                >
-                  <strong>{{ customItemForm.name }}</strong> :
-                  {{ customItemForm.ability }}
-                </p>
               </div>
             </template>
             <template #btn>
               <div class="flex gap-2">
-                <form method="dialog" class="w-[49%] scr-l:w-[49%]">
+                <form
+                  method="dialog"
+                  class="w-[49%] scr-l:w-[49%] flex justify-center"
+                >
                   <ButtonSetting
                     class="w-full"
                     styleType="close"
@@ -196,7 +205,10 @@ const saveItem = async () => {
                     :action="removeItem"
                   />
                 </form>
-                <form method="dialog" class="w-[49%] scr-l:w-[49%]">
+                <form
+                  method="dialog"
+                  class="w-[49%] scr-l:w-[49%] flex justify-center"
+                >
                   <ButtonSetting
                     class="w-full"
                     styleType="save"
@@ -389,7 +401,10 @@ const saveItem = async () => {
             </template>
             <template #btn>
               <div class="flex w-full gap-2 justify-between">
-                <form method="dialog" class="w-[49%] scr-l:w-[49%]">
+                <form
+                  method="dialog"
+                  class="w-[49%] scr-l:w-[49%] flex justify-center"
+                >
                   <ButtonSetting
                     :disabled="
                       !customItemForm.name ||
@@ -402,7 +417,10 @@ const saveItem = async () => {
                     :action="saveItem"
                   />
                 </form>
-                <form method="dialog" class="w-[49%] scr-l:w-[49%]">
+                <form
+                  method="dialog"
+                  class="w-[49%] scr-l:w-[49%] flex justify-center"
+                >
                   <ButtonSetting
                     class="w-full"
                     styleType="close"
