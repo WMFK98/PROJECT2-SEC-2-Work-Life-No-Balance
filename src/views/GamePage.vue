@@ -430,12 +430,14 @@ init();
             <Setting>
               <template #inputSetting>
                 <div class="w-full flex items-center justify-between">
-                  Set :
-                  <ButtonSetting
-                    title="Default Setting"
-                    :action="resetSetting"
-                    style-type="default"
-                  />
+                  <p>Set :</p>
+                  <div class="w-max scr-l:w-[400px] flex justify-end">
+                    <ButtonSetting
+                      title="Default Setting"
+                      :action="resetSetting"
+                      style-type="default"
+                    />
+                  </div>
                 </div>
                 <InputSetting
                   title="Amount of point to win (50-500)"

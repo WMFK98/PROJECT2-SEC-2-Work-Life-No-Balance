@@ -4,7 +4,7 @@ const props = defineProps({
   pollItem: [Array, Object],
   canEdit: { type: Boolean, default: false },
 });
-defineEmits(["deleteItems", "showEdit"]);
+defineEmits(["deleteItem", "editItem"]);
 </script>
 <template>
   <div
@@ -48,11 +48,12 @@ defineEmits(["deleteItems", "showEdit"]);
       >
         <button
           class="btn btn-xs bg-btn-edit hover:bg-btn-edit-hover text-White border-0 hover:text-Black"
+          @click="$emit('editItem', id)"
         >
           Edit
         </button>
         <button
-          @click="$emit('deleteItems', id)"
+          @click="$emit('deleteItem', id)"
           class="btn btn-xs bg-Main-pink-300 hover:bg-Main-pink-200 text-White hover:text-Black border-0"
         >
           Delete

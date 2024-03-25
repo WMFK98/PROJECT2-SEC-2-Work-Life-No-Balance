@@ -3,7 +3,7 @@
     {
       "id": "101",
       "name": "KAK",
-      "ability": ["G6", "G6"],
+      "ability": ["G6", "N10C"],
       "isPerTurn": false
     },
     {
@@ -13,19 +13,19 @@
       "isPerTurn": false
     },
     {
-      "id": "101",
+      "id": "104",
       "name": "KAK",
       "ability": ["G6", "G6"],
       "isPerTurn": false
     },
     {
-      "id": "102",
+      "id": "142",
       "name": "KAI",
       "ability": ["G6", "G6"],
       "isPerTurn": false
     },
     {
-      "id": "103",
+      "id": "133",
       "name": "EZ",
       "ability": ["G6", "G6"],
       "isPerTurn": true

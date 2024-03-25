@@ -10,27 +10,40 @@ import soundbtn from "/music/soundBtn.mp3";
 import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
 import { onMounted, ref } from "vue";
+import { deleteItemById, editItem, getItems } from "./../utils/fetchUtils";
+import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
 
 const selectPageItem = ref(1);
 const customItems = ref(new TypeItemsCusMangement());
-import {
-  addItem,
-  deleteItemById,
-  editItem,
-  getItemById,
-  getItems,
-} from "./../utils/fetchUtils";
-import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+const selectedItem1 = ref("");
+const selectedItem2 = ref("");
+const itemsName = ref("");
+const isItemTime = ref(true);
+let isEditing = false;
 
 onMounted(async () => {
   customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
 
-const selectedItem1 = ref("");
-const selectedItem2 = ref("");
-const itemsName = ref("");
-const isPerTime = ref(true);
-const removeItems = async (removeId) => {
+const openEditItem = (editId) => {
+  const itemSelected = customItems.value.findTypeItem(editId);
+  itemsName.value = itemSelected.name;
+  selectedItem1.value = itemSelected.ability[0];
+  selectedItem2.value = itemSelected.ability[1];
+  isItemTime.value = !itemSelected.isPerTurn;
+  isEditing = true;
+  createItem.showModal();
+};
+
+const resetForm = () => {
+  itemsName.value = "";
+  selectedItem1.value = "";
+  selectedItem2.value = "";
+  isItemTime.value = true;
+  isEditing = false;
+};
+
+const removeItem = async (removeId) => {
   const statusCode = await deleteItemById(
     import.meta.env.VITE_BASE_URL,
     removeId
@@ -74,7 +87,7 @@ const removeItems = async (removeId) => {
         <div class="w-1/3 flex justify-end gap-2">
           <button
             class="btn btn-xs bg-btn-save hover:bg-btn-save-hover hover:text-Black text-White text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max h-[26px] rounded-full shadow-sm flex justify-center items-center"
-            onclick="categoryItem.showModal()"
+            onclick="createItem.showModal()"
             @click="playSoundSFX(soundbtn)"
           >
             ✚ Create Item
@@ -87,7 +100,7 @@ const removeItems = async (removeId) => {
             𝐢
           </button>
 
-          <HowtoPlay id="categoryItem">
+          <HowtoPlay id="createItem">
             <template #body>
               <div
                 id="navbar"
@@ -99,7 +112,7 @@ const removeItems = async (removeId) => {
                   <p
                     class="bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
                   >
-                    Custom Item
+                    {{ isEditing ? "Edit Item" : "Custom Item" }}
                   </p>
                 </div>
               </div>
@@ -116,7 +129,7 @@ const removeItems = async (removeId) => {
                     >
                       <div
                         class="h-[80%] w-[80%] bg-Main-pink-300 rounded-[20px] flex text-White scr-l:rounded-[40px] text-hs scr-m:text-hm-tal scr-l:text-hm-des text-center justify-center items-center"
-                        :class="isPerTime ? 'bg-isTurn' : ' bg-isPerTurn'"
+                        :class="isItemTime ? 'bg-item-time' : ' bg-item-turn'"
                       >
                         <span v-if="!itemsName">name</span>
                         <span v-else>{{ itemsName }}</span>
@@ -134,9 +147,8 @@ const removeItems = async (removeId) => {
                           type="radio"
                           name="type-item"
                           class="radio radio-error radio-xs scr-m:radio-sm"
-                          v-model="isPerTime"
-                          :value="false"
-                          checked
+                          v-model="isItemTime"
+                          :value="true"
                         />
                         <span>Item Time</span>
                       </label>
@@ -147,9 +159,8 @@ const removeItems = async (removeId) => {
                           type="radio"
                           name="type-item"
                           class="radio radio-xs radio-secondary scr-m:radio-sm"
-                          v-model="isPerTime"
-                          :value="true"
-                          checked
+                          v-model="isItemTime"
+                          :value="false"
                         />
                         <span>Item Turn</span>
                       </label>
@@ -261,9 +272,6 @@ const removeItems = async (removeId) => {
                   </div>
                 </div>
               </div>
-              <!-- <div class="flex justify-center gap-5 mt-4">
-          
-              </div> -->
             </template>
             <template #btn>
               <div class="flex w-full gap-2 justify-between">
@@ -273,6 +281,7 @@ const removeItems = async (removeId) => {
                   title="Save"
                 />
                 <ButtonClosePopup
+                  @click="resetForm"
                   class="w-[49%] scr-l:w-[49%]"
                 ></ButtonClosePopup></div
             ></template>
@@ -294,7 +303,8 @@ const removeItems = async (removeId) => {
         v-show="selectPageItem === 2"
         :poll-item="customItems.getAllTypeItems()"
         :can-edit="true"
-        @deleteItems="removeItems"
+        @deleteItem="removeItem"
+        @editItem="openEditItem"
       />
     </div>
   </div>

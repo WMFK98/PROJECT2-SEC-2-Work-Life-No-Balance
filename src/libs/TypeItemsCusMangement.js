@@ -1,5 +1,3 @@
-import Item from "../StateItem";
-
 export default class TypeItemsCusMangement {
   _typeItems = [];
   constructor(typeItems = []) {

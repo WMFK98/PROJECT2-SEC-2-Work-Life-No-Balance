@@ -7,7 +7,7 @@ import SixOneTime from "./assets/Icon_Dice_1/OneSixTM.png";
 import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png";
 import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png";
 const G6 = new TypeItem(
-  "6",
+  "G6",
   null,
   6,
   "การันตีว่าลูกเต๋า 1 ลูกจะทอยได้ 6",
@@ -16,7 +16,7 @@ const G6 = new TypeItem(
   SixOneTime
 );
 const N10C = new TypeItem(
-  "-10",
+  "N10C",
   null,
   0,
   "ลบ 10 “คะแนนของผู้เล่น” ฝ่ายตรงข้าม สามารถลดจนเหลือ 0",
