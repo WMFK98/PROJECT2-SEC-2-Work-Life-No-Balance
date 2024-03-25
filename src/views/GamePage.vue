@@ -34,6 +34,13 @@ import {
   setSoundDefault,
   setSound,
 } from "./../libs/SoundControl";
+import {
+  addItem,
+  deleteItemById,
+  editItem,
+  getItemById,
+  getItems,
+} from "./../utils/fetchUtils";
 
 let voidScore = 1;
 const theWinner = ref(null);
@@ -44,9 +51,10 @@ let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
 
+
 const musicSetting = reactive({});
 
-onMounted(() => {
+onMounted(async() => {
   if (!localStorage.getItem("settings")) {
     musicSetting.isOffMusic = false;
     musicSetting.isOffSFX = false;
@@ -55,7 +63,10 @@ onMounted(() => {
   musicSetting.isOffMusic = myMusic.isOffMusic;
   musicSetting.isOffSFX = myMusic.isOffSFX;
   setSound(myMusic);
+  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
+
+
 
 const updateMusicSetting = (e, name) => {
   if (name == "isOffMusic") {
