@@ -9,37 +9,45 @@ import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
-import { onMounted, ref } from "vue";
-import { deleteItemById, editItem, getItems } from "./../utils/fetchUtils";
+import { onMounted, reactive, ref } from "vue";
+import {
+  deleteItemById,
+  addItem,
+  editItem,
+  getItems,
+} from "./../utils/fetchUtils";
 import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
 
 const selectPageItem = ref(1);
 const customItems = ref(new TypeItemsCusMangement());
-const selectedItem1 = ref("");
-const selectedItem2 = ref("");
-const itemsName = ref("");
-const isItemTime = ref(true);
+const customItemForm = reactive({
+  ability: [],
+  name: "",
+  isPerTurn: true,
+});
+const selectedItemId = ref(null);
 let isEditing = false;
-
 onMounted(async () => {
   customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
 
 const openEditItem = (editId) => {
+  selectedItemId.value = editId;
   const itemSelected = customItems.value.findTypeItem(editId);
-  itemsName.value = itemSelected.name;
-  selectedItem1.value = itemSelected.ability[0];
-  selectedItem2.value = itemSelected.ability[1];
-  isItemTime.value = !itemSelected.isPerTurn;
+  customItemForm.name = itemSelected.name;
+  customItemForm.ability[0] = itemSelected.ability[0];
+  customItemForm.ability[1] = itemSelected.ability[1];
+  customItemForm.isPerTurn = itemSelected.isPerTurn;
   isEditing = true;
   createItem.showModal();
 };
 
 const resetForm = () => {
-  itemsName.value = "";
-  selectedItem1.value = "";
-  selectedItem2.value = "";
-  isItemTime.value = true;
+  customItemForm.name = "";
+  customItemForm.ability[0] = "";
+  customItemForm.ability[1] = "";
+  customItemForm.isPerTurn = false;
+  selectedItemId.value = null;
   isEditing = false;
 };
 
@@ -51,22 +59,27 @@ const removeItem = async (removeId) => {
   if (statusCode === 200) customItems.value.removePollItem(removeId);
 };
 
-const saveItems = async () => {
-  const addedItem = await addItem(import.meta.env.VITE_BASE_URL, {
-    name: itemsName.value,
-    ability: [selectedItem1.value, selectedItem2.value],
-    isTurn: isPerTime.value,
-  });
-
-  if (addedItem !== undefined) {
-    customItems.value.addTypeItem({
-      id: addedItem.id,
-      name: addedItem.name,
-      ability: addedItem.ability,
-      isTurn: addedItem.isTurn,
+const saveItem = async () => {
+  let updateItem;
+  if (isEditing) {
+    updateItem = await editItem(
+      import.meta.env.VITE_BASE_URL,
+      selectedItemId.value,
+      {
+        ...customItemForm,
+      }
+    );
+    if (updateItem)
+      customItems.value.updateTypeItem(selectedItemId.value, {
+        ...updateItem,
+      });
+  } else {
+    updateItem = await addItem(import.meta.env.VITE_BASE_URL, {
+      ...customItemForm,
     });
+    if (updateItem) customItems.value.addTypeItem({ ...updateItem });
+    resetForm();
   }
-  itemStorage.value = { id: undefined, name: "", ability: "", isTurn: "" };
 };
 </script>
 
@@ -98,7 +111,7 @@ const saveItems = async () => {
           </button>
           <SelectPage
             v-model="selectPageItem"
-            :name-pages="['Base Items', 'Custom Items']"
+            :name-pages="['Custom Items', 'Base Items']"
           />
         </div>
         <div class="w-1/3 flex justify-end gap-2">
@@ -129,7 +142,11 @@ const saveItems = async () => {
                   <p
                     class="bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
                   >
-                    {{ isEditing ? "Edit Item" : "Custom Item" }}
+                    {{
+                      isEditing
+                        ? "Edit Item : " + selectedItemId
+                        : "Custom Item"
+                    }}
                   </p>
                 </div>
               </div>
@@ -146,10 +163,14 @@ const saveItems = async () => {
                     >
                       <div
                         class="h-[80%] w-[80%] bg-Main-pink-300 rounded-[20px] flex text-White scr-l:rounded-[40px] text-hs scr-m:text-hm-tal scr-l:text-hm-des text-center justify-center items-center"
-                        :class="isItemTime ? 'bg-item-time' : ' bg-item-turn'"
+                        :class="
+                          customItemForm.isPerTurn
+                            ? ' bg-item-turn'
+                            : 'bg-item-time'
+                        "
                       >
-                        <span v-if="!itemsName">name</span>
-                        <span v-else>{{ itemsName }}</span>
+                        <span v-if="!customItemForm.name">name</span>
+                        <span v-else>{{ customItemForm.name }}</span>
                       </div>
                     </div>
 
@@ -164,8 +185,8 @@ const saveItems = async () => {
                           type="radio"
                           name="type-item"
                           class="radio radio-error radio-xs scr-m:radio-sm"
-                          v-model="isItemTime"
-                          :value="true"
+                          v-model="customItemForm.isPerTurn"
+                          :value="false"
                         />
                         <span>Item Time</span>
                       </label>
@@ -176,8 +197,8 @@ const saveItems = async () => {
                           type="radio"
                           name="type-item"
                           class="radio radio-xs radio-secondary scr-m:radio-sm"
-                          v-model="isItemTime"
-                          :value="false"
+                          v-model="customItemForm.isPerTurn"
+                          :value="true"
                         />
                         <span>Item Turn</span>
                       </label>
@@ -187,7 +208,7 @@ const saveItems = async () => {
                   <div class="flex justify-center">
                     <input
                       type="text"
-                      v-model.trim="itemsName"
+                      v-model.trim="customItemForm.name"
                       placeholder="Name of Item"
                       maxlength="4"
                       class="input input-xs scr-m:input-md input-bordered text-hss scr-l:text-hs-des text-Black w-full text-center bg-White"
@@ -216,7 +237,7 @@ const saveItems = async () => {
                           <label
                             class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
                             :class="
-                              selectedItem1 === name
+                              customItemForm.ability[0] === name
                                 ? 'bg-Yellow-light'
                                 : isPerTurn ||
                                   name === 'Dice+' ||
@@ -229,9 +250,9 @@ const saveItems = async () => {
                           >
                             <input
                               @click="
-                                selectedItem1 === name
-                                  ? (selectedItem1 = '')
-                                  : (selectedItem1 = name)
+                                customItemForm.ability[0] === name
+                                  ? (customItemForm.ability[0] = '')
+                                  : (customItemForm.ability[0] = name)
                               "
                               type="checkbox"
                             />
@@ -261,7 +282,7 @@ const saveItems = async () => {
                           <label
                             class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
                             :class="
-                              selectedItem2 === name
+                              customItemForm.ability[1] === name
                                 ? 'bg-Yellow-light'
                                 : isPerTurn ||
                                   name === 'Dice+' ||
@@ -274,9 +295,9 @@ const saveItems = async () => {
                           >
                             <input
                               @click="
-                                selectedItem2 === name
-                                  ? (selectedItem2 = '')
-                                  : (selectedItem2 = name)
+                                customItemForm.ability[1] === name
+                                  ? (customItemForm.ability[1] = '')
+                                  : (customItemForm.ability[1] = name)
                               "
                               type="checkbox"
                             />
@@ -292,16 +313,27 @@ const saveItems = async () => {
             </template>
             <template #btn>
               <div class="flex w-full gap-2 justify-between">
-                <ButtonSetting
-                  class="w-[49%] scr-l:w-[49%]"
-                  styleType="save"
-                  title="Save"
-                  :action="saveItems"
-                />
-                <ButtonClosePopup
-                  @click="resetForm"
-                  class="w-[49%] scr-l:w-[49%]"
-                ></ButtonClosePopup></div
+                <form method="dialog" class="w-[49%] scr-l:w-[49%]">
+                  <ButtonSetting
+                    :disabled="
+                      !customItemForm.name ||
+                      !customItemForm.ability[0] ||
+                      !customItemForm.ability[1]
+                    "
+                    class="w-full"
+                    styleType="save"
+                    title="Save"
+                    :action="saveItem"
+                  />
+                </form>
+                <form method="dialog" class="w-[49%] scr-l:w-[49%]">
+                  <ButtonSetting
+                    class="w-full"
+                    styleType="close"
+                    title="Cancel"
+                    :action="resetForm"
+                  />
+                </form></div
             ></template>
           </HowtoPlay>
           <HowtoPlay id="wiki">
@@ -313,12 +345,13 @@ const saveItems = async () => {
       </div>
       <ItemsInfo
         class="h-full scr-m:h-full scr-l:h-full"
-        v-show="selectPageItem === 1"
+        v-show="selectPageItem === 2"
         :poll-item="initStructureItem"
       />
+
       <ItemsInfo
         class="h-full scr-m:h-full scr-l:h-full"
-        v-show="selectPageItem === 2"
+        v-show="selectPageItem === 1"
         :poll-item="customItems.getAllTypeItems()"
         :can-edit="true"
         @deleteItem="removeItem"

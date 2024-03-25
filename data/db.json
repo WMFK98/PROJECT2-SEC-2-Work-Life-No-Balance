@@ -1,34 +1,31 @@
 {
   "TypeItemsCus": [
     {
-      "id": "101",
-      "name": "KAK",
-      "ability": ["G6", "N10C"],
-      "isPerTurn": false
+      "ability": [
+        "X2>3",
+        "Dice-"
+      ],
+      "name": "dd",
+      "isPerTurn": false,
+      "id": "1680"
     },
     {
-      "id": "103",
-      "name": "EZ",
-      "ability": ["G6", "G6"],
-      "isPerTurn": false
-    },
-    {
-      "id": "104",
-      "name": "KAK",
-      "ability": ["G6", "G6"],
-      "isPerTurn": false
-    },
-    {
-      "id": "142",
-      "name": "KAI",
-      "ability": ["G6", "G6"],
-      "isPerTurn": false
-    },
-    {
-      "id": "133",
-      "name": "EZ",
-      "ability": ["G6", "G6"],
+      "id": "00f2",
+      "ability": [
+        "X2>3",
+        "X2>3"
+      ],
+      "name": "nnn",
       "isPerTurn": true
+    },
+    {
+      "ability": [
+        "Dice+",
+        "+2"
+      ],
+      "name": "xxs",
+      "isPerTurn": false,
+      "id": "fe20"
     }
   ]
 }

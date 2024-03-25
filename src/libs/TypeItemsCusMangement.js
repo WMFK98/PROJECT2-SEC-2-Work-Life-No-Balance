@@ -3,6 +3,13 @@ export default class TypeItemsCusMangement {
   constructor(typeItems = []) {
     this._typeItems = typeItems;
   }
+  updateTypeItem(id, newTypeItem) {
+    this._typeItems[this.findIndexTypeItem(id)] = {
+      ...this._typeItems[this.findIndexTypeItem(id)],
+      ...newTypeItem,
+    };
+  }
+
   searchTypeItemByName(searchName) {
     return this._typeItems.filter(({ name }) => name === searchName);
   }
