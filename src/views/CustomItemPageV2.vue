@@ -95,6 +95,8 @@ const saveItem = async () => {
 </script>
 
 <template>
+  <div class="absolute"></div>
+
   <div
     id="bg"
     class="bg-from-inherit w-screen h-screen flex justify-center items-center overflow-hidden"

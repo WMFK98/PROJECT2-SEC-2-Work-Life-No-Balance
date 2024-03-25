@@ -375,7 +375,33 @@ init();
 </script>
 
 <template>
-  <!-- bug พิศวง -->
+  <div
+    v-show="theWinner"
+    class="absolute overflow-hidden w-screen h-screen z-10 animate-duration-5000 animate-jump-in"
+  >
+    <img
+      src="/gif/win-effect-4.gif"
+      class="left-0 top-0 absolute w-[40%]"
+      alt=""
+    />
+    <img
+      src="/gif/win-effect-4.gif"
+      class="right-0 top-0 absolute w-[40%]"
+      alt=""
+    />
+
+    <img
+      src="/gif/win-effect-1.gif"
+      class="-left-[5%] bottom-0 absolute w-[40%]"
+      alt=""
+    />
+    <img
+      src="/gif/win-effect-2.gif"
+      class="-right-[5%] bottom-0 absolute w-[40%]"
+      alt=""
+    />
+  </div>
+
   <p class="hidden">{{ player1.curPoint }} {{ player2.curPoint }}</p>
   <div
     id="bg"
@@ -402,7 +428,7 @@ init();
           <div id="top-btn" class="flex gap-3 items-center">
             <button
               id="btn-tutorial"
-              class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
+              class="z-20 bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
               onclick="tutorial.showModal()"
               @click="playSoundSFX(soundbtn)"
             >
@@ -415,13 +441,13 @@ init();
             </HowtoPlay>
 
             <ButtonGame
+              class="z-20"
               title="🆕 NEW GAME"
               buttonStyle="static"
               :action="reset"
-              :theWinner="theWinner"
             />
             <button
-              class="bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
+              class="z-20 bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
               onclick="setting.showModal()"
               @click="playSoundSFX(soundbtn)"
             >

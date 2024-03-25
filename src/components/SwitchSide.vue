@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
   <div
     id="display-p1"
-    class="w-[204.944px] scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
+    class="w-[204.944px] relative scr-m:w-[307.78px] scr-l:w-[400px] shadow-xl rounded-tr-[20px] flex flex-col justify-center items-center pt-[15px]"
     :class="[
       theWinner === player
         ? 'bg-Black'
@@ -19,6 +19,12 @@ const props = defineProps({
         : 'bg-Main-pink-200',
     ]"
   >
+    <p
+      v-show="theWinner === player"
+      class="absolute scr-l:text-[250%] top-[38%] scr-l:top-[28%]"
+    >
+      👑
+    </p>
     <h2
       class="text-hm scr-m:text-hm-tal scr-l:text-hm-des"
       :class="theWinner === player ? 'text-Yellow' : 'text-Black'"
