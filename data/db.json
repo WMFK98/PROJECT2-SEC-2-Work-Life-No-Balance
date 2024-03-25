@@ -1,31 +1,31 @@
 {
   "TypeItemsCus": [
     {
+      "id": "681c",
       "ability": [
-        "X2>3",
-        "Dice-"
+        "Dice+",
+        "Dice+"
       ],
-      "name": "dd",
-      "isPerTurn": false,
-      "id": "1680"
+      "name": "sss",
+      "isPerTurn": false
     },
     {
-      "id": "00f2",
+      "id": "b6bd",
       "ability": [
         "X2>3",
         "X2>3"
       ],
-      "name": "nnn",
-      "isPerTurn": true
+      "name": "3",
+      "isPerTurn": false
     },
     {
+      "id": "6bdc",
       "ability": [
-        "Dice+",
-        "+2"
+        "+2",
+        "X2>3"
       ],
-      "name": "xxs",
-      "isPerTurn": false,
-      "id": "fe20"
+      "name": "33",
+      "isPerTurn": true
     }
   ]
 }

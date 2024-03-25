@@ -52,11 +52,11 @@ defineProps({ id: String });
             >
               <div class="flex gap-3 text-hss scr-l:text-hs-des">
                 <div class="flex gap-2 src-l:gap-4">
-                  <div class="bg-isPerTurn w-4 scr-l:w-8 rounded-[5px]"></div>
+                  <div class="bg-item-time w-4 scr-l:w-8 rounded-[5px]"></div>
                   <p>Item Time</p>
                 </div>
                 <div class="flex gap-2">
-                  <div class="bg-isTurn w-4 scr-l:w-8 rounded-[5px]"></div>
+                  <div class="bg-item-turn w-4 scr-l:w-8 rounded-[5px]"></div>
                   <p>Item Turn</p>
                 </div>
                 <div class="flex gap-2">
