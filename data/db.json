@@ -1,31 +1,13 @@
 {
   "TypeItemsCus": [
     {
-      "id": "681c",
       "ability": [
-        "Dice+",
-        "Dice+"
+        "N10C",
+        "N10C"
       ],
-      "name": "sss",
-      "isPerTurn": false
-    },
-    {
-      "ability": [
-        "+2",
-        "X2>3"
-      ],
-      "name": "R",
-      "isPerTurn": true,
-      "id": "6bdc"
-    },
-    {
-      "id": "5836",
-      "ability": [
-        "X2>3",
-        "X2>3"
-      ],
-      "name": "jj",
-      "isPerTurn": true
+      "name": "dcc",
+      "isPerTurn": false,
+      "id": "b95b"
     }
   ]
 }

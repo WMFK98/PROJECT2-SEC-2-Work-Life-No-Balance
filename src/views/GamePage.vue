@@ -118,7 +118,7 @@ const reset = () => {
   theWinner.value = null;
   currentPlayer[0] = player1;
   enemyPlayer[0] = player2;
-  [(player1, player2)].forEach((player) => {
+  [player1, player2].forEach((player) => {
     player.point = 0;
     player.buff = [];
     player.curPoint = 0;

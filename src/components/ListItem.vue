@@ -20,7 +20,7 @@ const props = defineProps({
     </p>
     <div
       id="items-p2 p-[2px]"
-      class="scr-l:w-[480px] w-[300px] h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-l:h-[71px] scr-m:rounded-[20px]"
+      class="scr-l:w-[480px] w-[300px] h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-m:w-[435.391px] scr-l:h-[71px] scr-m:rounded-[20px]"
       :class="player.items.owner == 'p2' ? 'flex-row-reverse' : ''"
     >
       <Item :pollItem="player.items.getAllItem()">

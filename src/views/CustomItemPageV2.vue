@@ -464,7 +464,7 @@ const saveItem = async () => {
         class="m-auto flex justify-center flex-col items-center gap-3"
         v-show="!customItems.getAllTypeItems().length && selectPageItem === 1"
       >
-        <p class="text-hm-des text-Black">Click to Custom your item!!</p>
+        <p class="text-hm-des text-Black">Click to custom your item!!</p>
         <button
           class="btn btn-xs bg-btn-save hover:bg-btn-save-hover hover:text-Black text-White text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max h-[26px] rounded-full shadow-sm flex justify-center items-center"
           onclick="createItem.showModal()"
