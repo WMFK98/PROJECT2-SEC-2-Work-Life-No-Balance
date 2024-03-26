@@ -25,6 +25,7 @@ export default class TypeItemsCusMangement {
   }
 
   addTypeItems(typeItems = []) {
-    typeItems.forEach((typeItem) => this._typeItems.push(typeItem));
+    typeItems.forEach((typeItem) => this._typeItems.push(typeItem) 
+    );
   }
 }

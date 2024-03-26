@@ -43,6 +43,7 @@ export default class ItemsManagement {
   }
   getAllItemUsed() {
     return this._items.filter(({ isUsed }) => isUsed);
+    
   }
 
   setLimitItem(limitItem) {

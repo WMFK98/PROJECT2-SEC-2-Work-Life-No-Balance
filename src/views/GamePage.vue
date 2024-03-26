@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch, onMounted } from "vue";
+import { reactive, ref, watch, onMounted , computed } from "vue";
 import TypeItem from "./../TypeItem";
 import { random } from "./../utils/tool";
 import ItemManagement from "./../libs/ItemsManagement";
@@ -41,20 +41,24 @@ import {
   getItemById,
   getItems,
 } from "./../utils/fetchUtils";
+import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
 
 let voidScore = 1;
 const theWinner = ref(null);
 const pollSelectedItems = [];
-let pollItem = [];
-let checkSelectedItems = reactive([]);
+let pollItem = reactive([]);
+let checkSelectedItems = computed(() => {
+  return new Array(pollItem.length).fill(true)
+})
 let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
-
-
 const musicSetting = reactive({});
+const customItemsManager = new TypeItemsCusMangement();
+let customItem = []
 
-onMounted(async() => {
+
+onMounted(() => {
   if (!localStorage.getItem("settings")) {
     musicSetting.isOffMusic = false;
     musicSetting.isOffSFX = false;
@@ -63,10 +67,24 @@ onMounted(async() => {
   musicSetting.isOffMusic = myMusic.isOffMusic;
   musicSetting.isOffSFX = myMusic.isOffSFX;
   setSound(myMusic);
-  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
 
 
+
+async function fetchDataAndAddItems() {
+    initItem();
+    try {
+        const result = await getItems(import.meta.env.VITE_BASE_URL);
+        customItemsManager.addTypeItems(result);
+        const customItem = customItemsManager.getAllTypeItems().map(el => new TypeItem(el.name,el.ability,undefined,undefined,!el.isTurn))
+        pollItem.push(...customItem)
+        pollSelectedItems.push(...customItem)
+        console.log(pollItem);
+        console.log(customItem);
+    } catch (error) {
+        console.error("Error fetching or adding items:", error);
+}
+}
 
 const updateMusicSetting = (e, name) => {
   if (name == "isOffMusic") {
@@ -120,7 +138,7 @@ const chooseItems = (index) => {
   checkSelectedItems[index] = !checkSelectedItems[index];
 };
 
-const reset = () => {
+const reset = async() => {
   resetDice();
   stopMusic();
   phaseGame = 0;
@@ -135,6 +153,7 @@ const reset = () => {
     player.items.clearAll();
     player.items.addRandomItem(defaultSetting.startingItem);
   });
+  console.log(player1.items);
 };
 const checkWin = () => {
   if (enemyPlayer[0].point >= defaultSetting.settingPoint) {
@@ -340,8 +359,9 @@ const initItem = () => {
   plus2Point.addAbility(plus2Abililty);
   popDice.addAbility(popDiceAbililty);
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-  pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
+  pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point,);
 };
+
 
 const localSetting = () => {
   if (!localStorage.getItem("settings")) {
@@ -374,14 +394,13 @@ const localSetting = () => {
   addSelectedItem();
 };
 
-const init = () => {
+const init = async () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
-  initItem();
   localSetting();
   reset();
 };
-
+fetchDataAndAddItems()
 init();
 </script>
 

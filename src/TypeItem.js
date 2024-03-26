@@ -6,7 +6,7 @@ export default class TypeItem {
     discription = "-",
     isPerTurn = true,
     isAttack = false,
-    picture = "-"
+    picture = ""
   ) {
     this.name = name;
     this.priority = priority;

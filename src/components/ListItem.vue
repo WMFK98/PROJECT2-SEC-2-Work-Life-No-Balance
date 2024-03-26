@@ -52,8 +52,15 @@ const props = defineProps({
               type="checkbox"
               :disabled="!(currentPlayer === player) || theWinner"
             />
-            <img class="swap-off" :src="picture" />
-            <img class="swap-on" :src="picture" />
+            <span v-if="picture" >
+              <img class="swap-off"  :src="picture" />
+              <img class="swap-on" :src="picture" />
+            </span>
+            <span v-else>
+              <p class="swap-off">{{ name }}</p>
+              <p class="swap-on">{{ name }}</p>
+            </span>
+        
           </label>
         </template>
       </Item>
