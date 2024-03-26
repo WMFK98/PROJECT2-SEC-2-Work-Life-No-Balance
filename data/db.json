@@ -17,6 +17,15 @@
       "name": "R",
       "isPerTurn": true,
       "id": "6bdc"
+    },
+    {
+      "id": "5836",
+      "ability": [
+        "X2>3",
+        "X2>3"
+      ],
+      "name": "jj",
+      "isPerTurn": true
     }
   ]
 }

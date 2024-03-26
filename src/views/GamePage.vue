@@ -10,6 +10,7 @@ import soundAddItem from "/music/addItem.mp3";
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
 import soundSwap from "/music/swapsound.mp3";
+import backgroundMusic from "/music/backgroundMusic.mp3";
 import Item from "./../StateItem";
 
 import ButtonGame from "./../components/ButtonGame.vue";
@@ -178,6 +179,7 @@ const resetDice = () => {
 };
 
 const roll = () => {
+  playSoundMusic(backgroundMusic);
   if (phaseGame === 0) resetDice();
   phaseGame = 1;
   activeItem();
@@ -366,6 +368,7 @@ import { useRouter } from "vue-router";
 const route = useRouter();
 
 const rollBack = () => {
+  stopMusic();
   route.go(-1);
 };
 
@@ -614,20 +617,19 @@ init();
             ></ListItem></template
         ></SwitchSideLower>
         <div
-          id="btns"
           class="absolute flex flex-col gap-[16px] mt-5 scr-m:mt-20 scr-l:mt-[125px] items-center"
         >
           <ButtonGame
+            :disabled="theWinner !== null"
             title="🎲 ROLL DICE"
             buttonStyle="normal"
             :action="roll"
-            :theWinner="theWinner"
           />
           <ButtonGame
+            :disabled="theWinner !== null"
             title="📥 Hold"
             buttonStyle="short"
             :action="hold"
-            :theWinner="theWinner"
             :sound-s-f-x="soundHold"
           />
         </div>

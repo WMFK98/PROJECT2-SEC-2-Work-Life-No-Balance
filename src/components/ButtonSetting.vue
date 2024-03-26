@@ -3,7 +3,7 @@ import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../libs/SoundControl";
 const props = defineProps({
   title: String,
-  action: Function,
+  action: { type: Function, default: () => {} },
   styleType: {
     type: String,
     varlidatior(value) {

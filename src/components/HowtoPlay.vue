@@ -6,6 +6,7 @@ import SelectPage from "./SelectPage.vue";
 import ItemsInfo from "./ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
 import ButtonSetting from "./ButtonSetting.vue";
+
 const selectTutorialPage = ref(1);
 defineProps({ id: String });
 </script>
@@ -199,7 +200,7 @@ defineProps({ id: String });
             <li>
               <strong>Item Time </strong>
               <span
-                class="bg-isPerTurn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
+                class="bg-item-time w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
                 >i</span
               >
 
@@ -208,7 +209,7 @@ defineProps({ id: String });
             <li>
               <strong>Item Turn </strong>
               <span
-                class="bg-isTurn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
+                class="bg-item-turn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
                 >i</span
               >
 
@@ -225,26 +226,21 @@ defineProps({ id: String });
             </li>
           </slot>
         </ol>
-
-        <ItemsInfo
-          v-show="selectTutorialPage === 2"
-          class="h-[120px] scr-m:h-[290px]"
-          :poll-item="initStructureItem"
-        />
+        <div>
+          <div
+            class="h-[150px] scr-m:h-[290px] overflow-y-scroll"
+            v-show="selectTutorialPage === 2"
+          >
+            <ItemsInfo :poll-item="initStructureItem" />
+          </div>
+        </div>
       </slot>
       <slot name="btn">
         <form method="dialog" class="flex justify-center">
-          <ButtonSetting
-            class="w-full"
-            styleType="close"
-            title="close"
-            :action="resetForm"
-          />
+          <ButtonSetting class="w-full" styleType="close" title="close" />
         </form>
       </slot>
     </div>
   </dialog>
 </template>
-
-<style scoped></style>
 ../libs/SoundControl
