@@ -23,10 +23,10 @@ const props = defineProps({
         ? 'bg-Main-pink-300  hover:bg-Main-pink-100 text-White hover:text-Black'
         : styleType === 'quite'
         ? ' bg-Black text-White hover:text-Black'
-        : 'hover:bg-Main-blue-100  bg-Yellow text-Black hover:text-Black'
+        : 'hover:bg-Main-blue-100  hover:bg-btn-active  text-White  bg-Black hover:text-Black '
     "
     id="saveButton"
-    @click="[action(), playSoundSFX(soundbtn)];"
+    @click="[action(), playSoundSFX(soundbtn)]"
   >
     {{ title }}
   </button>

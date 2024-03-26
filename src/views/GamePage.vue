@@ -464,6 +464,29 @@ init();
               ⚙️
             </button>
             <Setting>
+              <template #title>
+                <div class="flex mb-3">
+                  <form method="dialog" class="flex flex-1">
+                    <ButtonSetting
+                      class="w-max rounded-full"
+                      title="X"
+                      :action="closeSetting"
+                      style-type="close"
+                    />
+                  </form>
+
+                  <h3 class="font-bold flex-[6] text-center text-m">
+                    SETTING MENU
+                  </h3>
+
+                  <ButtonSetting
+                    class="flex-1"
+                    title="Quite Game"
+                    :action="rollBack"
+                    style-type="close"
+                  />
+                </div>
+              </template>
               <template #inputSetting>
                 <div class="w-full flex items-center justify-between">
                   <p>Set :</p>
@@ -525,15 +548,8 @@ init();
                   :action="saveSetting"
                   style-type="save"
                 />
-
                 <ButtonSetting
-                  title="Quite"
-                  :action="rollBack"
-                  style-type="quite"
-                />
-
-                <ButtonSetting
-                  title="Close"
+                  title="Cancel"
                   :action="closeSetting"
                   style-type="close"
                 />
