@@ -116,9 +116,9 @@ const reset = () => {
   phaseGame = 0;
   dices = dices.map(() => 1);
   theWinner.value = null;
-  currentPlayer[0] = currentPlayer[0] === player1 ? player2 : player1;
-  enemyPlayer[0] = enemyPlayer[0] === player1 ? player2 : player1;
-  [player1, player2].forEach((player) => {
+  currentPlayer[0] = player1;
+  enemyPlayer[0] = player2;
+  [(player1, player2)].forEach((player) => {
     player.point = 0;
     player.buff = [];
     player.curPoint = 0;
