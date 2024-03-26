@@ -362,6 +362,12 @@ const localSetting = () => {
   );
   addSelectedItem();
 };
+import { useRouter } from "vue-router";
+const route = useRouter();
+
+const rollBack = () => {
+  route.go(-1);
+};
 
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
@@ -518,6 +524,12 @@ init();
                   title="Save"
                   :action="saveSetting"
                   style-type="save"
+                />
+
+                <ButtonSetting
+                  title="Quite"
+                  :action="rollBack"
+                  style-type="quite"
                 />
 
                 <ButtonSetting

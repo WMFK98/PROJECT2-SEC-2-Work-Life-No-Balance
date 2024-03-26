@@ -7,19 +7,25 @@ import ItemsInfo from "./../components/ItemsInfo.vue";
 import HowtoPlay from "./../components/HowtoPlay.vue";
 import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
-
 import { playSoundSFX } from "./../libs/SoundControl";
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, ref, reactive } from "vue";
+
+const customItems = ref(new TypeItemsCusMangement());
 import {
-  deleteItemById,
   addItem,
+  deleteItemById,
   editItem,
+  getItemById,
   getItems,
 } from "./../utils/fetchUtils";
 import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+import { useRouter } from "vue-router";
+const route = useRouter();
+const rollBack = () => {
+  route.go(-1);
+};
 
 const selectPageItem = ref(1);
-const customItems = ref(new TypeItemsCusMangement());
 const customItemForm = reactive({
   ability: [],
   name: "",
@@ -119,6 +125,7 @@ const saveItem = async () => {
             class="group bg-opacity-0 text-Black border-0 shadow-none flex items-center gap-2 w-max h-max"
           >
             <BackIcon
+              @click="rollBack"
               class="h-[20px] w-[20px] scr-m:h-[30px] scr-m:w-[30px] scr-l:h-[50px] scr-l:w-[50px]"
             />
           </button>
