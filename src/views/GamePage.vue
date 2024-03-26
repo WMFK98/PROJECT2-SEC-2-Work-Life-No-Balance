@@ -115,8 +115,8 @@ const reset = () => {
   phaseGame = 0;
   dices = dices.map(() => 1);
   theWinner.value = null;
-  currentPlayer[0] = player1;
-  enemyPlayer[0] = player2;
+  currentPlayer[0] = currentPlayer[0] === player1 ? player2 : player1;
+  enemyPlayer[0] = enemyPlayer[0] === player1 ? player2 : player1;
   [player1, player2].forEach((player) => {
     player.point = 0;
     player.buff = [];
@@ -377,8 +377,12 @@ init();
 <template>
   <div
     v-show="theWinner"
-    class="absolute overflow-hidden w-screen h-screen z-10 animate-duration-5000 animate-jump-in"
+    class="absolute overflow-hidden w-screen h-screen z-10 animate-duration-5000 flex animate-jump-in"
   >
+    <img
+      :src="theWinner === player1 ? '/gif/winner-1.gif' : '/gif/winner-2.gif'"
+      class="m-auto w-[50%]"
+    />
     <img
       src="/gif/win-effect-4.gif"
       class="left-0 top-0 absolute w-[40%]"

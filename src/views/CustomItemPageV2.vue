@@ -7,7 +7,7 @@ import ItemsInfo from "./../components/ItemsInfo.vue";
 import HowtoPlay from "./../components/HowtoPlay.vue";
 import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
-import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
+
 import { playSoundSFX } from "./../libs/SoundControl";
 import { onMounted, reactive, ref } from "vue";
 import {
