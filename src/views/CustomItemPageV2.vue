@@ -9,6 +9,7 @@ import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
+import SelectItem from "@/components/SelectItem.vue";
 
 import { onMounted, ref } from "vue";
 const selectPageItem = ref(1);
@@ -175,97 +176,17 @@ const removeItems = async (removeId) => {
                   id="marge-items"
                   class="w-auto flex flex-col items-center gap-3 scr-m:gap-3 mb-2 h-auto"
                 >
-                  <div id="select-Items-1">
-                    <p
-                      class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des"
-                    >
-                      ITEMS 1
-                    </p>
-                    <div
-                      class="item-bar w-max flex p-1 gap-1 bg-White text-hss scr-l:text-hs-des scr-l:gap-8 text-White h-max rounded-[20px]"
-                    >
-                      <Item :pollItem="initStructureItem">
-                        <template
-                          #default="{
-                            item: { name, picture, isPerTurn, isAttack },
-                          }"
-                        >
-                          <label
-                            class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
-                            :class="
-                              selectedItem1 === name
-                                ? 'bg-Yellow-light'
-                                : isPerTurn ||
-                                  name === 'Dice+' ||
-                                  name === 'Dice-'
-                                ? 'bg-isTurn text-White'
-                                : isAttack
-                                ? 'bg-Main-pink-300 text-White'
-                                : 'bg-isPerTurn text-White'
-                            "
-                          >
-                            <input
-                              @click="
-                                selectedItem1 === name
-                                  ? (selectedItem1 = '')
-                                  : (selectedItem1 = name)
-                              "
-                              type="checkbox"
-                            />
 
-                            <img class="swap-off" :src="picture" />
-                            <img class="swap-on" :src="picture" />
-                          </label>
-                        </template>
-                        
-                      </Item>
-                    </div>
-                    
-                  </div>
-                  <div id="select-Items-2">
-                    <p
-                      class="text-Black px-1 scr-m:text-hs-tal scr-l:text-hs-des"
-                    >
-                      ITEMS 2
-                    </p>
-                    <div
-                      class="item-bar w-max flex p-1 gap-1 bg-White text-hss scr-l:text-hs-des scr-l:gap-8 text-White h-max rounded-[20px]"
-                    >
-                      <Item :pollItem="initStructureItem">
-                        <template
-                          #default="{
-                            item: { name, picture, isPerTurn, isAttack },
-                          }"
-                        >
-                          <label
-                            class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
-                            :class="
-                              selectedItem2 === name
-                                ? 'bg-Yellow-light'
-                                : isPerTurn ||
-                                  name === 'Dice+' ||
-                                  name === 'Dice-'
-                                ? 'bg-isTurn text-White'
-                                : isAttack
-                                ? 'bg-Main-pink-300 text-White'
-                                : 'bg-isPerTurn text-White'
-                            "
-                          >
-                            <input
-                              @click="
-                                selectedItem2 === name
-                                  ? (selectedItem2 = '')
-                                  : (selectedItem2 = name)
-                              "
-                              type="checkbox"
-                            />
-                            <img class="swap-off" :src="picture" />
-                            <img class="swap-on" :src="picture" />
-                          </label>
-                        </template>
-                      </Item>
-                    </div>
-                  </div>
+
+                  <SelectItem 
+                  SItem = "1"
+                  v-model="selectedItem1"
+                  />
+                  <SelectItem 
+                  SItem = '2'
+                  v-model="selectedItem2"
+                  />
+                  
                 </div>
               </div>
               <!-- <div class="flex justify-center gap-5 mt-4">
