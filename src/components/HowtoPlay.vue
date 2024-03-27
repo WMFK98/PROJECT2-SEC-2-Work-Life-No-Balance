@@ -74,7 +74,6 @@ defineProps({ id: String });
         <ol
           class="h-[150px] scr-l:rounded-[20px] scr-l:h-[504px] scr-m:h-[300px] scr-m:text-hs-tal flex flex-col scr-l:gap-8 scr-l:p-[30px] gap-3 bg-White p-2 rounded-[10px] border overflow-y-scroll"
           v-show="selectTutorialPage === 1"
-          type="1"
         >
           <slot name="page">
             <li><strong>กติกา:</strong></li>
@@ -227,12 +226,10 @@ defineProps({ id: String });
           </slot>
         </ol>
         <div>
-          <div
-            class="h-[150px] scr-m:h-[290px] overflow-y-scroll"
+          <ItemsInfo
             v-show="selectTutorialPage === 2"
-          >
-            <ItemsInfo :poll-item="initStructureItem" />
-          </div>
+            :poll-item="initStructureItem"
+          />
         </div>
       </slot>
       <slot name="btn">

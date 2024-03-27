@@ -8,7 +8,7 @@ defineEmits(["deleteItem", "editItem"]);
 </script>
 <template>
   <div
-    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap overflow-y-scroll justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
+    class="flex gap-2 flex-col scr-l:flex-row scr-l:flex-wrap justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
   >
     <div
       id="item-box"

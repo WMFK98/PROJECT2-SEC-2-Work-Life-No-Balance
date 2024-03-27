@@ -1,13 +1,3 @@
 {
-  "TypeItemsCus": [
-    {
-      "ability": [
-        "N10C",
-        "N10C"
-      ],
-      "name": "dcc",
-      "isPerTurn": false,
-      "id": "b95b"
-    }
-  ]
+  "TypeItemsCus": []
 }

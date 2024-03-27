@@ -18,6 +18,7 @@ export default {
       "btn-edit-hover": "#f879ff",
       Yellow: "#FFF72D",
       White: "#F8F8F8",
+      blue: "#F8F8F8",
       Black: "#434343",
       bgCusItem: "rgba(255, 230, 142,0.7)",
     },

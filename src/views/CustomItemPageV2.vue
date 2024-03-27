@@ -74,6 +74,7 @@ const removeItem = async () => {
   );
   if (statusCode === 200)
     customItems.value.removePollItem(selectedItemId.value);
+  resetForm();
 };
 
 const saveItem = async () => {
@@ -453,7 +454,7 @@ const saveItem = async () => {
       />
 
       <ItemsInfo
-        class="h-full scr-m:h-full scr-l:h-full"
+        class="h-full overflow-y-scroll scr-m:h-full scr-l:h-full"
         v-show="selectPageItem === 1"
         :poll-item="customItems.getAllTypeItems()"
         :can-edit="true"

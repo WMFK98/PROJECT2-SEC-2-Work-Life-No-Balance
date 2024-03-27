@@ -414,7 +414,6 @@ init();
       alt=""
     />
   </div>
-
   <p class="hidden">{{ player1.curPoint }} {{ player2.curPoint }}</p>
   <div
     id="bg"
@@ -471,7 +470,7 @@ init();
                 <div class="flex mb-3">
                   <form method="dialog" class="flex flex-1">
                     <ButtonSetting
-                      class="w-max rounded-full"
+                      class="w-max rounded-full scr-m:rounded-full scr-l:rounded-full"
                       title="X"
                       :action="closeSetting"
                       style-type="close"
@@ -484,7 +483,7 @@ init();
 
                   <ButtonSetting
                     class="flex-1"
-                    title="Quite Game"
+                    title="Home Page"
                     :action="rollBack"
                     style-type="close"
                   />
