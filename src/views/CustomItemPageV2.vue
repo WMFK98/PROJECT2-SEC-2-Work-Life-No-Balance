@@ -288,9 +288,24 @@ const isPerTime = ref(true)
 								<strong>เลือกความสามารถของไอเทมในการผสมได้:</strong> 2 ไอเทม
 							</li>
 							<li>
-								<strong>เลือกรูปแบบของไอเทม:</strong> Item Time⏳ หรือ Item Turn
+								<strong>เลือกรูปแบบของไอเทม: </strong
+								><span
+									class="bg-isPerTurn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
+									>i</span
+								>
+
+								: เมื่อกดใช้จะมีผลเพียงครั้งเดียวเท่านั้น
+								<span
+									class="bg-isTurn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
+									>i</span
+								>
+
+								: เมื่อกดใช้จะมีผลตลอดทั้งเทิร์น
 							</li>
-							<strong>กระบวนการคือ:</strong>
+							<li>
+								<strong>กระบวนการคือ:</strong>
+							</li>
+
 							<li>
 								จะมี <strong>item 2 ช่อง</strong> ให้ผู้เล่นเลือก
 								<strong> item </strong>
