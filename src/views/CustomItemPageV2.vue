@@ -9,10 +9,10 @@ import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import ButtonClosePopup from "@/components/ButtonClosePopup.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
-
+import {useCustom} from "@/stores/TypeItemsCusMangement";
 import { onMounted, ref } from "vue";
 const selectPageItem = ref(1);
-const customItems = ref(new TypeItemsCusMangement());
+const customItems = useCustom();
 import {
   addItem,
   deleteItemById,
@@ -20,10 +20,10 @@ import {
   getItemById,
   getItems,
 } from "./../utils/fetchUtils";
-import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+
 
 onMounted(async () => {
-  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
+  customItems.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
 
 const selectedItem1 = ref("");
