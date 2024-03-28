@@ -1,5 +1,5 @@
 import Item from "../StateItem";
-
+import {reactive} from "vue"
 export default class TypeItemsCusMangement {
   _typeItems = [];
   constructor(typeItems = []) {
