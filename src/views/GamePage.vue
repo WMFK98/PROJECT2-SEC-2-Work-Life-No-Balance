@@ -60,15 +60,6 @@ onMounted(() => {
   setSound(myMusic);
 });
 
-const parseToTypeItem = (oldCustomItem) => {
-  const newCustomItems = oldCustomItem.map(
-    (el) =>
-      new TypeItem(el.name, [], undefined, undefined, el.isPerTurn, el.isAttack)
-  );
-
-  return newCustomItems;
-};
-
 const updateMusicSetting = (e, name) => {
   if (name == "isOffMusic") {
     musicSetting.isOffMusic = e.openSound;
@@ -451,7 +442,6 @@ const init = () => {
 };
 
 init();
-
 
 </script>
 
