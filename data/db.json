@@ -1,3 +1,13 @@
 {
-  "TypeItemsCus": []
+  "TypeItemsCus": [
+    {
+      "id": "bdcd",
+      "ability": [
+        "X2>3",
+        "Dice+"
+      ],
+      "name": "....",
+      "isPerTurn": true
+    }
+  ]
 }

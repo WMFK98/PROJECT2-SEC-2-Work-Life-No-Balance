@@ -9,8 +9,7 @@ import SelectPage from "./../components/SelectPage.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../libs/SoundControl";
 import { onMounted, ref, reactive } from "vue";
-
-const customItems = ref(new TypeItemsCusMangement());
+import { useCustom } from "@/stores/TypeItemsCusMangement";
 import {
   addItem,
   deleteItemById,
@@ -18,13 +17,13 @@ import {
   getItemById,
   getItems,
 } from "./../utils/fetchUtils";
-import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+
 import { useRouter } from "vue-router";
 const route = useRouter();
 const rollBack = () => {
   route.go(-1);
 };
-
+const customItems = useCustom();
 const selectPageItem = ref(1);
 const customItemForm = reactive({
   ability: [],
@@ -34,11 +33,11 @@ const customItemForm = reactive({
 const selectedItemId = ref(null);
 let isEditing = false;
 onMounted(async () => {
-  customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
+  customItems.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
 });
 
 const setCustomItemFormById = (id) => {
-  const itemSelected = customItems.value.findTypeItem(id);
+  const itemSelected = customItems.findTypeItem(id);
   customItemForm.name = itemSelected.name;
   customItemForm.ability[0] = itemSelected.ability[0];
   customItemForm.ability[1] = itemSelected.ability[1];
@@ -73,7 +72,7 @@ const removeItem = async () => {
     selectedItemId.value
   );
   if (statusCode === 200)
-    customItems.value.removePollItem(selectedItemId.value);
+    customItems.removePollItem(selectedItemId.value);
   resetForm();
 };
 
@@ -88,14 +87,14 @@ const saveItem = async () => {
       }
     );
     if (updateItem)
-      customItems.value.updateTypeItem(selectedItemId.value, {
+      customItems.updateTypeItem(selectedItemId.value, {
         ...updateItem,
       });
   } else {
     updateItem = await addItem(import.meta.env.VITE_BASE_URL, {
       ...customItemForm,
     });
-    if (updateItem) customItems.value.addTypeItem({ ...updateItem });
+    if (updateItem) customItems.addTypeItem({ ...updateItem });
     resetForm();
   }
 };
@@ -477,3 +476,4 @@ const saveItem = async () => {
     </div>
   </div>
 </template>
+@/stores/TypeItemsCusMangement

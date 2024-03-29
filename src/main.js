@@ -1,5 +1,5 @@
 import "./assets/main.css"
-
+import {createPinia} from "pinia"
 import { createApp } from "vue"
 import HomePage from "./views/HomePage.vue"
 import GamePage from "./views/GamePage.vue"
@@ -7,7 +7,7 @@ import CustomItemPageV2 from "./views/CustomItemPageV2.vue"
 import App from "./App.vue"
 import router from "../router/index.js"
 
-createApp(App).use(router).mount("#app")
+createApp(App).use(router).use(createPinia()).mount("#app")
 router.isReady().then(() => {
 	// เป็นเมธอดจาก Web Performance API ที่มันจะให้ข้อมูลการนำทางเวลาเข้าเว็ปซึ่งอ้างผ่าน type navigation มันจะคืนค่าเป็น array obj ที่โหลดหน้าเว็ป
 	const navigationEntries = performance.getEntriesByType("navigation")

@@ -278,3 +278,4 @@ const isPerTime = ref(true);
     </div>
   </div>
 </template>
+@/stores/TypeItemsCusMangement

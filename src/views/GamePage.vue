@@ -35,7 +35,9 @@ import {
   setSoundDefault,
   setSound,
 } from "./../libs/SoundControl";
+import { useCustom } from "@/stores/TypeItemsCusMangement";
 
+const customItemManager = useCustom();
 let voidScore = 1;
 const theWinner = ref(null);
 const pollSelectedItems = [];
@@ -57,6 +59,15 @@ onMounted(() => {
   musicSetting.isOffSFX = myMusic.isOffSFX;
   setSound(myMusic);
 });
+
+const parseToTypeItem = (oldCustomItem) => {
+  const newCustomItems = oldCustomItem.map(
+    (el) =>
+      new TypeItem(el.name, [], undefined, undefined, el.isPerTurn, el.isAttack)
+  );
+
+  return newCustomItems;
+};
 
 const updateMusicSetting = (e, name) => {
   if (name == "isOffMusic") {
@@ -148,13 +159,25 @@ const checkAddItem = () => {
 const isVoidScore = () => dices.some((dice) => dice <= voidScore);
 
 const activeItem = () => {
+  const customItem = [];
+  currentPlayer[0].items.getAllItemUsed().forEach((item) => {
+    if (Array.isArray(item.itemInfo.ability)) {
+      item.itemInfo.ability.forEach((itemObj) => {
+        customItem.push({ itemInfo: { ...item.itemInfo, ability : itemObj.ability } });
+      });
+    }
+  });
+  const starterItem = currentPlayer[0].items.getAllItemUsed().filter(el => !Array.isArray(el.itemInfo.ability))
+  // console.log(...currentPlayer[0].items.getAllItemUsed());
   const orderPriorityItem = [
     itemRollDice,
-    ...currentPlayer[0].items.getAllItemUsed(),
+    ...starterItem,
+    ...customItem,
     ...currentPlayer[0].buff,
   ];
   orderPriorityItem.sort((a, b) => a.itemInfo.priority - b.itemInfo.priority);
   orderPriorityItem.forEach((item) => {
+    console.log(item);
     item.itemInfo.ability();
     if (item.itemInfo.isPerTurn && !item.isBuff)
       currentPlayer[0].buff.push({ isBuff: true, ...item });
@@ -330,8 +353,58 @@ const initItem = () => {
   addDice.addAbility(addDiceAbililty);
   plus2Point.addAbility(plus2Abililty);
   popDice.addAbility(popDiceAbililty);
-  pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
-  pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
+
+  const newCustomItems = customItemManager
+    .getAllTypeItems()
+    .map((oldTypeItem) => {
+      const ability = [];
+      oldTypeItem.ability.forEach((el) => {
+        switch (el) {
+          case "X2>3":
+            ability.push(X2P50);
+            break;
+          case "Dice+":
+            ability.push(addDice);
+            break;
+          case "N10C":
+            ability.push(N10C);
+            break;
+          case "O&E":
+            ability.push(OAE);
+            break;
+          case "Dice-":
+            ability.push(popDice);
+            break;
+          case "G6":
+            ability.push(G6);
+            break;
+          case "+2":
+            ability.push(plus2Point);
+            break;
+        }
+      });
+      return new TypeItem(
+        oldTypeItem.name,
+        ability,
+        undefined,
+        undefined,
+        oldTypeItem.isPerTurn,
+        oldTypeItem.isAttack
+      );
+    });
+  console.log(newCustomItems);
+  pollItem.push(
+    X2P50,
+    addDice,
+    G6,
+    N10C,
+    OAE,
+    popDice,
+    plus2Point,
+    ...newCustomItems
+  );
+  console.log(pollItem);
+  pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point, ...newCustomItems);
 };
 
 const localSetting = () => {
@@ -341,10 +414,11 @@ const localSetting = () => {
 
   checkSelectedItems = reactive(
     JSON.parse(localStorage.getItem("settings")).checkSelectedItems == undefined
-      ? new Array(pollItem.length).fill(true)
+      ? new Array(pollItem.length + customItemManager.getAllTypeItems().length).fill(true)
       : JSON.parse(localStorage.getItem("settings")).checkSelectedItems
   );
-
+  
+  
   defaultSetting.checkSelectedItems = checkSelectedItems;
 
   watch(
@@ -381,6 +455,10 @@ const init = () => {
 };
 
 init();
+
+console.log(pollItem);
+console.log(checkSelectedItems);
+console.log(pollSelectedItems);
 </script>
 
 <template>
