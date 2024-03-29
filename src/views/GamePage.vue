@@ -163,12 +163,11 @@ const activeItem = () => {
   currentPlayer[0].items.getAllItemUsed().forEach((item) => {
     if (Array.isArray(item.itemInfo.ability)) {
       item.itemInfo.ability.forEach((itemObj) => {
-        customItem.push({ itemInfo: { ...item.itemInfo, ability : itemObj.ability } });
+        customItem.push({ itemInfo: { ...item.itemInfo, ability : itemObj.ability , priority : itemObj.priority} });
       });
     }
   });
   const starterItem = currentPlayer[0].items.getAllItemUsed().filter(el => !Array.isArray(el.itemInfo.ability))
-  // console.log(...currentPlayer[0].items.getAllItemUsed());
   const orderPriorityItem = [
     itemRollDice,
     ...starterItem,
@@ -177,7 +176,6 @@ const activeItem = () => {
   ];
   orderPriorityItem.sort((a, b) => a.itemInfo.priority - b.itemInfo.priority);
   orderPriorityItem.forEach((item) => {
-    console.log(item);
     item.itemInfo.ability();
     if (item.itemInfo.isPerTurn && !item.isBuff)
       currentPlayer[0].buff.push({ isBuff: true, ...item });
@@ -392,7 +390,6 @@ const initItem = () => {
         oldTypeItem.isAttack
       );
     });
-  console.log(newCustomItems);
   pollItem.push(
     X2P50,
     addDice,
@@ -403,7 +400,6 @@ const initItem = () => {
     plus2Point,
     ...newCustomItems
   );
-  console.log(pollItem);
   pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point, ...newCustomItems);
 };
 
@@ -456,9 +452,7 @@ const init = () => {
 
 init();
 
-console.log(pollItem);
-console.log(checkSelectedItems);
-console.log(pollSelectedItems);
+
 </script>
 
 <template>

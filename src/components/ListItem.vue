@@ -52,8 +52,15 @@ const props = defineProps({
               @click="[player.items.toggleUsedItem(id), playSoundSFX(soundbtn)]"
               type="checkbox"
             />
-            <img class="swap-off" :src="picture" />
-            <img class="swap-on" :src="picture" />
+
+     
+              <img v-show="picture" class="swap-off" :src="picture" />
+              <img v-show="picture"  class="swap-on" :src="picture" />
+           
+     
+              <p  v-show="!picture" class="swap-off">{{ name }}</p>
+              <p  v-show="!picture" class="swap-on">{{ name }}</p>
+
           </label>
         </template>
       </Item>
