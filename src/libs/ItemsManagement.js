@@ -16,7 +16,7 @@ export default class ItemsManagement {
   toggleUsedItem(id) {
     this.findItem(id).toggleUsed();
   }
-  UnusedAllItem() {
+  unUsedAllItem() {
     this._items.forEach((item) => (item.isUsed = false));
   }
 
@@ -36,10 +36,18 @@ export default class ItemsManagement {
     if (this._items.length < this.limitItem)
       this._items.push(new Item(typeItem));
   }
+  getAllEnableItem() {
+    return this.pollItem
+      .filter((item) => item)
+      .filter(({ isEnable }) => isEnable);
+  }
+
   addRandomItem(amout = 1) {
-    if (this.pollItem.length < 1) return;
+    if (this.getAllEnableItem().length < 1) return;
     for (let i = 0; i < amout; i++)
-      this.addItem(this.pollItem[random(0, this.pollItem.length - 1)]);
+      this.addItem(
+        this.getAllEnableItem()[random(0, this.getAllEnableItem().length - 1)]
+      );
   }
   getAllItemUsed() {
     return this._items.filter(({ isUsed }) => isUsed);

@@ -5,6 +5,7 @@ const props = defineProps({
   action: Function,
   values: [Array, Object],
 });
+defineEmits(["enableItem"]);
 </script>
 
 <template>
@@ -17,10 +18,9 @@ const props = defineProps({
         className="flex justify-between w-[50px] scr-m:w-[70px] gap-1  cursor-pointer checked:bg-btn-hover"
       >
         <input
-          @click="action(index)"
-          :v-model="checkboxs[index]"
+          @click="$emit('enableItem', item)"
           type="checkbox"
-          :checked="checkboxs[index]"
+          :checked="checkboxs.find(({ id }) => id === item.id)"
           className="checkbox border-2   checkbox-xs scr-m:checkbox-md scr-l:checkbox-lg"
         />
         <span>{{ item.name }}</span>

@@ -4,7 +4,7 @@ import TypeItem from "./../TypeItem";
 import { random } from "./../utils/tool";
 import ItemManagement from "./../libs/ItemsManagement";
 import initStructureItem from "./../initStructureItem";
-
+import { useRouter } from "vue-router";
 import soundbtn from "/music/soundBtn.mp3";
 import soundAddItem from "/music/addItem.mp3";
 import soundHold from "/music/holdsound.mp3";
@@ -12,7 +12,6 @@ import soundWin from "/music/toothless.mp3";
 import soundSwap from "/music/swapsound.mp3";
 import backgroundMusic from "/music/backgroundMusic.mp3";
 import Item from "./../StateItem";
-
 import ButtonGame from "./../components/ButtonGame.vue";
 import DisplayDice from "./../components/DisplayDice.vue";
 import HowtoPlay from "./../components/HowtoPlay.vue";
@@ -36,16 +35,28 @@ import {
   setSound,
 } from "./../libs/SoundControl";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
+const route = useRouter();
 
 const customItemManager = useCustom();
 let voidScore = 1;
 const theWinner = ref(null);
-const pollSelectedItems = [];
 let pollItem = [];
 let checkSelectedItems = reactive([]);
 let givePoint = 0;
 let dices = reactive([1, 1]);
 let phaseGame = 0;
+let currentItemSelected = [];
+const itemSelectedForm = reactive([]);
+
+const updateTypeItemEnable = (typeItem) => {
+  const sameItemIndex = itemSelectedForm.findIndex(
+    ({ id }) => id === typeItem.id
+  );
+  if (sameItemIndex === -1) itemSelectedForm.push(typeItem);
+  else itemSelectedForm.splice(sameItemIndex, 1);
+
+  console.log(itemSelectedForm);
+};
 
 const musicSetting = reactive({});
 
@@ -57,16 +68,8 @@ onMounted(() => {
   const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
   musicSetting.isOffMusic = myMusic.isOffMusic;
   musicSetting.isOffSFX = myMusic.isOffSFX;
-  setSound(myMusic);
+  reset();
 });
-
-const updateMusicSetting = (e, name) => {
-  if (name == "isOffMusic") {
-    musicSetting.isOffMusic = e.openSound;
-  } else {
-    musicSetting.isOffSFX = e.openSound;
-  }
-};
 
 let defaultSetting = localStorage.getItem("settings")
   ? JSON.parse(localStorage.getItem("settings"))
@@ -105,11 +108,21 @@ const rollDiceAbility = () => {
 };
 
 const itemRollDice = new Item(
-  new TypeItem("rollDice", rollDiceAbility, 2, "-", false)
+  new TypeItem(
+    "rollDice",
+    rollDiceAbility,
+    2,
+    "Base Ability to roll dice",
+    false
+  )
 );
 
-const chooseItems = (index) => {
-  checkSelectedItems[index] = !checkSelectedItems[index];
+const updateMusicSetting = (e, name) => {
+  if (name == "isOffMusic") {
+    musicSetting.isOffMusic = e.openSound;
+  } else {
+    musicSetting.isOffSFX = e.openSound;
+  }
 };
 
 const reset = () => {
@@ -154,11 +167,19 @@ const activeItem = () => {
   currentPlayer[0].items.getAllItemUsed().forEach((item) => {
     if (Array.isArray(item.itemInfo.ability)) {
       item.itemInfo.ability.forEach((itemObj) => {
-        customItem.push({ itemInfo: { ...item.itemInfo, ability : itemObj.ability , priority : itemObj.priority} });
+        customItem.push({
+          itemInfo: {
+            ...item.itemInfo,
+            ability: itemObj.ability,
+            priority: itemObj.priority,
+          },
+        });
       });
     }
   });
-  const starterItem = currentPlayer[0].items.getAllItemUsed().filter(el => !Array.isArray(el.itemInfo.ability))
+  const starterItem = currentPlayer[0].items
+    .getAllItemUsed()
+    .filter((el) => !Array.isArray(el.itemInfo.ability));
   const orderPriorityItem = [
     itemRollDice,
     ...starterItem,
@@ -201,7 +222,7 @@ const roll = () => {
 };
 
 const hold = () => {
-  currentPlayer[0].items.UnusedAllItem();
+  currentPlayer[0].items.unUsedAllItem();
   currentPlayer[0].point += currentPlayer[0].curPoint;
   currentPlayer[0].curPoint = 0;
   switchPlayer();
@@ -216,49 +237,31 @@ const resetSetting = () => {
   musicSetting.isOffMusic = false;
   musicSetting.isOffSFX = false;
   checkSelectedItems = checkSelectedItems.fill(true);
-  defaultSetting = { ...currentSetting };
-  reset();
+
+  itemSelectedForm.splice(0, itemSelectedForm.length);
+  itemSelectedForm.push(...pollItem.slice(0, 7));
 };
+
+const commitSeletedItem = (itemSelectedForm) => {
+  currentItemSelected = [...itemSelectedForm];
+  pollItem.forEach((item) => (item.isEnable = false));
+  currentItemSelected.forEach((item) => (item.isEnable = true));
+};
+
 const closeSetting = () => {
   currentSetting.limitItem = defaultSetting.limitItem;
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
   currentSetting.settingPoint = defaultSetting.settingPoint;
   currentSetting.startingItem = defaultSetting.startingItem;
-  const arrNameItem = pollSelectedItems.map((item) => item.name);
-  checkSelectedItems.forEach((isChecked, index) => {
-    if (isChecked) {
-      if (!arrNameItem.includes(pollItem[index].name)) {
-        checkSelectedItems[index] = !checkSelectedItems[index];
-      }
-    } else {
-      if (arrNameItem.includes(pollItem[index].name)) {
-        checkSelectedItems[index] = !checkSelectedItems[index];
-      }
-    }
-  });
-};
-
-const addSelectedItem = function () {
-  pollSelectedItems.splice(0, pollSelectedItems.length);
-  checkSelectedItems.forEach((isChecked, index) => {
-    if (isChecked) {
-      pollSelectedItems.push(pollItem[index]);
-    }
-  });
-  [player1, player2].forEach((el) => {
-    el.items.changePollitem(pollSelectedItems);
-  });
+  itemSelectedForm.splice(0, itemSelectedForm.length);
+  itemSelectedForm.push(...currentItemSelected);
 };
 
 const saveSetting = () => {
   const isInteger = (input, min, max) => {
     if (input === "") return false;
     const isValidInput = !isNaN(input) && Number.isInteger(Number(input));
-    if (
-      isValidInput &&
-      typeof min !== "undefined" &&
-      typeof max !== "undefined"
-    ) {
+    if (isValidInput && min !== "undefined" && max !== "undefined") {
       return input >= min && input <= max;
     }
     return isValidInput;
@@ -278,7 +281,7 @@ const saveSetting = () => {
   defaultSetting = { ...currentSetting };
   player1.items.setLimitItem(defaultSetting.limitItem);
   player2.items.setLimitItem(defaultSetting.limitItem);
-  addSelectedItem();
+  commitSeletedItem(itemSelectedForm);
   reset();
 };
 
@@ -375,10 +378,12 @@ const initItem = () => {
       return new TypeItem(
         oldTypeItem.name,
         ability,
-        undefined,
-        undefined,
+        null,
+        null,
         oldTypeItem.isPerTurn,
-        oldTypeItem.isAttack
+        oldTypeItem.isAttack,
+        null,
+        oldTypeItem.isEnable
       );
     });
   pollItem.push(
@@ -391,7 +396,6 @@ const initItem = () => {
     plus2Point,
     ...newCustomItems
   );
-  pollSelectedItems.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point, ...newCustomItems);
 };
 
 const localSetting = () => {
@@ -401,48 +405,54 @@ const localSetting = () => {
 
   checkSelectedItems = reactive(
     JSON.parse(localStorage.getItem("settings")).checkSelectedItems == undefined
-      ? new Array(pollItem.length + customItemManager.getAllTypeItems().length).fill(true)
+      ? new Array(
+          pollItem.length + customItemManager.getAllTypeItems().length
+        ).fill(true)
       : JSON.parse(localStorage.getItem("settings")).checkSelectedItems
   );
-  
-  
-  defaultSetting.checkSelectedItems = checkSelectedItems;
-
-  watch(
-    [currentSetting, checkSelectedItems, musicSetting],
-    ([newSetting, newSelectedItems, newMusicSetting]) => {
-      const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
-      const newVal = {
-        ...storedSettings,
-        ...newSetting,
-        checkSelectedItems: newSelectedItems,
-        musicSetting: { ...newMusicSetting },
-      };
-      localStorage.setItem("settings", JSON.stringify(newVal));
-      setSound(newMusicSetting);
-    },
-    { deep: true }
-  );
-  addSelectedItem();
 };
-import { useRouter } from "vue-router";
-const route = useRouter();
 
 const rollBack = () => {
   stopMusic();
   route.go(-1);
 };
-
+watch(
+  [currentSetting, musicSetting, itemSelectedForm],
+  ([newSetting, newMusicSetting, newStoredItemSelected]) => {
+    const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+    const newVal = {
+      ...storedSettings,
+      ...newSetting,
+      storedItemSelected: newStoredItemSelected.map((item) => {
+        return item;
+      }),
+      musicSetting: { ...newMusicSetting },
+    };
+    localStorage.setItem("settings", JSON.stringify(newVal));
+    setSound(newMusicSetting);
+  },
+  { deep: true }
+);
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
   initItem();
   localSetting();
-  reset();
+
+  //RIP....
+  const storedItemSelected = JSON.parse(localStorage.getItem("settings"))
+    .storedItemSelected?.map(({ id }) => {
+      return pollItem.find((item) => item.id === id);
+    })
+    .filter((item) => item);
+  const defaultItemSelected = storedItemSelected
+    ? storedItemSelected
+    : [...pollItem.filter(({ isEnable }) => isEnable)];
+  commitSeletedItem(defaultItemSelected);
+  itemSelectedForm.push(...currentItemSelected);
 };
 
 init();
-
 </script>
 
 <template>
@@ -600,10 +610,10 @@ init();
 
               <template #checkboxSetting>
                 <CheckboxsSetting
+                  @enableItem="updateTypeItemEnable"
                   title="Item Random:"
-                  :action="chooseItems"
+                  :checkboxs="itemSelectedForm"
                   :values="pollItem"
-                  :checkboxs="checkSelectedItems"
                 />
               </template>
               <template #submit>

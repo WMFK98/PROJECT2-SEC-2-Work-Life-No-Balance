@@ -14,7 +14,6 @@ import {
   addItem,
   deleteItemById,
   editItem,
-  getItemById,
   getItems,
 } from "./../utils/fetchUtils";
 
@@ -29,6 +28,7 @@ const customItemForm = reactive({
   ability: [],
   name: "",
   isPerTurn: true,
+  isEnable: true,
 });
 const selectedItemId = ref(null);
 let isEditing = false;
@@ -71,8 +71,7 @@ const removeItem = async () => {
     import.meta.env.VITE_BASE_URL,
     selectedItemId.value
   );
-  if (statusCode === 200)
-    customItems.removePollItem(selectedItemId.value);
+  if (statusCode === 200) customItems.removePollItem(selectedItemId.value);
   resetForm();
 };
 
