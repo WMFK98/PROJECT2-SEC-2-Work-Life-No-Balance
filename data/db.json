@@ -1,14 +1,13 @@
 {
   "TypeItemsCus": [
     {
-      "id": "253d",
       "ability": [
         "X2>3",
         "X2>3"
       ],
-      "name": "kj",
-      "isPerTurn": false,
-      "isEnable": true
+      "name": "kuy",
+      "isPerTurn": true,
+      "id": "7503"
     }
   ]
 }

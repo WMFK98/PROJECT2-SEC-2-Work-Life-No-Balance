@@ -12,12 +12,9 @@ import OddAndEven from "./../assets/Icon_Dice_1/ODDEVENT.png";
 import SixOneTime from "./../assets/Icon_Dice_1/OneSixTM.png";
 import PlusTwo from "./../assets/Icon_Dice_1/PlusTwo.png";
 import SqureTwo from "./../assets/Icon_Dice_1/SqureTwo.png";
-import {
-  getItems,
-} from "./../utils/fetchUtils";
+import { getItems } from "./../utils/fetchUtils";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
-import { onMounted} from "vue";
-
+import { onMounted } from "vue";
 
 const customItems = useCustom();
 onMounted(async () => {

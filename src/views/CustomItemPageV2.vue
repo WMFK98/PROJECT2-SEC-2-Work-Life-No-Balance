@@ -18,6 +18,7 @@ import {
 } from "./../utils/fetchUtils";
 
 import { useRouter } from "vue-router";
+
 const route = useRouter();
 const rollBack = () => {
   route.go(-1);
@@ -28,7 +29,6 @@ const customItemForm = reactive({
   ability: [],
   name: "",
   isPerTurn: true,
-  isEnable: true,
 });
 const selectedItemId = ref(null);
 let isEditing = false;

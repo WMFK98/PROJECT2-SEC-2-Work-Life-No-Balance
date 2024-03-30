@@ -38,6 +38,7 @@ export function setSoundDefault() {
 }
 
 export function setSound(obj) {
+  console.log(obj);
   isOffMusic = obj.isOffMusic;
   isOffSFX = obj.isOffSFX;
 }

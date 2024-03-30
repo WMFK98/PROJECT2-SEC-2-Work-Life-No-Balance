@@ -54,8 +54,6 @@ const updateTypeItemEnable = (typeItem) => {
   );
   if (sameItemIndex === -1) itemSelectedForm.push(typeItem);
   else itemSelectedForm.splice(sameItemIndex, 1);
-
-  console.log(itemSelectedForm);
 };
 
 const musicSetting = reactive({});
@@ -68,6 +66,7 @@ onMounted(() => {
   const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
   musicSetting.isOffMusic = myMusic.isOffMusic;
   musicSetting.isOffSFX = myMusic.isOffSFX;
+  setSound(myMusic);
   reset();
 });
 
@@ -76,7 +75,7 @@ let defaultSetting = localStorage.getItem("settings")
   : {
       settingPoint: 100,
       limitItem: 7,
-      addItemNumSetting: 1,
+      addItemNumSetting: 5,
       startingItem: 0,
       musicSetting: { isOffMusic: false, isOffSFX: false },
     };
@@ -253,6 +252,7 @@ const closeSetting = () => {
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
   currentSetting.settingPoint = defaultSetting.settingPoint;
   currentSetting.startingItem = defaultSetting.startingItem;
+  console.log("liii");
   itemSelectedForm.splice(0, itemSelectedForm.length);
   itemSelectedForm.push(...currentItemSelected);
 };
@@ -375,7 +375,8 @@ const initItem = () => {
             break;
         }
       });
-      return new TypeItem(
+
+      const newitem = new TypeItem(
         oldTypeItem.name,
         ability,
         null,
@@ -383,8 +384,12 @@ const initItem = () => {
         oldTypeItem.isPerTurn,
         oldTypeItem.isAttack,
         null,
-        oldTypeItem.isEnable
+        null,
+        oldTypeItem.id
       );
+
+      console.log(newitem);
+      return newitem;
     });
   pollItem.push(
     X2P50,
@@ -402,44 +407,49 @@ const localSetting = () => {
   if (!localStorage.getItem("settings")) {
     localStorage.setItem("settings", JSON.stringify(defaultSetting));
   }
+  watch(
+    [currentSetting, musicSetting],
+    ([newSetting, newMusicSetting]) => {
+      const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+      const newVal = {
+        ...storedSettings,
+        ...newSetting,
+        musicSetting: { ...newMusicSetting },
+      };
+      localStorage.setItem("settings", JSON.stringify(newVal));
+      setSound(newMusicSetting);
+    },
+    { deep: true }
+  );
 
-  checkSelectedItems = reactive(
-    JSON.parse(localStorage.getItem("settings")).checkSelectedItems == undefined
-      ? new Array(
-          pollItem.length + customItemManager.getAllTypeItems().length
-        ).fill(true)
-      : JSON.parse(localStorage.getItem("settings")).checkSelectedItems
+  watch(
+    [itemSelectedForm],
+    ([newStoredItemSelected]) => {
+      const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+      const newVal = {
+        ...storedSettings,
+        storedItemSelected: newStoredItemSelected.map((item) => {
+          return item;
+        }),
+      };
+      localStorage.setItem("settings", JSON.stringify(newVal));
+    },
+    { deep: true }
   );
 };
 
 const rollBack = () => {
+  closeSetting();
   stopMusic();
   route.go(-1);
 };
-watch(
-  [currentSetting, musicSetting, itemSelectedForm],
-  ([newSetting, newMusicSetting, newStoredItemSelected]) => {
-    const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
-    const newVal = {
-      ...storedSettings,
-      ...newSetting,
-      storedItemSelected: newStoredItemSelected.map((item) => {
-        return item;
-      }),
-      musicSetting: { ...newMusicSetting },
-    };
-    localStorage.setItem("settings", JSON.stringify(newVal));
-    setSound(newMusicSetting);
-  },
-  { deep: true }
-);
+
 const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
-  initItem();
   localSetting();
+  initItem();
 
-  //RIP....
   const storedItemSelected = JSON.parse(localStorage.getItem("settings"))
     .storedItemSelected?.map(({ id }) => {
       return pollItem.find((item) => item.id === id);
@@ -451,6 +461,20 @@ const init = () => {
   commitSeletedItem(defaultItemSelected);
   itemSelectedForm.push(...currentItemSelected);
 };
+
+onMounted(() => {
+  if (!localStorage.getItem("settings")) {
+    musicSetting.isOffMusic = false;
+    musicSetting.isOffSFX = false;
+  }
+  const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
+  musicSetting.isOffMusic = myMusic.isOffMusic;
+  musicSetting.isOffSFX = myMusic.isOffSFX;
+  console.log(currentItemSelected);
+  console.log(itemSelectedForm);
+  setSound(myMusic);
+  reset();
+});
 
 init();
 </script>
