@@ -3,12 +3,19 @@ import { defineProps } from "vue";
 const props = defineProps({
   pollItem: [Array, Object],
   canEdit: { type: Boolean, default: false },
+  sizeSmall: {
+    type: Boolean,
+    default: false,
+  },
 });
 defineEmits(["deleteItem", "editItem"]);
 </script>
 <template>
   <div
-    class="flex gap-2 flex-col overflow-y-scroll scr-l:flex-row scr-l:flex-wrap justify-start rounded-md h-max scr-m:h-max scr-l:h-max"
+    class="flex gap-2 flex-col overflow-y-scroll scr-l:flex-row scr-l:flex-wrap justify-start rounded-md"
+    :class="
+      sizeSmall ? ' h-[149px] scr-m:h-[290px]' : 'h-max scr-m:h-max scr-l:h-max'
+    "
   >
     <div
       id="item-box"

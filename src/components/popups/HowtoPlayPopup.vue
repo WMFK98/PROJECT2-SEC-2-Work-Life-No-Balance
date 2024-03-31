@@ -231,14 +231,14 @@ defineProps({ id: String });
         </ol>
         <ItemsInfo
           v-show="selectTutorialPage === 2"
-          class="h-[149px] scr-m:h-[290px]"
           :poll-item="initStructureItem"
+          :size-small="true"
         />
 
         <ItemsInfo
           v-show="selectTutorialPage === 3"
-          class="h-[149px] scr-m:h-[290px]"
           :poll-item="customItem.getAllTypeItems()"
+          :size-small="true"
         />
       </slot>
       <slot name="btn">
