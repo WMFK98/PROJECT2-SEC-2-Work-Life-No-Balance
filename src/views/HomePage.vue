@@ -1,10 +1,9 @@
 <script setup>
-import ButtonGame from "./../components/ButtonGame.vue";
+import ButtonGame from "./../components/buttons/ButtonGame.vue";
 import logoGame from "/images/logo-game.png";
 import amongDice1 from "/images/among-dice-1.png";
 import amongDice2 from "/images/among-dice-2.png";
-import HowtoPlay from "@/components/HowtoPlay.vue";
-
+import HowtoPlay from "@/components/popups/HowtoPlay.vue";
 import Diceplus from "./../assets/Icon_Dice_1/DicePlus.png";
 import DelDice from "./../assets/Icon_Dice_1/DelDice.png";
 import DelTenSC from "./../assets/Icon_Dice_1/DelTenSC.png";

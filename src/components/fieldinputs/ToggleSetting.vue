@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from "vue";
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../libs/SoundControl";
+import { playSoundSFX } from "@/libs/SoundControl";
 
 const emits = defineEmits(["update"]);
 const props = defineProps({

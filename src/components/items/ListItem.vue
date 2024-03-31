@@ -1,7 +1,7 @@
 <script setup>
 import Item from "./Item.vue";
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../libs/SoundControl";
+import { playSoundSFX } from "./../../libs/SoundControl";
 
 const props = defineProps({
   player: Object,
@@ -53,14 +53,11 @@ const props = defineProps({
               type="checkbox"
             />
 
-     
-              <img v-show="picture" class="swap-off" :src="picture" />
-              <img v-show="picture"  class="swap-on" :src="picture" />
-           
-     
-              <p  v-show="!picture" class="swap-off">{{ name }}</p>
-              <p  v-show="!picture" class="swap-on">{{ name }}</p>
+            <img v-show="picture" class="swap-off" :src="picture" />
+            <img v-show="picture" class="swap-on" :src="picture" />
 
+            <p v-show="!picture" class="swap-off">{{ name }}</p>
+            <p v-show="!picture" class="swap-on">{{ name }}</p>
           </label>
         </template>
       </Item>

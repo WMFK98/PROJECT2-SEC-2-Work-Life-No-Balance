@@ -12,19 +12,19 @@ import soundWin from "/music/toothless.mp3";
 import soundSwap from "/music/swapsound.mp3";
 import backgroundMusic from "/music/backgroundMusic.mp3";
 import Item from "./../StateItem";
-import ButtonGame from "./../components/ButtonGame.vue";
-import DisplayDice from "./../components/DisplayDice.vue";
-import HowtoPlay from "./../components/HowtoPlay.vue";
-import Setting from "./../components/Setting.vue";
-import InputSetting from "./../components/InputSetting.vue";
-import ToggleSetting from "./../components/ToggleSetting.vue";
-import CheckboxsSetting from "./../components/CheckboxsSetting.vue";
-import ButtonSetting from "./../components/ButtonSetting.vue";
-import PopupLog from "./../components/PopupLog.vue";
-import ListItem from "./../components/ListItem.vue";
-import CurrentPoint from "./../components/CurrentPoint.vue";
-import SwitchSide from "./../components/SwitchSide.vue";
-import SwitchSideLower from "./../components/SwitchSideLower.vue";
+import ButtonGame from "./../components/buttons/ButtonGame.vue";
+import DisplayDice from "./../components/other/DisplayDice.vue";
+import HowtoPlay from "./../components/popups/HowtoPlay.vue";
+import Setting from "./../components/popups/Setting.vue";
+import InputSetting from "./../components/fieldinputs/InputSetting.vue";
+import ToggleSetting from "./../components/fieldinputs/ToggleSetting.vue";
+import CheckboxsSetting from "./../components/fieldinputs/CheckboxsSetting.vue";
+import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
+import PopupLog from "./../components/popups/PopupLog.vue";
+import ListItem from "./../components/items/ListItem.vue";
+import CurrentPoint from "./../components/other/CurrentPoint.vue";
+import SwitchSide from "./../components/other/SwitchSide.vue";
+import SwitchSideLower from "./../components/other/SwitchSideLower.vue";
 import {
   playSoundSFX,
   playSoundMusic,
@@ -75,7 +75,7 @@ let defaultSetting = localStorage.getItem("settings")
   : {
       settingPoint: 100,
       limitItem: 7,
-      addItemNumSetting: 5,
+      addItemNumSetting: 1,
       startingItem: 0,
       musicSetting: { isOffMusic: false, isOffSFX: false },
     };

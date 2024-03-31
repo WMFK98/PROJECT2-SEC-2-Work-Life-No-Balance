@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from "vue";
-import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../libs/SoundControl";
-import SelectPage from "./SelectPage.vue";
-import ItemsInfo from "./ItemsInfo.vue";
+import SelectPage from "./../fieldinputs/SelectPage.vue";
+import ItemsInfo from "./../items/ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
-import ButtonSetting from "./ButtonSetting.vue";
+import ButtonSetting from "./../buttons/ButtonSetting.vue";
 
 const selectTutorialPage = ref(1);
 defineProps({ id: String });
@@ -240,4 +238,3 @@ defineProps({ id: String });
     </div>
   </dialog>
 </template>
-../libs/SoundControl

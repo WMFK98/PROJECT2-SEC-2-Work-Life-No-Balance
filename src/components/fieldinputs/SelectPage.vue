@@ -1,5 +1,5 @@
 <script setup>
-import { playSoundSFX } from "./../libs/SoundControl";
+import { playSoundSFX } from "@/libs/SoundControl";
 import soundbtn from "/music/soundBtn.mp3";
 defineProps({ modelValue: Number, group: String, namePages: Array });
 </script>

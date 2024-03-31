@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
-import { playSoundSFX, playSoundMusic } from "./../libs/SoundControl";
+import { playSoundSFX } from "@/libs/SoundControl";
 import soundbtn from "/music/soundBtn.mp3";
 const props = defineProps({
   title: String,

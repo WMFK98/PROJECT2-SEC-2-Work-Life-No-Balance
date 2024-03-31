@@ -1,6 +1,6 @@
 <script setup>
 import soundbtn from "/music/soundBtn.mp3";
-import { playSoundSFX } from "./../libs/SoundControl";
+import { playSoundSFX } from "@/libs/SoundControl";
 const props = defineProps({
   title: String,
   action: { type: Function, default: () => {} },
