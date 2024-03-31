@@ -9,9 +9,9 @@ export default class TypeItem {
     isAttack = false,
     picture = null,
     isEnable = true,
-    idCus = TypeItem.nextid++
+    idCustom = TypeItem.nextid++
   ) {
-    this.id = idCus;
+    this.id = idCustom;
     this.name = name;
     this.priority = priority;
     this.isPerTurn = isPerTurn;

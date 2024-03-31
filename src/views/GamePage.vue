@@ -336,6 +336,7 @@ const initItem = () => {
     if (phaseGame === 0) return;
     givePoint = givePoint + 2;
   };
+
   const { G6, N10C, OAE, X2P50, addDice, plus2Point, popDice } =
     initStructureItem;
   G6.addAbility(guarantee6Ability);
@@ -345,37 +346,17 @@ const initItem = () => {
   addDice.addAbility(addDiceAbililty);
   plus2Point.addAbility(plus2Abililty);
   popDice.addAbility(popDiceAbililty);
+  pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 
   const newCustomItems = customItemManager
     .getAllTypeItems()
     .map((oldTypeItem) => {
       const ability = [];
-      oldTypeItem.ability.forEach((el) => {
-        switch (el) {
-          case "X2>3":
-            ability.push(X2P50);
-            break;
-          case "Dice+":
-            ability.push(addDice);
-            break;
-          case "N10C":
-            ability.push(N10C);
-            break;
-          case "O&E":
-            ability.push(OAE);
-            break;
-          case "Dice-":
-            ability.push(popDice);
-            break;
-          case "G6":
-            ability.push(G6);
-            break;
-          case "+2":
-            ability.push(plus2Point);
-            break;
-        }
+      oldTypeItem.ability.forEach((textAbility) => {
+        const itemSearch = pollItem.find(({ name }) => name === textAbility);
+        console.log(itemSearch);
+        if (itemSearch) ability.push(itemSearch);
       });
-
       const newitem = new TypeItem(
         oldTypeItem.name,
         ability,
@@ -384,29 +365,42 @@ const initItem = () => {
         oldTypeItem.isPerTurn,
         oldTypeItem.isAttack,
         null,
-        null,
+        true,
         oldTypeItem.id
       );
-
-      console.log(newitem);
       return newitem;
     });
-  pollItem.push(
-    X2P50,
-    addDice,
-    G6,
-    N10C,
-    OAE,
-    popDice,
-    plus2Point,
-    ...newCustomItems
-  );
+  pollItem.push(...newCustomItems);
 };
 
 const localSetting = () => {
   if (!localStorage.getItem("settings")) {
     localStorage.setItem("settings", JSON.stringify(defaultSetting));
   }
+
+  const storedItemSelected = JSON.parse(localStorage.getItem("settings"))
+    .storedItemSelected?.map(({ id }) => {
+      return pollItem.find((item) => item.id === id);
+    })
+    .filter((item) => item);
+  const defaultItemSelected = storedItemSelected
+    ? storedItemSelected
+    : [...pollItem.filter(({ isEnable }) => isEnable)];
+  commitSeletedItem(defaultItemSelected);
+  itemSelectedForm.push(...currentItemSelected);
+};
+
+const rollBack = () => {
+  closeSetting();
+  stopMusic();
+  route.go(-1);
+};
+
+const init = () => {
+  watch(() => [player1.point, player2.point], checkWin);
+  watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
+  initItem();
+  localSetting();
   watch(
     [currentSetting, musicSetting],
     ([newSetting, newMusicSetting]) => {
@@ -436,30 +430,6 @@ const localSetting = () => {
     },
     { deep: true }
   );
-};
-
-const rollBack = () => {
-  closeSetting();
-  stopMusic();
-  route.go(-1);
-};
-
-const init = () => {
-  watch(() => [player1.point, player2.point], checkWin);
-  watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
-  localSetting();
-  initItem();
-
-  const storedItemSelected = JSON.parse(localStorage.getItem("settings"))
-    .storedItemSelected?.map(({ id }) => {
-      return pollItem.find((item) => item.id === id);
-    })
-    .filter((item) => item);
-  const defaultItemSelected = storedItemSelected
-    ? storedItemSelected
-    : [...pollItem.filter(({ isEnable }) => isEnable)];
-  commitSeletedItem(defaultItemSelected);
-  itemSelectedForm.push(...currentItemSelected);
 };
 
 onMounted(() => {
