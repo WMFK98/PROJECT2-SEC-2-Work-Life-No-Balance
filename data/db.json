@@ -8,6 +8,51 @@
       ],
       "name": "dd",
       "isPerTurn": false
+    },
+    {
+      "id": "860d",
+      "ability": [
+        "X2>3",
+        "X2>3"
+      ],
+      "name": "l",
+      "isPerTurn": false
+    },
+    {
+      "ability": [
+        "X2>3",
+        "X2>3"
+      ],
+      "name": "k",
+      "isPerTurn": true,
+      "id": "be2c"
+    },
+    {
+      "id": "a9b5",
+      "ability": [
+        "X2>3",
+        "X2>3"
+      ],
+      "name": "kkk",
+      "isPerTurn": true
+    },
+    {
+      "id": "8835",
+      "ability": [
+        "Dice-",
+        "Dice-"
+      ],
+      "name": "kk",
+      "isPerTurn": false
+    },
+    {
+      "id": "0c66",
+      "ability": [
+        "Dice-",
+        "Dice-"
+      ],
+      "name": "k",
+      "isPerTurn": false
     }
   ]
 }

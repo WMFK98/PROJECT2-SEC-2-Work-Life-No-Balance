@@ -30,7 +30,7 @@ const props = defineProps({
         } of player.items.getAllItem()"
       >
         <label
-          class="swap hover:bg-Black swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
+          class="swap hover:bg-Black swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-full items-center p-[1px]"
           :class="
             !(currentPlayer === player) || theWinner
               ? 'bg-btn-hover  text-White'

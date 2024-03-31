@@ -360,11 +360,12 @@ const saveItem = async () => {
                 </form></div
             ></template>
           </HowtoPlayPopup>
-          <HowtoPlay id="wiki">
+          <HowtoPlayPopup id="wiki">
             <template #navbar>
-              <p>wiki</p>
+              <p>manual 📒</p>
             </template>
-          </HowtoPlay>
+            <template #page>เล้งมาใส่หน่อย</template>
+          </HowtoPlayPopup>
         </div>
       </div>
       <ItemsInfo

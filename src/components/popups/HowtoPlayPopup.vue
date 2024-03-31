@@ -4,8 +4,10 @@ import SelectPage from "./../fieldinputs/SelectPage.vue";
 import ItemsInfo from "./../items/ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
 import ButtonSetting from "./../buttons/ButtonSetting.vue";
+import { useCustom } from "@/stores/TypeItemsCusMangement";
 
 const selectTutorialPage = ref(1);
+const customItem = useCustom();
 defineProps({ id: String });
 </script>
 
@@ -22,7 +24,7 @@ defineProps({ id: String });
           <slot name="navbar">
             <SelectPage
               v-model="selectTutorialPage"
-              :name-pages="['How to play', 'Item info']"
+              :name-pages="['How to play', 'Items', 'Custom Items']"
             />
             <div
               v-show="selectTutorialPage === 1"
@@ -46,21 +48,25 @@ defineProps({ id: String });
               </div>
             </div>
             <div
-              v-show="selectTutorialPage === 2"
+              v-show="selectTutorialPage === 2 || selectTutorialPage === 3"
               class="flex gap-3 text-hss scr-l:text-hs-des"
             >
               <div class="flex gap-3 text-hss scr-l:text-hs-des">
                 <div class="flex gap-2 src-l:gap-4">
-                  <div class="bg-item-time w-4 scr-l:w-8 rounded-[5px]"></div>
+                  <div
+                    class="bg-item-time w-4 h-4 scr-l:w-8 scr-l:h-8 rounded-[5px]"
+                  ></div>
                   <p>Item Time</p>
                 </div>
                 <div class="flex gap-2">
-                  <div class="bg-item-turn w-4 scr-l:w-8 rounded-[5px]"></div>
+                  <div
+                    class="bg-item-turn w-4 h-4 scr-l:w-8 scr-l:h-8 rounded-[5px]"
+                  ></div>
                   <p>Item Turn</p>
                 </div>
                 <div class="flex gap-2">
                   <div
-                    class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"
+                    class="bg-Main-pink-300 w-4 h-4 scr-l:w-8 scr-l:h-8 rounded-[5px]"
                   ></div>
                   <p>Item Attack</p>
                 </div>
@@ -223,13 +229,17 @@ defineProps({ id: String });
             </li>
           </slot>
         </ol>
-        <div>
-          <ItemsInfo
-            v-show="selectTutorialPage === 2"
-            class="h-[149px] scr-m:h-[290px]"
-            :poll-item="initStructureItem"
-          />
-        </div>
+        <ItemsInfo
+          v-show="selectTutorialPage === 2"
+          class="h-[149px] scr-m:h-[290px]"
+          :poll-item="initStructureItem"
+        />
+
+        <ItemsInfo
+          v-show="selectTutorialPage === 3"
+          class="h-[149px] scr-m:h-[290px]"
+          :poll-item="customItem.getAllTypeItems()"
+        />
       </slot>
       <slot name="btn">
         <form method="dialog" class="flex justify-center">
