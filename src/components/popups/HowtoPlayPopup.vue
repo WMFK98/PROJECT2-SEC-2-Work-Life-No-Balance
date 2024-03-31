@@ -226,6 +226,7 @@ defineProps({ id: String });
         <div>
           <ItemsInfo
             v-show="selectTutorialPage === 2"
+            class="h-[149px] scr-m:h-[290px]"
             :poll-item="initStructureItem"
           />
         </div>

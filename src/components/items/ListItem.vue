@@ -1,5 +1,4 @@
 <script setup>
-import Item from "./Item.vue";
 import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../../libs/SoundControl";
 
@@ -23,44 +22,40 @@ const props = defineProps({
       class="scr-l:w-[480px] w-[300px] h-[45px] rounded-[10px] flex p-1 gap-1 bg-White text-hss scr-m:text-hs-tal scr-l:text-hs-des text-White scr-m:h-[63.49px] scr-m:w-[435.391px] scr-l:h-[71px] scr-m:rounded-[20px]"
       :class="player.items.owner == 'p2' ? 'flex-row-reverse' : ''"
     >
-      <Item :pollItem="player.items.getAllItem()">
-        <template
-          #default="{
-            item: {
-              id,
-              isUsed,
-              itemInfo: { name, picture, isPerTurn, isAttack },
-            },
-          }"
+      <div
+        v-for="{
+          id,
+          isUsed,
+          itemInfo: { name, picture, isPerTurn, isAttack },
+        } of player.items.getAllItem()"
+      >
+        <label
+          class="swap hover:bg-Black swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
+          :class="
+            !(currentPlayer === player) || theWinner
+              ? 'bg-btn-hover  text-White'
+              : isUsed
+              ? 'bg-Yellow-light  text-Black'
+              : isPerTurn || name === 'Dice+' || name === 'Dice-'
+              ? 'bg-item-turn text-White'
+              : isAttack
+              ? 'bg-Main-pink-300 text-White'
+              : 'bg-item-time text-White'
+          "
+          :disabled="!(currentPlayer === player) || theWinner"
         >
-          <label
-            class="swap hover:bg-Black swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-auto items-center p-[1px]"
-            :class="
-              !(currentPlayer === player) || theWinner
-                ? 'bg-btn-hover  text-White'
-                : isUsed
-                ? 'bg-Yellow-light  text-Black'
-                : isPerTurn || name === 'Dice+' || name === 'Dice-'
-                ? 'bg-item-turn text-White'
-                : isAttack
-                ? 'bg-Main-pink-300 text-White'
-                : 'bg-item-time text-White'
-            "
-            :disabled="!(currentPlayer === player) || theWinner"
-          >
-            <input
-              @click="[player.items.toggleUsedItem(id), playSoundSFX(soundbtn)]"
-              type="checkbox"
-            />
+          <input
+            @click="[player.items.toggleUsedItem(id), playSoundSFX(soundbtn)]"
+            type="checkbox"
+          />
 
-            <img v-show="picture" class="swap-off" :src="picture" />
-            <img v-show="picture" class="swap-on" :src="picture" />
+          <img v-show="picture" class="swap-off" :src="picture" />
+          <img v-show="picture" class="swap-on" :src="picture" />
 
-            <p v-show="!picture" class="swap-off">{{ name }}</p>
-            <p v-show="!picture" class="swap-on">{{ name }}</p>
-          </label>
-        </template>
-      </Item>
+          <p v-show="!picture" class="swap-off">{{ name }}</p>
+          <p v-show="!picture" class="swap-on">{{ name }}</p>
+        </label>
+      </div>
     </div>
   </div>
 </template>

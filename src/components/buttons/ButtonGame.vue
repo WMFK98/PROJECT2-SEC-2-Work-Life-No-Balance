@@ -8,7 +8,7 @@ const props = defineProps({
   soundSFX: { type: String, default: soundbtn },
   buttonStyle: {
     type: String,
-    define(value) {
+    varlidatior(value) {
       return ["normal", "short", "static"].includes(value);
     },
   },

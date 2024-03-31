@@ -20,6 +20,7 @@ import InputSetting from "./../components/fieldinputs/InputSetting.vue";
 import ToggleSetting from "./../components/fieldinputs/ToggleSetting.vue";
 import CheckboxsSetting from "./../components/fieldinputs/CheckboxsSetting.vue";
 import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
+import ButtonMini from "./../components/buttons/ButtonMini.vue";
 import LogPopup from "./../components/popups/LogPopup.vue";
 import ListItem from "./../components/items/ListItem.vue";
 import CurrentPoint from "./../components/other/CurrentPoint.vue";
@@ -35,6 +36,7 @@ import {
   setSound,
 } from "./../libs/SoundControl";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
+
 const route = useRouter();
 
 const customItemManager = useCustom();
@@ -500,14 +502,7 @@ init();
           class="flex flex-col py-2 scr-l:pt-[19px] gap-2 scr-m:gap-[22px] items-center"
         >
           <div id="top-btn" class="flex gap-3 items-center">
-            <button
-              id="btn-tutorial"
-              class="z-20 bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
-              onclick="tutorial.showModal()"
-              @click="playSoundSFX(soundbtn)"
-            >
-              📖
-            </button>
+            <ButtonMini title="📖" onclick="tutorial.showModal()" />
             <HowtoPlayPopup id="tutorial">
               <template #items-tutorial>
                 <ItemsInfo :poll-item="pollItem" />
@@ -520,13 +515,7 @@ init();
               buttonStyle="static"
               :action="reset"
             />
-            <button
-              class="z-20 bg-Yellow-light px-2 text-hss scr-m:text-hs-tal scr-l:text-hs-des shadow-lg text-Black hover:bg-btn-hover btn btn-xs border-0 scr-m:h-[39px] scr-m:w-max scr-m:px-[15px] scr-m:rounded-[30px] scr-l:h-[50px]"
-              onclick="setting.showModal()"
-              @click="playSoundSFX(soundbtn)"
-            >
-              ⚙️
-            </button>
+            <ButtonMini title="⚙️" onclick="setting.showModal()" />
             <SettingPopup>
               <template #title>
                 <div class="flex mb-3">

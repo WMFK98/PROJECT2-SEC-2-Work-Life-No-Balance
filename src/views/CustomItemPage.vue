@@ -228,7 +228,7 @@ const saveItem = async () => {
                 </form></div
             ></template>
           </HowtoPlayPopup>
-          <HowtoPlay id="createItem">
+          <HowtoPlayPopup id="createItem">
             <template #body>
               <div
                 id="navbar"
@@ -359,7 +359,7 @@ const saveItem = async () => {
                   />
                 </form></div
             ></template>
-          </HowtoPlay>
+          </HowtoPlayPopup>
           <HowtoPlay id="wiki">
             <template #navbar>
               <p>wiki</p>

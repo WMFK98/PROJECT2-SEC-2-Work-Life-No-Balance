@@ -1,6 +1,4 @@
 <script setup>
-import Item from "./../items/Item.vue";
-
 const props = defineProps({
   SItem: String,
   modelValue: String,
@@ -16,31 +14,29 @@ const props = defineProps({
     <div
       class="item-bar w-max flex p-1 gap-1 bg-White text-hss scr-l:text-hs-des scr-l:gap-8 text-White h-max rounded-[20px]"
     >
-      <Item :pollItem="initStructureItem">
-        <template #default="{ item: { name, picture, isPerTurn, isAttack } }">
-          <label
-            class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
-            :class="
-              modelValue === name
-                ? 'bg-Yellow-light'
-                : isPerTurn || name === 'Dice+' || name === 'Dice-'
-                ? 'bg-item-turn text-White'
-                : isAttack
-                ? 'bg-Main-pink-300 text-White'
-                : 'bg-item-time text-White'
-            "
-          >
-            <input
-              :value="name"
-              @click="$emit('update:modelValue', $event.target.value)"
-              type="checkbox"
-            />
+      <div v-for="{ name, picture, isPerTurn, isAttack } of items">
+        <label
+          class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
+          :class="
+            modelValue === name
+              ? 'bg-Yellow-light'
+              : isPerTurn || name === 'Dice+' || name === 'Dice-'
+              ? 'bg-item-turn text-White'
+              : isAttack
+              ? 'bg-Main-pink-300 text-White'
+              : 'bg-item-time text-White'
+          "
+        >
+          <input
+            :value="name"
+            @click="$emit('update:modelValue', $event.target.value)"
+            type="checkbox"
+          />
 
-            <img class="swap-off" :src="picture" />
-            <img class="swap-on" :src="picture" />
-          </label>
-        </template>
-      </Item>
+          <img class="swap-off" :src="picture" />
+          <img class="swap-on" :src="picture" />
+        </label>
+      </div>
     </div>
   </div>
 </template>
