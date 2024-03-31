@@ -30,7 +30,7 @@ const selectPageItem = ref(1);
 const customItemForm = reactive({
   ability: [],
   name: "",
-  isPerTurn: true,
+  isPerTurn: false,
 });
 const selectedItemId = ref(null);
 let isEditing = false;
@@ -96,8 +96,8 @@ const saveItem = async () => {
       ...customItemForm,
     });
     if (updateItem) customItems.addTypeItem({ ...updateItem });
-    resetForm();
   }
+  resetForm();
 };
 </script>
 
