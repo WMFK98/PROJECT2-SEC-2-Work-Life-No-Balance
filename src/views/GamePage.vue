@@ -14,13 +14,13 @@ import backgroundMusic from "/music/backgroundMusic.mp3";
 import Item from "./../StateItem";
 import ButtonGame from "./../components/buttons/ButtonGame.vue";
 import DisplayDice from "./../components/other/DisplayDice.vue";
-import HowtoPlay from "./../components/popups/HowtoPlay.vue";
-import Setting from "./../components/popups/Setting.vue";
+import HowtoPlayPopup from "./../components/popups/HowtoPlayPopup.vue";
+import SettingPopup from "./../components/popups/SettingPopup.vue";
 import InputSetting from "./../components/fieldinputs/InputSetting.vue";
 import ToggleSetting from "./../components/fieldinputs/ToggleSetting.vue";
 import CheckboxsSetting from "./../components/fieldinputs/CheckboxsSetting.vue";
 import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
-import PopupLog from "./../components/popups/PopupLog.vue";
+import LogPopup from "./../components/popups/LogPopup.vue";
 import ListItem from "./../components/items/ListItem.vue";
 import CurrentPoint from "./../components/other/CurrentPoint.vue";
 import SwitchSide from "./../components/other/SwitchSide.vue";
@@ -252,7 +252,6 @@ const closeSetting = () => {
   currentSetting.addItemNumSetting = defaultSetting.addItemNumSetting;
   currentSetting.settingPoint = defaultSetting.settingPoint;
   currentSetting.startingItem = defaultSetting.startingItem;
-  console.log("liii");
   itemSelectedForm.splice(0, itemSelectedForm.length);
   itemSelectedForm.push(...currentItemSelected);
 };
@@ -354,7 +353,6 @@ const initItem = () => {
       const ability = [];
       oldTypeItem.ability.forEach((textAbility) => {
         const itemSearch = pollItem.find(({ name }) => name === textAbility);
-        console.log(itemSearch);
         if (itemSearch) ability.push(itemSearch);
       });
       const newitem = new TypeItem(
@@ -440,8 +438,6 @@ onMounted(() => {
   const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
   musicSetting.isOffMusic = myMusic.isOffMusic;
   musicSetting.isOffSFX = myMusic.isOffSFX;
-  console.log(currentItemSelected);
-  console.log(itemSelectedForm);
   setSound(myMusic);
   reset();
 });
@@ -512,11 +508,11 @@ init();
             >
               📖
             </button>
-            <HowtoPlay id="tutorial">
+            <HowtoPlayPopup id="tutorial">
               <template #items-tutorial>
                 <ItemsInfo :poll-item="pollItem" />
               </template>
-            </HowtoPlay>
+            </HowtoPlayPopup>
 
             <ButtonGame
               class="z-20"
@@ -531,7 +527,7 @@ init();
             >
               ⚙️
             </button>
-            <Setting>
+            <SettingPopup>
               <template #title>
                 <div class="flex mb-3">
                   <form method="dialog" class="flex flex-1">
@@ -622,10 +618,10 @@ init();
                   style-type="close"
                 />
 
-                <PopupLog log="❌Something went wrong❌" type="errorModal" />
-                <PopupLog log="✅Success✅" type="successModal" />
+                <LogPopup log="❌Something went wrong❌" type="errorModal" />
+                <LogPopup log="✅Success✅" type="successModal" />
               </template>
-            </Setting>
+            </SettingPopup>
           </div>
 
           <div

@@ -3,7 +3,7 @@ import ButtonGame from "./../components/buttons/ButtonGame.vue";
 import logoGame from "/images/logo-game.png";
 import amongDice1 from "/images/among-dice-1.png";
 import amongDice2 from "/images/among-dice-2.png";
-import HowtoPlay from "@/components/popups/HowtoPlay.vue";
+import HowtoPlayPopup from "@/components/popups/HowtoPlayPopup.vue";
 import Diceplus from "./../assets/Icon_Dice_1/DicePlus.png";
 import DelDice from "./../assets/Icon_Dice_1/DelDice.png";
 import DelTenSC from "./../assets/Icon_Dice_1/DelTenSC.png";
@@ -96,7 +96,7 @@ onMounted(async () => {
           onclick="HowToPlay.showModal()"
         />
 
-        <HowtoPlay id="HowToPlay" />
+        <HowtoPlayPopup id="HowToPlay" />
         <router-link :to="{ name: 'CustomItem' }">
           <ButtonGame
             title="Custom Item"

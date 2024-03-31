@@ -23,7 +23,6 @@ export default class TypeItem {
   }
   toggleEnable() {
     this.isEnable = !this.isEnable;
-    console.log(this.isEnable);
   }
   addAbility(newAbility) {
     this.ability = newAbility;

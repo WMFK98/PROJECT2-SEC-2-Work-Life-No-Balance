@@ -4,7 +4,7 @@ import Item from "@/StateItem";
 import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
 import BackIcon from "./../assets/Icon/BackIcon.vue";
 import ItemsInfo from "./../components/items/ItemsInfo.vue";
-import HowtoPlay from "./../components/popups/HowtoPlay.vue";
+import HowtoPlayPopup from "./../components/popups/HowtoPlayPopup.vue";
 import SelectPage from "./../components/fieldinputs/SelectPage.vue";
 import SelectItem from "@/components/fieldinputs/SelectItem.vue";
 import soundbtn from "/music/soundBtn.mp3";
@@ -171,7 +171,7 @@ const saveItem = async () => {
           >
             𝐢
           </button>
-          <HowtoPlay id="removeItemPopup">
+          <HowtoPlayPopup id="removeItemPopup">
             <template #body>
               <h1 class="text-hm-des">Are you sure to remove this item?</h1>
               <div
@@ -227,7 +227,7 @@ const saveItem = async () => {
                   />
                 </form></div
             ></template>
-          </HowtoPlay>
+          </HowtoPlayPopup>
           <HowtoPlay id="createItem">
             <template #body>
               <div
@@ -317,8 +317,15 @@ const saveItem = async () => {
                   id="marge-items"
                   class="w-auto flex flex-col items-center gap-3 scr-m:gap-3 mb-2 h-auto"
                 >
-                  <SelectItem :items="initStructureItem" SItem="1" v-model="customItemForm.ability[0]" />
-                  <SelectItem  :items="initStructureItem" v-model="customItemForm.ability[1]" />
+                  <SelectItem
+                    :items="initStructureItem"
+                    SItem="1"
+                    v-model="customItemForm.ability[0]"
+                  />
+                  <SelectItem
+                    :items="initStructureItem"
+                    v-model="customItemForm.ability[1]"
+                  />
                 </div>
               </div>
             </template>
