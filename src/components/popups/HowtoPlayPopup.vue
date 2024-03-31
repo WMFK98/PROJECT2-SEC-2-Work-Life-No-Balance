@@ -24,7 +24,7 @@ defineProps({ id: String });
           <slot name="navbar">
             <SelectPage
               v-model="selectTutorialPage"
-              :name-pages="['How to play', 'Items', 'Custom Items']"
+              :name-pages="['How to play', 'Base Items', 'Custom Items']"
             />
             <div
               v-show="selectTutorialPage === 1"
