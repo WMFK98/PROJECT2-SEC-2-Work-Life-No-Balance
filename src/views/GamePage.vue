@@ -60,6 +60,8 @@ onMounted(() => {
   setSound(myMusic);
 });
 
+
+
 const updateMusicSetting = (e, name) => {
   if (name == "isOffMusic") {
     musicSetting.isOffMusic = e.openSound;
@@ -442,6 +444,9 @@ const init = () => {
 };
 
 init();
+console.log("poll" +pollItem);
+console.log("pollSelect"+pollSelectedItems);
+console.log("check" + checkSelectedItems);
 
 </script>
 

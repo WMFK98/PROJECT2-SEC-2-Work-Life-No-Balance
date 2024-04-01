@@ -25,7 +25,6 @@ export const useCustom =  defineStore("customItem", () => {
   }
   const addTypeItem = (typeItem) =>{
     customItem.push(typeItem);
-    console.log(customItem);
   }
 
   const addTypeItems = (typeItems = []) => {
