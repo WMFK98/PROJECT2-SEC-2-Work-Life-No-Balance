@@ -590,8 +590,14 @@ init();
                   style-type="close"
                 />
 
-                <LogPopup log="❌Something went wrong❌" type="errorModal" />
-                <LogPopup log="✅Success✅" type="successModal" />
+                <LogPopup
+                  title="❌Something went wrong❌"
+                  log="Invalid Value! Please try again."
+                />
+                <LogPopup
+                  title="✅Success✅"
+                  log="Nice!!, we hope you enjoin."
+                />
               </template>
             </SettingPopup>
           </div>

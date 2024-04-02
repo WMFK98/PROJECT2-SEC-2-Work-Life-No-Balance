@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  type: String,
+  title: String,
   log: String,
 });
 </script>
@@ -8,8 +8,8 @@ const props = defineProps({
 <template>
   <dialog :id="type" class="modal">
     <div class="modal-box bg-Yellow-light">
-      <h3 class="font-bold text-lg text-center">{{ log }}</h3>
-      <p class="py-4 text-center font-bold">Invalid Value! Please try again.</p>
+      <h3 class="font-bold text-lg text-center">{{ title }}</h3>
+      <p class="py-4 text-center font-bold">{{ log }}</p>
     </div>
     <form method="dialog" class="modal-backdrop">
       <button>close</button>
