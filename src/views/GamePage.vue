@@ -591,10 +591,12 @@ init();
                 />
 
                 <LogPopup
+                  type="errorModal"
                   title="❌Something went wrong❌"
                   log="Invalid Value! Please try again."
                 />
                 <LogPopup
+                  type="successModal"
                   title="✅Success✅"
                   log="Nice!!, we hope you enjoin."
                 />
