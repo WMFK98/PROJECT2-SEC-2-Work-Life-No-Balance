@@ -7,102 +7,101 @@ import HowtoPlayPopup from "./../components/popups/HowtoPlayPopup.vue";
 import SelectPage from "./../components/fieldinputs/SelectPage.vue";
 import SelectItem from "@/components/fieldinputs/SelectItem.vue";
 import soundbtn from "/music/soundBtn.mp3";
-import TypeItemInfo from "@/components/other/TypeItemInfo.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
 import { onMounted, ref, reactive } from "vue";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
 
 import {
-  addItem,
-  deleteItemById,
-  editItem,
-  getItems,
-} from "./../utils/fetchUtils";
+	addItem,
+	deleteItemById,
+	editItem,
+	getItems,
+} from "./../utils/fetchUtils"
 
-import { useRouter } from "vue-router";
+import { useRouter } from "vue-router"
 
-const route = useRouter();
+const route = useRouter()
 const rollBack = () => {
-  route.go(-1);
-};
-const customItems = useCustom();
-const selectPageItem = ref(1);
+	route.go(-1)
+}
+const customItems = useCustom()
+const selectPageItem = ref(1)
 const customItemForm = reactive({
-  ability: [],
-  name: "",
-  isPerTurn: false,
-});
-const selectedItemId = ref(null);
-let isEditing = false;
+	ability: [],
+	name: "",
+	isPerTurn: false,
+})
+const selectedItemId = ref(null)
+let isEditing = false
 onMounted(async () => {
-  customItems.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
-});
+	customItems.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL))
+})
 
 const setCustomItemFormById = (id) => {
-  const itemSelected = customItems.findTypeItem(id);
-  customItemForm.name = itemSelected.name;
-  customItemForm.ability[0] = itemSelected.ability[0];
-  customItemForm.ability[1] = itemSelected.ability[1];
-  customItemForm.isPerTurn = itemSelected.isPerTurn;
-};
+	const itemSelected = customItems.findTypeItem(id)
+	customItemForm.name = itemSelected.name
+	customItemForm.ability[0] = itemSelected.ability[0]
+	customItemForm.ability[1] = itemSelected.ability[1]
+	customItemForm.isPerTurn = itemSelected.isPerTurn
+}
 
 const openEditItemPopup = (editId) => {
-  selectedItemId.value = editId;
-  setCustomItemFormById(editId);
-  isEditing = true;
-  createItem.showModal();
-};
+	selectedItemId.value = editId
+	setCustomItemFormById(editId)
+	isEditing = true
+	createItem.showModal()
+}
 
 const resetForm = () => {
-  customItemForm.name = "";
-  customItemForm.ability[0] = "";
-  customItemForm.ability[1] = "";
-  customItemForm.isPerTurn = false;
-  selectedItemId.value = null;
-  isEditing = false;
-};
+	customItemForm.name = ""
+	customItemForm.ability[0] = ""
+	customItemForm.ability[1] = ""
+	customItemForm.isPerTurn = false
+	selectedItemId.value = null
+	isEditing = false
+}
 
 const openRemoveItemPopup = (removeId) => {
-  selectedItemId.value = removeId;
-  setCustomItemFormById(removeId);
-  removeItemPopup.showModal();
-};
+	selectedItemId.value = removeId
+	setCustomItemFormById(removeId)
+	removeItemPopup.showModal()
+}
 
 const removeItem = async () => {
-  const statusCode = await deleteItemById(
-    import.meta.env.VITE_BASE_URL,
-    selectedItemId.value
-  );
-  if (statusCode === 200) customItems.removePollItem(selectedItemId.value);
-  resetForm();
-};
+	const statusCode = await deleteItemById(
+		import.meta.env.VITE_BASE_URL,
+		selectedItemId.value
+	)
+	if (statusCode === 200) customItems.removePollItem(selectedItemId.value)
+	resetForm()
+}
 
 const saveItem = async () => {
-  let updateItem;
-  if (isEditing) {
-    updateItem = await editItem(
-      import.meta.env.VITE_BASE_URL,
-      selectedItemId.value,
-      {
-        ...customItemForm,
-      }
-    );
-    if (updateItem)
-      customItems.updateTypeItem(selectedItemId.value, {
-        ...updateItem,
-      });
-  } else {
-    updateItem = await addItem(import.meta.env.VITE_BASE_URL, {
-      ...customItemForm,
-    });
-    if (updateItem) customItems.addTypeItem({ ...updateItem });
-  }
-  resetForm();
-};
+	let updateItem
+	if (isEditing) {
+		updateItem = await editItem(
+			import.meta.env.VITE_BASE_URL,
+			selectedItemId.value,
+			{
+				...customItemForm,
+			}
+		)
+		if (updateItem)
+			customItems.updateTypeItem(selectedItemId.value, {
+				...updateItem,
+			})
+	} else {
+		updateItem = await addItem(import.meta.env.VITE_BASE_URL, {
+			...customItemForm,
+		})
+		if (updateItem) customItems.addTypeItem({ ...updateItem })
+	}
+	resetForm()
+}
 </script>
 
 <template>
-  <div class="absolute"></div>
+	<div class="absolute"></div>
 
   <div
     id="bg"
@@ -255,130 +254,190 @@ const saveItem = async () => {
                       </div>
                     </div>
 
-                    <div
-                      id="selct-type-item"
-                      class="bg-White rounded-r-[10px] text-hss scr-m:text-hs-tal w-[84px] h-[50px] scr-m:h-[67px] scr-m:w-[110px] shadow-sm flex gap-1 flex-col justify-center"
-                    >
-                      <label
-                        class="flex items-center text-isPerTurn font-bold gap-1"
-                      >
-                        <input
-                          type="radio"
-                          name="type-item"
-                          class="radio radio-error radio-xs scr-m:radio-sm"
-                          v-model="customItemForm.isPerTurn"
-                          :value="false"
-                        />
-                        <span>Item Time</span>
-                      </label>
-                      <label
-                        class="flex items-center text-isTurn font-bold gap-1"
-                      >
-                        <input
-                          type="radio"
-                          name="type-item"
-                          class="radio radio-xs radio-secondary scr-m:radio-sm"
-                          v-model="customItemForm.isPerTurn"
-                          :value="true"
-                        />
-                        <span>Item Turn</span>
-                      </label>
-                    </div>
-                  </div>
+										<div
+											id="selct-type-item"
+											class="bg-White rounded-r-[10px] text-hss scr-m:text-hs-tal w-[84px] h-[50px] scr-m:h-[67px] scr-m:w-[110px] shadow-sm flex gap-1 flex-col justify-center"
+										>
+											<label
+												class="flex items-center text-isPerTurn font-bold gap-1"
+											>
+												<input
+													type="radio"
+													name="type-item"
+													class="radio radio-error radio-xs scr-m:radio-sm"
+													v-model="customItemForm.isPerTurn"
+													:value="false"
+												/>
+												<span>Item Time</span>
+											</label>
+											<label
+												class="flex items-center text-isTurn font-bold gap-1"
+											>
+												<input
+													type="radio"
+													name="type-item"
+													class="radio radio-xs radio-secondary scr-m:radio-sm"
+													v-model="customItemForm.isPerTurn"
+													:value="true"
+												/>
+												<span>Item Turn</span>
+											</label>
+										</div>
+									</div>
 
-                  <div class="flex justify-center">
-                    <input
-                      type="text"
-                      v-model.trim="customItemForm.name"
-                      placeholder="Name of Item"
-                      maxlength="4"
-                      class="input input-xs scr-m:input-md input-bordered text-hss scr-l:text-hs-des text-Black w-full text-center bg-White"
-                    />
-                  </div>
-                </div>
-                <div
-                  id="marge-items"
-                  class="w-auto flex flex-col items-center gap-3 scr-m:gap-3 mb-2 h-auto"
-                >
-                  <SelectItem
-                    :items="initStructureItem"
-                    SItem="1"
-                    v-model="customItemForm.ability[0]"
-                  />
-                  <SelectItem
-                    :items="initStructureItem"
-                    v-model="customItemForm.ability[1]"
-                  />
-                </div>
-              </div>
-            </template>
-            <template #btn>
-              <div class="flex w-full gap-2 justify-between">
-                <form
-                  method="dialog"
-                  class="w-[49%] scr-l:w-[49%] flex justify-center"
-                >
-                  <ButtonSetting
-                    :disabled="
-                      !customItemForm.name ||
-                      !customItemForm.ability[0] ||
-                      !customItemForm.ability[1]
-                    "
-                    class="w-full"
-                    styleType="save"
-                    title="Save"
-                    :action="saveItem"
-                  />
-                </form>
-                <form
-                  method="dialog"
-                  class="w-[49%] scr-l:w-[49%] flex justify-center"
-                >
-                  <ButtonSetting
-                    class="w-full"
-                    styleType="close"
-                    title="Cancel"
-                    :action="resetForm"
-                  />
-                </form></div
-            ></template>
-          </HowtoPlayPopup>
-          <HowtoPlayPopup id="wiki">
-            <template #navbar>
-              <p>manual 📒</p>
-            </template>
-            <template #page>เล้งมาใส่หน่อย</template>
-          </HowtoPlayPopup>
-        </div>
-      </div>
-      <ItemsInfo
-        class="h-full scr-m:h-full scr-l:h-full"
-        v-show="selectPageItem === 2"
-        :poll-item="initStructureItem"
-      />
+									<div class="flex justify-center">
+										<input
+											type="text"
+											v-model.trim="customItemForm.name"
+											placeholder="Name of Item"
+											maxlength="4"
+											class="input input-xs scr-m:input-md input-bordered text-hss scr-l:text-hs-des text-Black w-full text-center bg-White"
+										/>
+									</div>
+								</div>
+								<div
+									id="marge-items"
+									class="w-auto flex flex-col items-center gap-3 scr-m:gap-3 mb-2 h-auto"
+								>
+									<SelectItem
+										:items="initStructureItem"
+										SItem="1"
+										v-model="customItemForm.ability[0]"
+									/>
+									<SelectItem
+										:items="initStructureItem"
+										SItem="2"
+										v-model="customItemForm.ability[1]"
+									/>
+								</div>
+							</div>
+						</template>
+						<template #btn>
+							<div class="flex w-full gap-2 justify-between">
+								<form
+									method="dialog"
+									class="w-[49%] scr-l:w-[49%] flex justify-center"
+								>
+									<ButtonSetting
+										:disabled="
+											!customItemForm.name ||
+											!customItemForm.ability[0] ||
+											!customItemForm.ability[1]
+										"
+										class="w-full"
+										styleType="save"
+										title="Save"
+										:action="saveItem"
+									/>
+								</form>
+								<form
+									method="dialog"
+									class="w-[49%] scr-l:w-[49%] flex justify-center"
+								>
+									<ButtonSetting
+										class="w-full"
+										styleType="close"
+										title="Cancel"
+										:action="resetForm"
+									/>
+								</form></div
+						></template>
+					</HowtoPlayPopup>
+					<HowtoPlayPopup id="wiki">
+						<template #navbar>
+							<p>manual 📒</p>
+						</template>
+						<template #page
+							><li>
+								<strong>⚙️How To Custom Item⚙️</strong>
+							</li>
+							<li>
+								<strong>วิธีผสมไอเทม🪄:</strong>
+							</li>
+							<li>
+								<strong>เลือกความสามารถของไอเทมในการผสมได้:</strong> 2 ไอเทม
+							</li>
+							<li>
+								<strong>เลือกรูปแบบของไอเทม: </strong
+								><span
+									class="bg-item-turn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
+									>i</span
+								>
 
-      <ItemsInfo
-        class="h-full overflow-y-scroll scr-m:h-full scr-l:h-full"
-        v-show="selectPageItem === 1"
-        :poll-item="customItems.getAllTypeItems()"
-        :can-edit="true"
-        @deleteItem="openRemoveItemPopup"
-        @editItem="openEditItemPopup"
-      />
-      <div
-        class="m-auto flex justify-center flex-col items-center gap-3"
-        v-show="!customItems.getAllTypeItems().length && selectPageItem === 1"
-      >
-        <p class="text-hm-des text-Black">Click to custom your item!!</p>
-        <button
-          class="btn btn-xs bg-btn-save hover:bg-btn-save-hover hover:text-Black text-White text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max h-[26px] rounded-full shadow-sm flex justify-center items-center"
-          onclick="createItem.showModal()"
-          @click="playSoundSFX(soundbtn)"
-        >
-          Create Item
-        </button>
-      </div>
-    </div>
-  </div>
+								: เมื่อกดใช้จะมีผลเพียงครั้งเดียวเท่านั้น
+								<span
+									class="bg-item-time w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
+									>i</span
+								>
+
+								: เมื่อกดใช้จะมีผลตลอดทั้งเทิร์น
+							</li>
+							<li>
+								<strong>กระบวนการคือ:</strong>
+							</li>
+
+							<li>
+								จะมี <strong>item 2 ช่อง</strong> ให้ผู้เล่นเลือก
+								<strong> item </strong>
+								ช่องละ 1 ไอเทมเพื่อที่จะนำเอาความาสามารถของทั้ง 2
+								อันมารวมกันและผู้เล่นต้องเลือกว่าจะให้
+								<strong> item </strong>
+								ที่สร้างมานั้นเป็นรูปแบบการใช้ประเภทอะไร
+								<strong>(Item Time⏳, Item Turn)</strong>
+								และผู้เล่นยังสามารถที่จะ
+								<strong>custom name item</strong>✍️
+								ของไอเทมที่พึ่งสร้างขึ้นมาได้เมื่อผู้เล่นพอใจกับ
+								<strong>item</strong>ของตัวเองแล้วกด <strong>Save</strong>🟢
+								เพื่อยืนยันการสร้างของตัวเอง หรือถ้าไม่อยากสร้างแล้วก็กด
+								<strong>Cancle</strong>🔴 เพื่อยกเลิกและออกจากหน้า custom
+							</li>
+
+							<li>
+								<strong>วิธีแก้ไขไอเทมที่สร้างขึ้นมา🪄:</strong>
+							</li>
+							<li>
+								กดที่ปุ่ม
+								<strong>Edit 🟢</strong
+								>เพื่อทำการแก้ไขไอเทมที่ตัวเองได้สร้างขึ้นมาสามารถเปลี่ยนชื่อหรือความสามารถอื่นๆได้ตามต้องการ
+							</li>
+
+							<li>
+								กดที่ปุ่ม
+								<strong>Delete 🔴</strong>เพื่อทำการลบไอเทมที่สร้างขึ้นมาออกจาก
+								pool item
+							</li></template
+						>
+					</HowtoPlayPopup>
+				</div>
+			</div>
+			<ItemsInfo
+				class="h-full scr-m:h-full scr-l:h-full"
+				v-show="selectPageItem === 2"
+				:poll-item="initStructureItem"
+			/>
+
+			<ItemsInfo
+				class="h-full overflow-y-scroll scr-m:h-full scr-l:h-full"
+				v-show="selectPageItem === 1"
+				:poll-item="customItems.getAllTypeItems()"
+				:can-edit="true"
+				@deleteItem="openRemoveItemPopup"
+				@editItem="openEditItemPopup"
+			/>
+			<div
+				class="m-auto flex justify-center flex-col items-center gap-3"
+				v-show="!customItems.getAllTypeItems().length && selectPageItem === 1"
+			>
+				<p class="text-hm-des text-Black">Click to custom your item!!</p>
+				<button
+					class="btn btn-xs bg-btn-save hover:bg-btn-save-hover hover:text-Black text-White text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max h-[26px] rounded-full shadow-sm flex justify-center items-center"
+					onclick="createItem.showModal()"
+					@click="playSoundSFX(soundbtn)"
+				>
+					Create Item
+				</button>
+			</div>
+		</div>
+	</div>
 </template>
 @/stores/TypeItemsCusMangement
