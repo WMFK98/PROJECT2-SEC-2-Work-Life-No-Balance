@@ -5,7 +5,6 @@ import { random } from "./../utils/tool";
 import ItemManagement from "./../libs/ItemsManagement";
 import initStructureItem from "./../initStructureItem";
 import { useRouter } from "vue-router";
-import soundbtn from "/music/soundBtn.mp3";
 import soundAddItem from "/music/addItem.mp3";
 import soundHold from "/music/holdsound.mp3";
 import soundWin from "/music/toothless.mp3";
@@ -59,18 +58,6 @@ const updateTypeItemEnable = (typeItem) => {
 };
 
 const musicSetting = reactive({});
-
-onMounted(() => {
-  if (!localStorage.getItem("settings")) {
-    musicSetting.isOffMusic = false;
-    musicSetting.isOffSFX = false;
-  }
-  const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
-  musicSetting.isOffMusic = myMusic.isOffMusic;
-  musicSetting.isOffSFX = myMusic.isOffSFX;
-  setSound(myMusic);
-  reset();
-});
 
 let defaultSetting = localStorage.getItem("settings")
   ? JSON.parse(localStorage.getItem("settings"))
