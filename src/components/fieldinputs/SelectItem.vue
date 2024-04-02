@@ -2,7 +2,7 @@
 const props = defineProps({
   SItem: String,
   modelValue: String,
-  items: Array,
+  items: Object,
 });
 </script>
 

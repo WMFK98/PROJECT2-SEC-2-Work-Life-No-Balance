@@ -1,6 +1,5 @@
 <script setup>
 import initStructureItem from "./../initStructureItem";
-import Item from "@/StateItem";
 import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
 import BackIcon from "./../assets/Icon/BackIcon.vue";
 import ItemsInfo from "./../components/items/ItemsInfo.vue";
@@ -8,6 +7,7 @@ import HowtoPlayPopup from "./../components/popups/HowtoPlayPopup.vue";
 import SelectPage from "./../components/fieldinputs/SelectPage.vue";
 import SelectItem from "@/components/fieldinputs/SelectItem.vue";
 import soundbtn from "/music/soundBtn.mp3";
+import TypeItemInfo from "@/components/other/TypeItemInfo.vue";
 import { playSoundSFX } from "./../libs/SoundControl";
 import { onMounted, ref, reactive } from "vue";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
@@ -136,25 +136,8 @@ const saveItem = async () => {
           />
         </div>
         <div class="w-auto flex justify-end gap-2">
-          <div
-            v-show="selectPageItem === 2"
-            class="flex gap-3 text-hss scr-l:text-hs-des"
-          >
-            <div class="flex gap-3 text-hss scr-l:text-hs-des">
-              <div class="flex gap-2 src-l:gap-4">
-                <div class="bg-item-time w-4 scr-l:w-8 rounded-[5px]"></div>
-                <p>Item Time</p>
-              </div>
-              <div class="flex gap-2">
-                <div class="bg-item-turn w-4 scr-l:w-8 rounded-[5px]"></div>
-                <p>Item Turn</p>
-              </div>
-              <div class="flex gap-2">
-                <div class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"></div>
-                <p>Item Attack</p>
-              </div>
-            </div>
-          </div>
+          <TypeItemInfo v-show="selectPageItem === 2" />
+
           <button
             class="btn btn-xs bg-btn-save hover:bg-btn-save-hover hover:text-Black text-White text-hss scr-m:btn-md scr-m:text-hs-tal border-0 w-max h-[26px] rounded-full shadow-sm flex justify-center items-center"
             onclick="createItem.showModal()"

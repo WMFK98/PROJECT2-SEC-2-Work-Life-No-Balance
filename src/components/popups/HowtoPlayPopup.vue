@@ -5,6 +5,7 @@ import ItemsInfo from "./../items/ItemsInfo.vue";
 import initStructureItem from "@/initStructureItem";
 import ButtonSetting from "./../buttons/ButtonSetting.vue";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
+import TypeItemInfo from "../other/TypeItemInfo.vue";
 
 const selectTutorialPage = ref(1);
 const customItem = useCustom();
@@ -47,7 +48,10 @@ defineProps({ id: String });
                 <p>Item</p>
               </div>
             </div>
-            <div
+            <TypeItemInfo
+              v-show="selectTutorialPage === 2 || selectTutorialPage === 3"
+            />
+            <!-- <div
               v-show="selectTutorialPage === 2 || selectTutorialPage === 3"
               class="flex gap-3 text-hss scr-l:text-hs-des"
             >
@@ -71,7 +75,7 @@ defineProps({ id: String });
                   <p>Item Attack</p>
                 </div>
               </div>
-            </div>
+            </div> -->
           </slot>
         </nav>
 

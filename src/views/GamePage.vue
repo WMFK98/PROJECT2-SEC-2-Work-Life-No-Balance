@@ -503,11 +503,7 @@ init();
         >
           <div id="top-btn" class="flex gap-3 items-center">
             <ButtonMini title="📖" onclick="tutorial.showModal()" />
-            <HowtoPlayPopup id="tutorial">
-              <template #items-tutorial>
-                <ItemsInfo :poll-item="pollItem" />
-              </template>
-            </HowtoPlayPopup>
+            <HowtoPlayPopup id="tutorial" />
 
             <ButtonGame
               class="z-20"

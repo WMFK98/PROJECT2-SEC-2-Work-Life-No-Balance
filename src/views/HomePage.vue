@@ -93,10 +93,10 @@ onMounted(async () => {
           title="How to Play"
           button-style="normal"
           class="animate-fade-up animate-duration-[2000ms] opacity-0 animate-delay-500 animate-ease-out animate-normal"
-          onclick="HowToPlay.showModal()"
+          onclick="tutroril.showModal()"
         />
 
-        <HowtoPlayPopup id="HowToPlay" />
+        <HowtoPlayPopup id="tutroril" />
         <router-link :to="{ name: 'CustomItem' }">
           <ButtonGame
             title="Custom Item"

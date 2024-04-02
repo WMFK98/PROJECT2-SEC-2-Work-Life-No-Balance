@@ -20,6 +20,7 @@ import {
   getItems,
 } from "./../utils/fetchUtils";
 import TypeItemsCusMangement from "@/libs/TypeItemsCusMangement";
+import TypeItemInfo from "./TypeItemInfo.vue";
 
 onMounted(async () => {
   customItems.value.addTypeItems(await getItems(import.meta.env.VITE_BASE_URL));
@@ -85,22 +86,7 @@ const isPerTime = ref(true);
                   v-model="selectPageItem"
                   :name-pages="['Base Items', 'Custom Items']"
                 />
-                <div class="flex gap-3 text-hss scr-l:text-hs-des">
-                  <div class="flex gap-2 src-l:gap-4">
-                    <div class="bg-isPerTurn w-4 scr-l:w-8 rounded-[5px]"></div>
-                    <p>Item Time</p>
-                  </div>
-                  <div class="flex gap-2">
-                    <div class="bg-isTurn w-4 scr-l:w-8 rounded-[5px]"></div>
-                    <p>Item Turn</p>
-                  </div>
-                  <div class="flex gap-2">
-                    <div
-                      class="bg-Main-pink-300 w-4 scr-l:w-8 rounded-[5px]"
-                    ></div>
-                    <p>Item Attack</p>
-                  </div>
-                </div>
+                <TypeItemInfo />
               </nav>
 
               <ItemsInfo
