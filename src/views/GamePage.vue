@@ -360,7 +360,7 @@ const initItem = () => {
   pollItem.push(...newCustomItems);
 };
 
-const localSetting = () => {
+const getLocalSetting = () => {
   if (!localStorage.getItem("settings")) {
     localStorage.setItem("settings", JSON.stringify(defaultSetting));
   }
@@ -387,7 +387,7 @@ const init = () => {
   watch(() => [player1.point, player2.point], checkWin);
   watch(() => [player1.curPoint, player2.curPoint], checkAddItem);
   initItem();
-  localSetting();
+  getLocalSetting();
   watch(
     [currentSetting, musicSetting],
     ([newSetting, newMusicSetting]) => {

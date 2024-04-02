@@ -8,6 +8,15 @@
       "name": "ddlk",
       "isPerTurn": false,
       "id": "34a2"
+    },
+    {
+      "id": "7a0e",
+      "ability": [
+        "G6",
+        "+2"
+      ],
+      "name": "dece",
+      "isPerTurn": false
     }
   ]
 }

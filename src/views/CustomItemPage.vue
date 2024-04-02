@@ -63,6 +63,7 @@ const resetForm = () => {
 };
 
 const openRemoveItemPopup = (removeId) => {
+  console.log("wascall");
   selectedItemId.value = removeId;
   setCustomItemFormById(removeId);
   removeItemPopup.showModal();
