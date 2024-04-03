@@ -9,13 +9,9 @@ const props = defineProps({
     default: false,
   },
 });
-const emits = defineEmits(["deleteItem", "editItem"]);
-const handleDelete = (e) => {
-  emits("editItem", e);
-};
-
-const handleEdit = (e) => {
-  emits("editItem", e);
+const emits = defineEmits(["handleIteminfo"]);
+const handleBtnIteminfo = (id, status) => {
+  emits("handleIteminfo", id, status);
 };
 </script>
 <template>
@@ -28,14 +24,14 @@ const handleEdit = (e) => {
     <div
       id="item-box"
       class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
-      v-for="(item, index ) in pollItem"
+      v-for="(item, index) in pollItem"
       :key="index"
     >
       <ItemInfo
         :item="item"
         :canEdit="canEdit"
-        @deleteItemC="handleDelete"
-        @editItemC="handleEdit"
+        @deleteItemC="handleBtnIteminfo"
+        @editItemC="handleBtnIteminfo"
       >
       </ItemInfo>
     </div>

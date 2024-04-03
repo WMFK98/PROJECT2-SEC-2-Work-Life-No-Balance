@@ -421,8 +421,13 @@ const saveItem = async () => {
         v-show="selectPageItem === 1"
         :poll-item="customItems.getAllTypeItems()"
         :can-edit="true"
-        @deleteItem="openRemoveItemPopup"
-        @editItem="openEditItemPopup"
+        @handleIteminfo="
+          (id, status) => {
+            status === 'delete'
+              ? openRemoveItemPopup(id)
+              : openEditItemPopup(id);
+          }
+        "
       />
       <div
         class="m-auto flex justify-center flex-col items-center gap-3"
