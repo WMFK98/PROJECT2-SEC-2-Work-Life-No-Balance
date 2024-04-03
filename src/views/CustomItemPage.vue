@@ -347,14 +347,13 @@ const saveItem = async () => {
                   class="bg-item-turn w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
                   >i</span
                 >
-
-                : เมื่อกดใช้จะมีผลเพียงครั้งเดียวเท่านั้น
+                : เมื่อกดใช้จะมีผลตลอดทั้งเทิร์น :
                 <span
                   class="bg-item-time w-4 scr-l:w-7 h-4 scr-l:h-7 rounded-[5px] text-White inline-flex justify-center"
                   >i</span
                 >
 
-                : เมื่อกดใช้จะมีผลตลอดทั้งเทิร์น
+                เมื่อกดใช้จะมีผลเพียงครั้งเดียวเท่านั้น
               </li>
               <li>
                 <strong>กระบวนการคือ:</strong>
