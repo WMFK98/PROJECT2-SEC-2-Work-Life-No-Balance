@@ -68,8 +68,7 @@ Items ในเกมนี้จะมีอยู่ 3 ประเภทค�
 ## Video How to play
 https://youtu.be/70lhWfCvW5Y
 ## Video How Create Edit Delete Custom Item
-https://youtu.be/q1s47Oraays
-
+https://youtu.be/M8eiI5E00oM
 ## Reference
 ### Thank you  Jonas Schmedtmann 
 ### https://www.udemy.com/user/jonasschmedtmann/?kw=jonas&src=sac
