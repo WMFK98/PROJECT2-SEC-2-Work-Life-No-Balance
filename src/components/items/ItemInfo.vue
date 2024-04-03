@@ -1,16 +1,16 @@
 <script setup>
-import Diceplus from "/images/Icon_Dice_1/DicePlus.png";
-import DelDice from "/images/Icon_Dice_1/DelDice.png";
-import DelTenSC from "/images/Icon_Dice_1/DelTenSC.png";
-import OddAndEven from "/images/Icon_Dice_1/ODDEVENT.png";
-import SixOneTime from "/images/Icon_Dice_1/OneSixTM.png";
-import PlusTwo from "/images/Icon_Dice_1/PlusTwo.png";
-import SqureTwo from "/images/Icon_Dice_1/SqureTwo.png";
+import initStructureItem from "@/initStructureItem";
 const props = defineProps({
   canEdit: Boolean,
   item: Object,
 });
 defineEmits(["deleteItemC", "editItemC"]);
+
+const matchImagebyName = (name) => {
+  return Object.entries(initStructureItem).find(
+    ([_, value]) => value.name === name
+  )?.[1]?.picture;
+};
 </script>
 
 <template>
@@ -28,14 +28,31 @@ defineEmits(["deleteItemC", "editItemC"]);
     <p v-show="!item.picture">{{ item.name }}</p>
   </div>
   <p
-    class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
+  class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
   >
-    <strong>{{ item.name }}</strong> :
-    {{
-      item.discription
-        ? item.discription
-        : `ส่วนผสม "${item.ability[0]}" + "${item.ability[1]}"`
-    }}
+
+    <div class="flex "   v-show="item.discription" ><strong>{{ item.name }} </strong> :  <p> {{ item.discription}}</p> </div> 
+ 
+
+    <div class="flex items-center" v-show="!item.discription">
+      <strong>Ability : </strong>
+      <img
+      class="h-[30px] scr-m:h-[40px] scr-l:h-[50px]"
+      :src="matchImagebyName(item?.ability?.[0])"
+
+    />
+    +
+    <img
+      class="h-[30px] scr-m:h-[40px] scr-l:h-[50px]"
+      :src="matchImagebyName(item?.ability?.[1])"
+
+    />
+    </div>
+
+      
+
+
+   
   </p>
   <div
     v-if="canEdit"

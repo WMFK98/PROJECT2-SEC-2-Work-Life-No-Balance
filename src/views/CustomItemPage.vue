@@ -19,6 +19,7 @@ import {
 } from "./../utils/fetchUtils";
 
 import { useRouter } from "vue-router";
+import ItemInfo from "@/components/items/ItemInfo.vue";
 
 const route = useRouter();
 const rollBack = () => {
@@ -163,24 +164,7 @@ const saveItem = async () => {
                   id="item-box"
                   class="box-item scr-l:w-[560px] scr-m:h-[80px] scr-l:rounded-[20px] scr-l:p-5 scr-l:h-[120px] bg-White h-[60px] rounded-[10px] flex items-center gap-3 p-2 w-full"
                 >
-                  <div
-                    class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
-                    :class="
-                      customItemForm.isPerTurn
-                        ? 'bg-item-turn text-White'
-                        : 'bg-item-time text-White'
-                    "
-                  >
-                    <p>
-                      {{ customItemForm.name }}
-                    </p>
-                  </div>
-                  <p
-                    class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
-                  >
-                    <strong>{{ customItemForm.name }}</strong> :
-                    {{ customItemForm.ability }}
-                  </p>
+                  <ItemInfo :item="customItemForm" />
                 </div>
               </div>
             </template>
