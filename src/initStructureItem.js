@@ -1,11 +1,11 @@
 import TypeItem from "./TypeItem";
-import Diceplus from "./assets/Icon_Dice_1/DicePlus.png";
-import DelDice from "./assets/Icon_Dice_1/DelDice.png";
-import DelTenSC from "./assets/Icon_Dice_1/DelTenSC.png";
-import OddAndEven from "./assets/Icon_Dice_1/ODDEVENT.png";
-import SixOneTime from "./assets/Icon_Dice_1/OneSixTM.png";
-import PlusTwo from "./assets/Icon_Dice_1/PlusTwo.png";
-import SqureTwo from "./assets/Icon_Dice_1/SqureTwo.png";
+import Diceplus from "/images/Icon_Dice_1/DicePlus.png";
+import DelDice from "/images/Icon_Dice_1/DelDice.png";
+import DelTenSC from "/images/Icon_Dice_1/DelTenSC.png";
+import OddAndEven from "/images/Icon_Dice_1/ODDEVENT.png";
+import SixOneTime from "/images/Icon_Dice_1/OneSixTM.png";
+import PlusTwo from "/images/Icon_Dice_1/PlusTwo.png";
+import SqureTwo from "/images/Icon_Dice_1/SqureTwo.png";
 const G6 = new TypeItem(
   "G6",
   null,

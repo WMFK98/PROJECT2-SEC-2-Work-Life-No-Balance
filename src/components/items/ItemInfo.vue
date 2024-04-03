@@ -1,4 +1,11 @@
 <script setup>
+import Diceplus from "/images/Icon_Dice_1/DicePlus.png";
+import DelDice from "/images/Icon_Dice_1/DelDice.png";
+import DelTenSC from "/images/Icon_Dice_1/DelTenSC.png";
+import OddAndEven from "/images/Icon_Dice_1/ODDEVENT.png";
+import SixOneTime from "/images/Icon_Dice_1/OneSixTM.png";
+import PlusTwo from "/images/Icon_Dice_1/PlusTwo.png";
+import SqureTwo from "/images/Icon_Dice_1/SqureTwo.png";
 const props = defineProps({
   canEdit: Boolean,
   item: Object,
@@ -8,7 +15,7 @@ defineEmits(["deleteItemC", "editItemC"]);
 
 <template>
   <div
-    class="w-[35px] rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
+    class="w-[35px] relative rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
     :class="
       item.isPerTurn || item.name === 'Dice+' || item.name === 'Dice-'
         ? 'bg-item-turn text-White'
@@ -24,7 +31,11 @@ defineEmits(["deleteItemC", "editItemC"]);
     class="text-hss text-Black scr-m:text-hs-tal scr-l:text-[18px] w-[75%] scr-l:w-[65%]"
   >
     <strong>{{ item.name }}</strong> :
-    {{ item.discription ? item.discription : item.ability }}
+    {{
+      item.discription
+        ? item.discription
+        : `ส่วนผสม "${item.ability[0]}" + "${item.ability[1]}"`
+    }}
   </p>
   <div
     v-if="canEdit"

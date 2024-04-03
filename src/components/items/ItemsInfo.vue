@@ -37,12 +37,3 @@ const handleBtnIteminfo = (id, status) => {
     </div>
   </div>
 </template>
-<!-- {
-  id,
-  name,
-  picture,
-  discription,
-  isPerTurn,
-  isAttack,
-  ability,
-} -->

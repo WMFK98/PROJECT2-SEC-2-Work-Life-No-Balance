@@ -1,7 +1,7 @@
 <script setup>
+import BackIcon from "./../assets/icons/BackIcon.vue";
 import initStructureItem from "./../initStructureItem";
 import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
-import BackIcon from "./../assets/Icon/BackIcon.vue";
 import ItemsInfo from "./../components/items/ItemsInfo.vue";
 import HowtoPlayPopup from "./../components/popups/HowtoPlayPopup.vue";
 import SelectPage from "./../components/fieldinputs/SelectPage.vue";
