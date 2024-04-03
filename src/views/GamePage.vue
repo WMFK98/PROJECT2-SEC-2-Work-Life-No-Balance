@@ -37,7 +37,7 @@ import {
 import { useCustom } from "@/stores/TypeItemsCusMangement";
 
 const route = useRouter();
-
+const logDice = [];
 const customItemManager = useCustom();
 let voidScore = 1;
 const theWinner = ref(null);
@@ -114,9 +114,9 @@ const updateMusicSetting = (e, name) => {
 };
 
 const reset = () => {
-  resetDice();
   stopMusic();
   phaseGame = 0;
+  resetDice();
   dices = dices.map(() => 1);
   theWinner.value = null;
   currentPlayer[0] = player1;
@@ -195,13 +195,15 @@ const switchPlayer = () => {
 };
 
 const resetDice = () => {
-  if (dices.length < 2) dices.push(1);
-  else dices = dices.slice(0, 2);
+  if (logDice.length) {
+    logDice.forEach((log) => (log ? dices.pop() : dices.push(1)));
+    logDice.splice(0, logDice.length);
+  }
 };
 
 const roll = () => {
   playSoundMusic(backgroundMusic);
-  if (phaseGame === 0) resetDice();
+  resetDice();
   phaseGame = 1;
   activeItem();
   if (!isVoidScore()) return (currentPlayer[0].curPoint += givePoint);
@@ -283,6 +285,7 @@ const initItem = () => {
   const addDiceAbililty = function () {
     if (phaseGame === 0 || dices.length === 5) return;
     dices.push(1);
+    logDice.push(1);
   };
 
   const X2P50Abililty = () => {
@@ -303,8 +306,7 @@ const initItem = () => {
   };
 
   const OAEAbililty = () => {
-    if (phaseGame === 0) return;
-    if (isVoidScore()) switchPlayer();
+    if (phaseGame === 0 || isVoidScore()) return;
     if (givePoint % 2 !== 0) {
       givePoint = Math.floor(givePoint / 2);
       enemyPlayer[0].point += givePoint;
@@ -318,6 +320,8 @@ const initItem = () => {
   const popDiceAbililty = () => {
     if (phaseGame === 0 || dices.length < 2) return;
     dices.pop();
+    logDice.push(0);
+    console.log(logDice);
   };
 
   const plus2Abililty = () => {

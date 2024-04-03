@@ -36,7 +36,7 @@ const props = defineProps({
               ? 'bg-btn-hover  text-White'
               : isUsed
               ? 'bg-Yellow-light  text-Black'
-              : isPerTurn || name === 'Dice+' || name === 'Dice-'
+              : isPerTurn
               ? 'bg-item-turn text-White'
               : isAttack
               ? 'bg-Main-pink-300 text-White'

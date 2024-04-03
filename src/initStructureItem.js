@@ -29,7 +29,7 @@ const addDice = new TypeItem(
   null,
   1,
   "เพิ่มลูกเต๋า 1 ลูกให้เจ้าของเทิร์น ได้สูงสุด 5 ลูก",
-  false,
+  true,
   false,
   Diceplus
 );
@@ -56,7 +56,7 @@ const popDice = new TypeItem(
   null,
   1,
   "ลดลูกเต๋า 1 ลูกให้เจ้าของเทิร์น ได้ต่ำสุด 1 ลูก",
-  false,
+  true,
   false,
   DelDice
 );

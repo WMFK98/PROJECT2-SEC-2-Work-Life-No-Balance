@@ -17,7 +17,7 @@ defineEmits(["deleteItemC", "editItemC"]);
   <div
     class="w-[35px] relative rounded-[10px] scr-m:h-[50px] scr-m:w-[50px] scr-l:h-[70px] scr-l:w-[70px] scr-l:rounded-[15px] h-[35px] flex justify-center items-center text-White text-[10px] scr-m:text-hs-tal scr-l:text-hs-des"
     :class="
-      item.isPerTurn || item.name === 'Dice+' || item.name === 'Dice-'
+      item.isPerTurn
         ? 'bg-item-turn text-White'
         : item.isAttack
         ? 'bg-Main-pink-300 text-White'
