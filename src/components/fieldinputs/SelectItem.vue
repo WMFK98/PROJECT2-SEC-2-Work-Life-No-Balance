@@ -16,7 +16,7 @@ const props = defineProps({
     <div
       class="item-bar w-max flex p-1 gap-1 bg-White text-hss scr-l:text-hs-des scr-l:gap-8 text-White h-max rounded-[20px]"
     >
-      <div v-for="{ name, picture, isPerTurn, isAttack } of items">
+      <div v-for="({ name, picture, isPerTurn, isAttack },index) in items" :key="index">
         <label
           class="swap hover:bg-Black hover:text-White swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
           :class="

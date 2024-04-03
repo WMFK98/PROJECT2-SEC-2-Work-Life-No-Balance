@@ -20,6 +20,7 @@ defineProps({ modelValue: Number, group: String, namePages: Array });
         ]
       "
       :checked="modelValue === index + 1"
+      :key="index"
     />
   </div>
 </template>

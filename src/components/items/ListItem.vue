@@ -22,11 +22,12 @@ const props = defineProps({
       :class="player.items.owner == 'p2' ? 'flex-row-reverse' : ''"
     >
       <div
-        v-for="{
+        v-for="({
           id,
           isUsed,
           itemInfo: { name, picture, isPerTurn, isAttack },
-        } of player.items.getAllItem()"
+        },index) of player.items.getAllItem()"
+        :key="index"
       >
         <label
           class="swap hover:bg-Black hover:text-White swap-rotate text-hss scr-l:text-hs-des scr-m:text-hs-tal item btn btn-sm border-0 rounded-[10px] w-[38px] scr-l:w-[64px] scr-m:w-[57.49px] scr-m:rounded-[20px] h-full items-center p-[1px]"
