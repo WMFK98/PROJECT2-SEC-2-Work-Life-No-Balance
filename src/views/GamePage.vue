@@ -280,12 +280,12 @@ const initItem = () => {
     enemyPlayer[0].point = enemyPlayer[0].point < 0 ? 0 : enemyPlayer[0].point;
   };
 
-  const addDiceAbility = function () {
-    if (phaseGame === 0 || dices.length >= 5) return;
+  const addDiceAbililty = function () {
+    if (phaseGame === 0 || dices.length === 5) return;
     dices.push(1);
   };
 
-  const X2P50Ability = () => {
+  const X2P50Abililty = () => {
     if (phaseGame === 0) return;
     voidScore = 3;
     givePoint = givePoint * 2;
@@ -302,7 +302,7 @@ const initItem = () => {
     givePoint = dices.reduce((total, dice) => total + dice);
   };
 
-  const OAEAbility = () => {
+  const OAEAbililty = () => {
     if (phaseGame === 0) return;
     if (isVoidScore()) switchPlayer();
     if (givePoint % 2 !== 0) {
@@ -315,12 +315,12 @@ const initItem = () => {
     }
   };
 
-  const popDiceAbility = () => {
+  const popDiceAbililty = () => {
     if (phaseGame === 0 || dices.length < 2) return;
     dices.pop();
   };
 
-  const plus2Ability = () => {
+  const plus2Abililty = () => {
     if (phaseGame === 0) return;
     givePoint = givePoint + 2;
   };
@@ -329,11 +329,11 @@ const initItem = () => {
     initStructureItem;
   G6.addAbility(guarantee6Ability);
   N10C.addAbility(N10Ability);
-  OAE.addAbility(OAEAbility);
-  X2P50.addAbility(X2P50);
-  addDice.addAbility(addDiceAbility);
-  plus2Point.addAbility(plus2Ability);
-  popDice.addAbility(popDiceAbility);
+  OAE.addAbility(OAEAbililty);
+  X2P50.addAbility(X2P50Abililty);
+  addDice.addAbility(addDiceAbililty);
+  plus2Point.addAbility(plus2Abililty);
+  popDice.addAbility(popDiceAbililty);
   pollItem.push(X2P50, addDice, G6, N10C, OAE, popDice, plus2Point);
 
   const newCustomItems = customItemManager
