@@ -1,5 +1,4 @@
 <script setup>
-import { reactive } from "vue";
 import roll1 from "/images/dice-1.png";
 import roll2 from "/images/dice-2.png";
 import roll3 from "/images/dice-3.png";

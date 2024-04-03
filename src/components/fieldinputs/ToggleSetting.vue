@@ -35,4 +35,3 @@ const emitUpdateEvent = () => {
 </template>
 
 <style scoped></style>
-../libs/SoundControl

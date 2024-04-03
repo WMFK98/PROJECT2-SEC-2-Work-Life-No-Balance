@@ -18,7 +18,7 @@ const props = defineProps({
     >
       <div v-for="{ name, picture, isPerTurn, isAttack } of items">
         <label
-          class="swap swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
+          class="swap hover:bg-Black swap-rotate flex-1 scr-l:text-hs-des text-hs-tal item btn btn-sm border-0 w-[50px] scr-m:w-[70px] scr-m:h-[70px] rounded-[20px] h-[50px] items-center p-[1px]"
           :class="
             modelValue === name
               ? 'bg-Yellow-light'
@@ -47,5 +47,3 @@ const props = defineProps({
     </div>
   </div>
 </template>
-
-<style scoped></style>
