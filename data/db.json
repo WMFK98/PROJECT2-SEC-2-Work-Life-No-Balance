@@ -5,6 +5,18 @@
       "ability": ["Dice+", "Dice+"],
       "name": "bbbb",
       "isPerTurn": false
+    },
+    {
+      "id": "4c2c",
+      "ability": ["Dice+", "Dice+"],
+      "name": "bbbb",
+      "isPerTurn": false
+    },
+    {
+      "id": "4c2c",
+      "ability": ["Dice+", "Dice+"],
+      "name": "bbbb",
+      "isPerTurn": false
     }
   ]
 }

@@ -1,4 +1,6 @@
 <script setup>
+import soundbtn from "/music/soundBtn.mp3";
+import { playSoundSFX } from "@/libs/SoundControl";
 const props = defineProps({
   SItem: String,
   modelValue: String,
@@ -29,7 +31,12 @@ const props = defineProps({
         >
           <input
             :value="name"
-            @click="$emit('update:modelValue', $event.target.value)"
+            @click="
+              [
+                $emit('update:modelValue', $event.target.value),
+                playSoundSFX(soundbtn),
+              ]
+            "
             type="checkbox"
           />
 

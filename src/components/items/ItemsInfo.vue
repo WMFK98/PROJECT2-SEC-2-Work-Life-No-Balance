@@ -18,7 +18,9 @@ const handleBtnIteminfo = (id, status) => {
   <div
     class="flex gap-2 flex-col overflow-y-scroll scr-l:flex-row scr-l:flex-wrap justify-start rounded-md"
     :class="
-      sizeSmall ? ' h-[149px] scr-m:h-[290px]' : 'h-max scr-m:h-max scr-l:h-max'
+      sizeSmall
+        ? ' h-[149px] scr-m:min-h-[190px]  scr-l:h-fit  scr-l:max-h-[500px]   scr-m:max-h-[290px]'
+        : 'h-max scr-m:h-max scr-l:h-max'
     "
   >
     <div
