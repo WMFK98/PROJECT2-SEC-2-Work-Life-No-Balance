@@ -1,21 +1,12 @@
 {
   "TypeItemsCus": [
     {
-      "id": "e038",
+      "id": "30a0",
       "ability": [
-        "Dice-",
-        "G6"
+        "X2>3",
+        "X2>3"
       ],
-      "name": "XD",
-      "isPerTurn": false
-    },
-    {
-      "id": "bd6a",
-      "ability": [
-        "+2",
-        "+2"
-      ],
-      "name": "ss",
+      "name": "jjj",
       "isPerTurn": false
     }
   ]
