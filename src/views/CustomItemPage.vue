@@ -10,7 +10,7 @@ import soundbtn from "/music/soundBtn.mp3";
 import { playSoundSFX } from "./../libs/SoundControl";
 import { onMounted, ref, reactive } from "vue";
 import { useCustom } from "@/stores/TypeItemsCusMangement";
-
+import TypeItemInfo from "@/components/other/TypeItemInfo.vue";
 import {
   addItem,
   deleteItemById,
