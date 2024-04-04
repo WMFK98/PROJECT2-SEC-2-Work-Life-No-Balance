@@ -321,7 +321,6 @@ const initItem = () => {
     if (phaseGame === 0 || dices.length < 2) return;
     dices.pop();
     logDice.push(0);
-    console.log(logDice);
   };
 
   const plus2Abililty = () => {
