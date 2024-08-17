@@ -1,5 +1,8 @@
 # PROJECT1-SEC-2-Work-Life-No-Balance
 
+Do you wanna play? : https://project-2-sec-2-work-life-no-balance.vercel.app/home (Marging Item is not avalible in vercle but you can try by Installing this project
+
+
 ## PIG-GAME Item
 
 ### How to Play
@@ -85,6 +88,41 @@ Players can create their own 🪄 custom items using the abilities of existing i
 
 - [How to Play](https://youtu.be/70lhWfCvW5Y)
 - [How to Create, Edit, and Delete Custom Items](https://youtu.be/M8eiI5E00oM)
+
+## Getting Started
+
+1. **Clone the Repository**: 
+
+    ```bash
+    git clone https://github.com/WMFK98/Forkify
+    ```
+
+2. **Navigate to the Project Directory**: 
+
+    ```bash
+    cd Forkify
+    ```
+
+3. **Install Dependencies**: 
+
+    ```bash
+    npm install
+    ```
+
+4. **Start the Development Json-Server**: 
+
+    ```bash
+    npm run backend
+    ```
+
+5. **New Terminal**: 
+
+4. **Start the Development client-Server**: 
+    ```bash
+    npm run dev
+    ```
+
+
 
 ## Reference
 
