@@ -2,7 +2,7 @@
 ## Do you wanna try? 
 Avaliable: PC, Taplet and Phone
 
-Link : https://project-2-sec-2-work-life-no-balance.vercel.app (Marging Item is not avalible in vercle but you can try by Installing this project
+Link : https://project-2-sec-2-work-life-no-balance.vercel.app (The Customing Item is not avalible in vercle but you can try by Installing this project
 
 ## PIG-GAME Item
 
