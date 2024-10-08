@@ -1,30 +1,30 @@
 <script setup>
-import { reactive, ref, watch, onMounted } from "vue";
-import TypeItem from "./../TypeItem";
-import { random } from "./../utils/tool";
-import ItemManagement from "./../libs/ItemsManagement";
-import initStructureItem from "./../initStructureItem";
-import { useRouter } from "vue-router";
-import soundAddItem from "/music/addItem.mp3";
-import soundHold from "/music/holdsound.mp3";
-import soundWin from "/music/toothless.mp3";
-import soundSwap from "/music/swapsound.mp3";
-import backgroundMusic from "/music/backgroundMusic.mp3";
-import Item from "./../StateItem";
-import ButtonGame from "./../components/buttons/ButtonGame.vue";
-import DisplayDice from "./../components/other/DisplayDice.vue";
-import HowtoPlayPopup from "./../components/popups/HowtoPlayPopup.vue";
-import SettingPopup from "./../components/popups/SettingPopup.vue";
-import InputSetting from "./../components/fieldinputs/InputSetting.vue";
-import ToggleSetting from "./../components/fieldinputs/ToggleSetting.vue";
-import CheckboxsSetting from "./../components/fieldinputs/CheckboxsSetting.vue";
-import ButtonSetting from "./../components/buttons/ButtonSetting.vue";
-import ButtonMini from "./../components/buttons/ButtonMini.vue";
-import LogPopup from "./../components/popups/LogPopup.vue";
-import ListItem from "./../components/items/ListItem.vue";
-import CurrentPoint from "./../components/other/CurrentPoint.vue";
-import SwitchSide from "./../components/other/SwitchSide.vue";
-import SwitchSideLower from "./../components/other/SwitchSideLower.vue";
+import { reactive, ref, watch, onMounted } from 'vue';
+import TypeItem from './../TypeItem';
+import { random } from './../utils/tool';
+import ItemManagement from './../libs/ItemsManagement';
+import initStructureItem from './../initStructureItem';
+import { useRouter } from 'vue-router';
+import soundAddItem from '/music/addItem.mp3';
+import soundHold from '/music/holdsound.mp3';
+import soundWin from '/music/toothless.mp3';
+import soundSwap from '/music/swapsound.mp3';
+import backgroundMusic from '/music/backgroundMusic.mp3';
+import Item from './../StateItem';
+import ButtonGame from './../components/buttons/ButtonGame.vue';
+import DisplayDice from './../components/other/DisplayDice.vue';
+import HowtoPlayPopup from './../components/popups/HowtoPlayPopup.vue';
+import SettingPopup from './../components/popups/SettingPopup.vue';
+import InputSetting from './../components/fieldinputs/InputSetting.vue';
+import ToggleSetting from './../components/fieldinputs/ToggleSetting.vue';
+import CheckboxsSetting from './../components/fieldinputs/CheckboxsSetting.vue';
+import ButtonSetting from './../components/buttons/ButtonSetting.vue';
+import ButtonMini from './../components/buttons/ButtonMini.vue';
+import LogPopup from './../components/popups/LogPopup.vue';
+import ListItem from './../components/items/ListItem.vue';
+import CurrentPoint from './../components/other/CurrentPoint.vue';
+import SwitchSide from './../components/other/SwitchSide.vue';
+import SwitchSideLower from './../components/other/SwitchSideLower.vue';
 import {
   playSoundSFX,
   playSoundMusic,
@@ -33,8 +33,8 @@ import {
   stopMusic,
   setSoundDefault,
   setSound,
-} from "./../libs/SoundControl";
-import { useCustom } from "@/stores/TypeItemsCusMangement";
+} from './../libs/SoundControl';
+import { useCustom } from '@/stores/TypeItemsCusMangement';
 
 const route = useRouter();
 const logDice = [];
@@ -59,8 +59,8 @@ const updateTypeItemEnable = (typeItem) => {
 
 const musicSetting = reactive({});
 
-let defaultSetting = localStorage.getItem("settings")
-  ? JSON.parse(localStorage.getItem("settings"))
+let defaultSetting = localStorage.getItem('settings')
+  ? JSON.parse(localStorage.getItem('settings'))
   : {
       settingPoint: 100,
       limitItem: 7,
@@ -72,18 +72,18 @@ let defaultSetting = localStorage.getItem("settings")
 const currentSetting = reactive({ ...defaultSetting });
 
 const player1 = reactive({
-  name: "p1",
+  name: 'p1',
   point: 0,
   curPoint: 0,
-  items: new ItemManagement("p1", pollItem),
+  items: new ItemManagement('p1', pollItem),
   buff: [],
 });
 
 const player2 = reactive({
-  name: "p2",
+  name: 'p2',
   point: 0,
   curPoint: 0,
-  items: new ItemManagement("p2", pollItem),
+  items: new ItemManagement('p2', pollItem),
   buff: [],
 });
 
@@ -97,16 +97,16 @@ const rollDiceAbility = () => {
 
 const itemRollDice = new Item(
   new TypeItem(
-    "rollDice",
+    'rollDice',
     rollDiceAbility,
     2,
-    "Base Ability to roll dice",
+    'Base Ability to roll dice',
     false
   )
 );
 
 const updateMusicSetting = (e, name) => {
-  if (name == "isOffMusic") {
+  if (name == 'isOffMusic') {
     musicSetting.isOffMusic = e.openSound;
   } else {
     musicSetting.isOffSFX = e.openSound;
@@ -249,9 +249,9 @@ const closeSetting = () => {
 
 const saveSetting = () => {
   const isInteger = (input, min, max) => {
-    if (input === "") return false;
+    if (input === '') return false;
     const isValidInput = !isNaN(input) && Number.isInteger(Number(input));
-    if (isValidInput && min !== "undefined" && max !== "undefined") {
+    if (isValidInput && min !== 'undefined' && max !== 'undefined') {
       return input >= min && input <= max;
     }
     return isValidInput;
@@ -364,11 +364,11 @@ const initItem = () => {
 };
 
 const getLocalSetting = () => {
-  if (!localStorage.getItem("settings")) {
-    localStorage.setItem("settings", JSON.stringify(defaultSetting));
+  if (!localStorage.getItem('settings')) {
+    localStorage.setItem('settings', JSON.stringify(defaultSetting));
   }
 
-  const storedItemSelected = JSON.parse(localStorage.getItem("settings"))
+  const storedItemSelected = JSON.parse(localStorage.getItem('settings'))
     .storedItemSelected?.map(({ id }) => {
       return pollItem.find((item) => item.id === id);
     })
@@ -394,13 +394,13 @@ const init = () => {
   watch(
     [currentSetting, musicSetting],
     ([newSetting, newMusicSetting]) => {
-      const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+      const storedSettings = JSON.parse(localStorage.getItem('settings')) || {};
       const newVal = {
         ...storedSettings,
         ...newSetting,
         musicSetting: { ...newMusicSetting },
       };
-      localStorage.setItem("settings", JSON.stringify(newVal));
+      localStorage.setItem('settings', JSON.stringify(newVal));
       setSound(newMusicSetting);
     },
     { deep: true }
@@ -409,25 +409,25 @@ const init = () => {
   watch(
     [itemSelectedForm],
     ([newStoredItemSelected]) => {
-      const storedSettings = JSON.parse(localStorage.getItem("settings")) || {};
+      const storedSettings = JSON.parse(localStorage.getItem('settings')) || {};
       const newVal = {
         ...storedSettings,
         storedItemSelected: newStoredItemSelected.map((item) => {
           return item;
         }),
       };
-      localStorage.setItem("settings", JSON.stringify(newVal));
+      localStorage.setItem('settings', JSON.stringify(newVal));
     },
     { deep: true }
   );
 };
 
 onMounted(() => {
-  if (!localStorage.getItem("settings")) {
+  if (!localStorage.getItem('settings')) {
     musicSetting.isOffMusic = false;
     musicSetting.isOffSFX = false;
   }
-  const myMusic = JSON.parse(localStorage.getItem("settings")).musicSetting;
+  const myMusic = JSON.parse(localStorage.getItem('settings')).musicSetting;
   musicSetting.isOffMusic = myMusic.isOffMusic;
   musicSetting.isOffSFX = myMusic.isOffSFX;
   setSound(myMusic);
@@ -601,7 +601,7 @@ init();
                 <LogPopup
                   type="successModal"
                   title="✅Success✅"
-                  log="Nice!!, we hope you enjoin."
+                  log="Nice!!, we hope you enjoy."
                 />
               </template>
             </SettingPopup>
